@@ -62,13 +62,23 @@
 
             foreach ($clientes as $key => $value) {
 
+
+              $item1 = "id";
+              $valor1 = $value["idempresa"];
+              $empresa = ControladorEmpresas::ctrMostrarEmpresas($item1, $valor1);
+
+
+              $item2 = "id";
+              $valor2 = $value["idestablecimiento"];
+              $establecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($item2, $valor2);
+
               echo '<tr>
                       <td>'.($key+1).'</td>
                       <td>'.$value["tipoid"].'</td>
                       <td>'.$value["identificacion"].'</td>
                       <td>'.$value["nombre"].'</td>
-                      <td>'.$value["empresa"].'</td>
-                      <td>'.$value["oficinalocal"].'</td>
+                      <td>'.$empresa["empresa"].'</td>
+                      <td>'.$establecimiento["identificador"].'</td>
                       <td>'.$value["ciudad"].'</td>
                       <td>'.$value["telfijo"].'</td>
                       <td>'.$value["celular"].'</td>
@@ -203,37 +213,18 @@ MODAL AGREGAR CLIENTE
 
                   <option value="">Seleccionar la Empresa</option>
 
-                  <option value="Bancolombia">Bancolombia</option>
+                  <?php
 
-                  <option value="Davivienda">Davivienda</option>
+                  $item = null;
+                  $valor = null;
 
-                  <option value="Av Villas">Av Villas</option>
+                  $empresas = ControladorEmpresas::ctrMostrarEmpresas($item, $valor);
 
-                  <option value="Banco Popular">Banco Popular</option>
+                  foreach ($empresas as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["empresa"].'</option>';
+                  }
 
-                  <option value="Banco de Bogotá">Banco de Bogotá</option>
-
-                  <option value="BBVA">BBVA</option>
-
-                  <option value="Banco de Occidente">Banco de Occidente</option>
-
-                  <option value="Banco Agrario">Banco Agrario</option>
-
-                  <option value="Helm Bank">Helm Bank</option>
-
-                  <option value="Banco Caja Social">Banco Caja Social</option>
-
-                  <option value="Banco Sudameris">Banco Sudameris</option>
-
-                  <option value="Banco Falabella">Banco Falabella</option>
-
-                  <option value="Banco Corpbanca">Banco Corpbanca</option>
-
-                  <option value="Colpatria">Colpatria</option>
-
-                  <option value="Citibank">Citibank</option>
-
-                  <option value="Banco Pichincha">Banco Pichincha</option>
+                  ?>
 
                 </select>
 
@@ -242,7 +233,7 @@ MODAL AGREGAR CLIENTE
             </div>
 
 
-            <!-- ENTRADA PARA NO. OFICINA O LOCAL -->
+            <!-- ENTRADA PARA ESTABLECIMIENTO -->
 
             <div class="form-group">
 
@@ -250,13 +241,22 @@ MODAL AGREGAR CLIENTE
 
                 <span class="input-group-addon"><i class="fa fa-tag"></i></span>
 
-                <select class="form-control input-lg" name="nuevoLocalOficina">
+                <select class="form-control input-lg" name="nuevoEstablecimiento">
 
-                  <option value="">No. de Oficina o Local</option>
+                  <option value="">Seleccionar Establecimiento</option>
 
-                  <option value="Cuenta de Ahorros">Cuenta de Ahorros</option>
+                  <?php
 
-                  <option value="Cuenta Corriente">Cuenta Corriente</option>
+                  $item = null;
+                  $valor = null;
+
+                  $establecimientos = ControladorEstablecimientos::ctrMostrarEstablecimientos($item, $valor);
+
+                  foreach ($establecimientos as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["identificador"].'</option>';
+                  }
+
+                  ?>
 
                 </select>
 
@@ -333,7 +333,7 @@ MODAL AGREGAR CLIENTE
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar cliente</button>
+          <button type="submit" class="btn btn-primary">Crear cliente</button>
 
         </div>
 
@@ -449,22 +449,19 @@ MODAL EDITAR CLIENTE
                 <select class="form-control input-lg" name="editarEmpresa">
 
                   <option value="" id="editarEmpresa"></option>
-                  <option value="Bancolombia">Bancolombia</option>
-                  <option value="Davivienda">Davivienda</option>
-                  <option value="Av Villas">Av Villas</option>
-                  <option value="Banco Popular">Banco Popular</option>
-                  <option value="Banco de Bogotá">Banco de Bogotá</option>
-                  <option value="BBVA">BBVA</option>
-                  <option value="Banco de Occidente">Banco de Occidente</option>
-                  <option value="Banco Agrario">Banco Agrario</option>
-                  <option value="Helm Bank">Helm Bank</option>
-                  <option value="Banco Caja Social">Banco Caja Social</option>
-                  <option value="Banco Sudameris">Banco Sudameris</option>
-                  <option value="Banco Falabella">Banco Falabella</option>
-                  <option value="Banco Corpbanca">Banco Corpbanca</option>
-                  <option value="Colpatria">Colpatria</option>
-                  <option value="Citibank">Citibank</option>
-                  <option value="Banco Pichincha">Banco Pichincha</option>
+
+                  <?php
+
+                  $item = null;
+                  $valor = null;
+
+                  $empresas = ControladorEmpresas::ctrMostrarEmpresas($item, $valor);
+
+                  foreach ($empresas as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["empresa"].'</option>';
+                  }
+
+                  ?>
 
                 </select>
 
@@ -473,16 +470,27 @@ MODAL EDITAR CLIENTE
             </div>
 
 
-            <!-- ENTRADA PARA NO. DE OFICINA O LOCAL -->
+            <!-- ENTRADA PARA ESTABLECIMIENTO -->
 
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tag"></i></span>
-                <select class="form-control input-lg" name="editarLocalOficina">
+                <select class="form-control input-lg" name="editarEstablecimiento">
 
-                  <option value="" id="editarLocalOficina"></option>
-                  <option value="Cuenta de Ahorros">Cuenta de Ahorros</option>
-                  <option value="Cuenta Corriente">Cuenta Corriente</option>
+                  <option value="" id="editarEstablecimiento"></option>
+
+                  <?php
+
+                  $item = null;
+                  $valor = null;
+
+                  $establecimientos = ControladorEstablecimientos::ctrMostrarEstablecimientos($item, $valor);
+
+                  foreach ($establecimientos as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["identificador"].'</option>';
+                  }
+
+                  ?>
 
                 </select>
               </div>

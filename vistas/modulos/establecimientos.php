@@ -105,7 +105,7 @@ MODAL AGREGAR ESTABLECIMIENTO
 
         <div class="modal-header" style="background:#3c8dbc; color:white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Agregar Oficina o Local</h4>
+          <h4 class="modal-title">Agregar Establecimiento</h4>
         </div>
 
         <!--=====================================
@@ -187,7 +187,7 @@ MODAL AGREGAR ESTABLECIMIENTO
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Crear</button>
+          <button type="submit" class="btn btn-primary">Crear Establecimiento</button>
         </div>
 
         <?php
@@ -218,7 +218,7 @@ MODAL EDITAR ESTABLECIMIENTO
 
         <div class="modal-header" style="background:#3c8dbc; color:white">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Editar Oficina o Local</h4>
+          <h4 class="modal-title">Editar Establecimiento</h4>
         </div>
 
         <!--=====================================

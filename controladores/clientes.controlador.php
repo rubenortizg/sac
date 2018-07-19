@@ -27,8 +27,8 @@ class ControladorClientes {
                           "telfijo" => $_POST["nuevoTelefono"],
                           "celular" => $_POST["nuevoCelular"],
                           "ciudad" => $_POST["nuevaCiudad"],
-                          "empresa" => $_POST["nuevaEmpresa"],
-                          "oficinalocal" => $_POST["nuevoLocalOficina"],
+                          "idempresa" => $_POST["nuevaEmpresa"],
+                          "idestablecimiento" => $_POST["nuevoEstablecimiento"],
                           "idusuario" => $_SESSION["id"]);
 
             $respuesta = ModeloClientes::mdlIngresarCliente($tabla, $datos);
@@ -131,8 +131,8 @@ class ControladorClientes {
                           "telfijo" => $_POST["editarTelefono"],
                           "celular" => $_POST["editarCelular"],
                           "ciudad" => $_POST["editarCiudad"],
-                          "empresa" => $_POST["editarEmpresa"],
-                          "oficinalocal" => $_POST["editarLocalOficina"],
+                          "idempresa" => $_POST["editarEmpresa"],
+                          "idestablecimiento" => $_POST["editarEstablecimiento"],
                           "idusuario" => $_SESSION["id"]);
 
             $respuesta = ModeloClientes::mdlEditarCliente($tabla, $datos);

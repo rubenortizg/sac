@@ -10,7 +10,7 @@ class ModeloClientes {
 
   static public function mdlIngresarCliente($tabla, $datos){
 
-    $sql ="INSERT INTO $tabla(identificacion, tipoid, nombre, correo, telfijo, celular, ciudad, empresa, oficinalocal, idusuario) VALUES (:identificacion, :tipoid, :nombre, :correo, :telfijo, :celular, :ciudad, :empresa, :oficinalocal, :idusuario)";
+    $sql ="INSERT INTO $tabla(identificacion, tipoid, nombre, correo, telfijo, celular, ciudad, idempresa, idestablecimiento, idusuario) VALUES (:identificacion, :tipoid, :nombre, :correo, :telfijo, :celular, :ciudad, :idempresa, :idestablecimiento, :idusuario)";
 
     $stmt = Conexion::conectar()-> prepare($sql);
 
@@ -21,8 +21,8 @@ class ModeloClientes {
 		$stmt->bindParam(":telfijo", $datos["telfijo"], PDO::PARAM_STR);
     $stmt->bindParam(":celular", $datos["celular"], PDO::PARAM_STR);
     $stmt->bindParam(":ciudad", $datos["ciudad"], PDO::PARAM_STR);
-    $stmt->bindParam(":empresa", $datos["empresa"], PDO::PARAM_STR);
-    $stmt->bindParam(":oficinalocal", $datos["oficinalocal"], PDO::PARAM_STR);
+    $stmt->bindParam(":idempresa", $datos["idempresa"], PDO::PARAM_STR);
+    $stmt->bindParam(":idestablecimiento", $datos["idestablecimiento"], PDO::PARAM_STR);
     $stmt->bindParam(":idusuario", $datos["idusuario"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
@@ -78,7 +78,7 @@ class ModeloClientes {
 
   static public function mdlEditarCliente($tabla, $datos){
 
-    $sql ="UPDATE $tabla SET identificacion =:identificacion, tipoid =  :tipoid, nombre = :nombre, correo = :correo, telfijo = :telfijo, celular = :celular, ciudad = :ciudad, empresa = :empresa, oficinalocal = :oficinalocal, idusuario = :idusuario WHERE id = :id";
+    $sql ="UPDATE $tabla SET identificacion =:identificacion, tipoid =  :tipoid, nombre = :nombre, correo = :correo, telfijo = :telfijo, celular = :celular, ciudad = :ciudad, idempresa = :idempresa, idestablecimiento = :idestablecimiento, idusuario = :idusuario WHERE id = :id";
 
     $stmt = Conexion::conectar()-> prepare($sql);
 
@@ -90,8 +90,8 @@ class ModeloClientes {
 		$stmt->bindParam(":telfijo", $datos["telfijo"], PDO::PARAM_STR);
     $stmt->bindParam(":celular", $datos["celular"], PDO::PARAM_STR);
     $stmt->bindParam(":ciudad", $datos["ciudad"], PDO::PARAM_STR);
-    $stmt->bindParam(":empresa", $datos["empresa"], PDO::PARAM_STR);
-    $stmt->bindParam(":oficinalocal", $datos["oficinalocal"], PDO::PARAM_STR);
+    $stmt->bindParam(":idempresa", $datos["idempresa"], PDO::PARAM_STR);
+    $stmt->bindParam(":idestablecimiento", $datos["idestablecimiento"], PDO::PARAM_STR);
     $stmt->bindParam(":idusuario", $datos["idusuario"], PDO::PARAM_INT);
 
 		if($stmt->execute()){

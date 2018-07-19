@@ -29,10 +29,52 @@ $(".tablas").on("click", ".btnEditarCliente", function(){
 			$("#editarTelefono").val(respuesta["telfijo"]);
 			$("#editarCelular").val(respuesta["celular"]);
 			$("#editarEmail").val(respuesta["correo"]);
-			$("#editarEmpresa").val(respuesta["empresa"]);
-			$("#editarEmpresa").html(respuesta["empresa"]);
-			$("#editarLocalOficina").val(respuesta["oficinalocal"]);
-			$("#editarLocalOficina").html(respuesta["oficinalocal"]);
+
+
+			var idEmpresa = respuesta["idempresa"];
+			var datos = new FormData();
+			datos.append("idEmpresa", idEmpresa);
+
+			$.ajax({
+
+				url:"ajax/empresas.ajax.php",
+				method: "POST",
+				data: datos,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: "json",
+				success: function(respuesta){
+
+					$("#editarEmpresa").val(respuesta["id"]);
+					$("#editarEmpresa").html(respuesta["empresa"]);
+
+				}
+
+			});
+
+
+			var idEstablecimiento = respuesta["idestablecimiento"];
+			var datosEstablecimiento = new FormData();
+			datosEstablecimiento.append("idEstablecimiento", idEstablecimiento);
+
+			$.ajax({
+
+				url:"ajax/establecimientos.ajax.php",
+				method: "POST",
+				data: datosEstablecimiento,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: "json",
+				success: function(respuesta){
+
+					$("#editarEstablecimiento").val(respuesta["id"]);
+					$("#editarEstablecimiento").html(respuesta["identificador"]);
+
+				}
+
+			});
 
 		}
 
