@@ -152,6 +152,159 @@ class ControladorTransportadoras{
 
 	}
 
+
+
+	/*=============================================
+	REGISTRO DE TRANSPORTADORA - EXTERNA
+	=============================================*/
+
+	static public function ctrCrearTransportadoraExterno(){
+
+		if(isset($_POST["nuevaTransportadora"])){
+
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\. ]+$/', $_POST["nuevaTransportadora"])){
+
+			  /*=============================================
+				VALIDAR IMAGEN DEL LOGO
+				=============================================*/
+
+				$ruta = "";
+
+				if(isset($_FILES["nuevoLogo"]["tmp_name"])){
+
+					list($ancho, $alto) = getimagesize($_FILES["nuevoLogo"]["tmp_name"]);
+
+					$nuevoAncho = 500;
+					$nuevoAlto = 500;
+
+					/*=============================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR EL LOGO DE LA TRANSPORTADORA
+					=============================================*/
+
+					$nuevaTransportadoraDir = str_replace(array('ñ','Ñ','á','é','í','ó','ú','Á','É','Í','Ó','Ú','.',' '),array('n','N','a','e','i','o','u','A','E','I','O','U','_','_'),trim($_POST["nuevaTransportadora"]));
+
+					$directorio = "vistas/img/transportadoras/".$nuevaTransportadoraDir;
+
+					mkdir($directorio, 0755);
+
+					/*=============================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					=============================================*/
+
+					if($_FILES["nuevoLogo"]["type"] == "image/jpeg"){
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/transportadoras/".$nuevaTransportadoraDir."/".$aleatorio.".jpg";
+
+						$origen = imagecreatefromjpeg($_FILES["nuevoLogo"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagejpeg($destino, $ruta);
+
+					}
+
+					if($_FILES["nuevoLogo"]["type"] == "image/png"){
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/transportadoras/".$nuevaTransportadoraDir."/".$aleatorio.".png";
+
+						$origen = imagecreatefrompng($_FILES["nuevoLogo"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagepng($destino, $ruta);
+
+					}
+
+				}
+
+				/* =====================================
+					VALIDAR TRANSPORTADORA
+				========================================== */
+
+				$tabla = "transportadoras";
+
+				$datos = array("transportadora" => $_POST["nuevaTransportadora"],
+					           "logo"=>$ruta);
+
+				$respuesta = ModeloTransportadoras::mdlIngresarTransportadora($tabla, $datos);
+
+				if($respuesta == "ok"){
+
+					echo '<script>
+
+					swal({
+
+						type: "success",
+						title: "¡La transportadora ha sido guardada correctamente!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+
+							window.location = "radicador";
+
+						}
+
+					});
+
+
+					</script>';
+
+
+				}
+
+
+			}else{
+
+				echo '<script>
+
+					swal({
+
+						type: "error",
+						title: "¡La transportadora no puede ir vacía o llevar caracteres especiales!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+
+							window.location = "radicador";
+
+						}
+
+					});
+
+
+				</script>';
+
+			}
+
+
+		}
+
+
+	}
+
+
 	/*=============================================
 	MOSTRAR TRANSPORTADORA
 	=============================================*/

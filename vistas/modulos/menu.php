@@ -43,6 +43,63 @@
         </a>
       </li>
 
+      <li>
+        <a href="remitentes">
+          <i class="fa fa-send"></i>
+          <span>Remitentes</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="categorias">
+          <i class="fa fa-tags"></i>
+          <span>Categorias</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="radicados">
+          <i class="fa fa-envelope"></i>
+          <span>Radicacion</span>
+        </a>
+      </li>
+
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-cog"></i>
+          <span>Opciones</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+
+        <ul class="treeview-menu">
+          <li>
+            <a href="tipos">
+              <i class="fa fa-briefcase"></i>
+              <span>Tipos Establecimiento</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="perfiles">
+              <i class="fa fa-users"></i>
+              <span>Perfiles de Usuario</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="configuracion">
+              <i class="fa fa-cogs"></i>
+              <span>Configuración App</span>
+            </a>
+          </li>
+
+
+
+        </ul>
+      </li>
+
     </ul>
   </section>
 </aside>

@@ -51,11 +51,11 @@ CREATE TABLE `sac`.`clientes` (
  `telfijo` text COLLATE utf8_spanish_ci DEFAULT NULL,
  `celular` text COLLATE utf8_spanish_ci DEFAULT NULL,
  `ciudad` text COLLATE utf8_spanish_ci DEFAULT NULL,
- `empresa` text COLLATE utf8_spanish_ci DEFAULT NULL,
- `oficinalocal` text COLLATE utf8_spanish_ci DEFAULT NULL,
+ `idempresa` int(11) NOT NULL,
+ `idestablecimiento` int(11) NOT NULL,
  `idusuario` int(11) NOT NULL,
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 CREATE TABLE `sac`. `empresas` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -66,6 +66,14 @@ CREATE TABLE `sac`. `empresas` (
  UNIQUE KEY `empresa` (`empresa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+CREATE TABLE `sac`.`tipos` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `tipo` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+ `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `tipo` (`tipo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 CREATE TABLE `sac`.`establecimientos` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `identificador` varchar(100) NOT NULL,
@@ -74,4 +82,32 @@ CREATE TABLE `sac`.`establecimientos` (
  `idempresa` int(11) NOT NULL,
  PRIMARY KEY (`id`),
  UNIQUE KEY `identificador` (`identificador`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `sac`.`remitentes` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `remitente` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+ `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `remitente` (`remitente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `sac`.`categorias` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `categoria` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+ `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `categoria` (`categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `sac`.`radicados` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `radicado` int(11) NOT NULL,
+ `idtransportadora` int(11) NOT NULL,
+ `remitente` text COLLATE utf8_spanish_ci NOT NULL,
+ `iddestinatario` int(11) NOT NULL,
+ `idestablecimiento` int(11) NOT NULL,
+ `tipocorrespondencia` text COLLATE utf8_spanish_ci DEFAULT NULL,
+ `idusuario` int(11) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

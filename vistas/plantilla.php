@@ -124,9 +124,14 @@ echo '<div class="wrapper">';
         $_GET["ruta"] == "usuarios" ||
         $_GET["ruta"] == "admin" ||
         $_GET["ruta"] == "transportadoras" ||
+        $_GET["ruta"] == "tipos" ||
         $_GET["ruta"] == "establecimientos" ||
         $_GET["ruta"] == "empresas" ||
         $_GET["ruta"] == "clientes" ||
+        $_GET["ruta"] == "remitentes" ||
+        $_GET["ruta"] == "categorias" ||
+        $_GET["ruta"] == "radicados" ||
+        $_GET["ruta"] == "radicador" ||
         $_GET["ruta"] == "salir"){
     // ../lista blanca de modulos con URLs amigables
 
@@ -159,7 +164,11 @@ echo '<div class="wrapper">';
 <script src="vistas/js/transportadoras.js"></script>
 <script src="vistas/js/clientes.js"></script>
 <script src="vistas/js/empresas.js"></script>
+<script src="vistas/js/tipos.js"></script>
 <script src="vistas/js/establecimientos.js"></script>
+<script src="vistas/js/categorias.js"></script>
+<script src="vistas/js/remitentes.js"></script>
+<script src="vistas/js/radicador.js"></script>
 
 </body>
 </html>
