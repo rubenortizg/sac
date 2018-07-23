@@ -16,7 +16,24 @@ function desactivarEstablecimientos(){
 }
 
 /* =================================================
-AGREGANDO ESTABLECIMIENTOS AL COMPROBANTE DESDE LA TABLA
+FUNCION PARA HABILITAR ESTABLECIMIENTOS
+====================================================*/
+
+function activarEstablecimientos(){
+
+  var activarBoton = $(".recuperarEstablecimiento");
+
+  for (var i = 0; i < activarBoton.length; i++) {
+
+    $(activarBoton[i]).removeClass("btn-default");
+    $(activarBoton[i]).addClass("btn-primary agregarEstablecimiento");
+
+  }
+
+}
+
+/* =================================================
+AGREGANDO ESTABLECIMIENTOS AL RADICADO DESDE LA TABLA
 ====================================================*/
 
 $(".tablaRadicados tbody").on("click", "button.agregarEstablecimiento", function(){
@@ -85,7 +102,7 @@ $(".tablaRadicados tbody").on("click", "button.agregarEstablecimiento", function
                   '<div class="input-group">'+
                     '<span class="input-group-addon"><i class="fa fa-briefcase"></i></span>'+
                     '<input type="text" class="form-control" id="nuevoEstablecimiento" name="nuevoEstablecimiento" value="'+identificador+'" readonly>'+
-                    '<span class="input-group-addon"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></span>'+
+                    '<span class="input-group-addon"><button class="btn btn-danger btn-xs quitarEstablecimiento" idEstablecimiento="'+idEstablecimiento+'"><i class="fa fa-times"></i></button></span>'+
                   '</div>'+
 
                   '<div class="row" style="padding:5px 0px">'+
@@ -130,9 +147,48 @@ $(".tablaRadicados tbody").on("click", "button.agregarEstablecimiento", function
 
 })
 
+/* =================================================
+QUITAR ESTABLECIMIENTOS AL RADICADO DESDE LA TABLA
+====================================================*/
+
+$(".formularioRadicador").on("click", "button.quitarEstablecimiento", function(){
+
+  $(this).parent().parent().parent().parent().remove();
+
+  var idEstablecimiento =$(this).attr("idEstablecimiento");
+
+  $("button.recuperarEstablecimiento[idEstablecimiento='"+idEstablecimiento+"']").removeClass('btn-default');
+  $("button.recuperarEstablecimiento[idEstablecimiento='"+idEstablecimiento+"']").addClass('btn-primary agregarEstablecimiento');
+
+
+  activarEstablecimientos();
+
+  $(".sorting").click(function(){
+      activarEstablecimientos();
+  })
+
+  $("select[name='DataTables_Table_0_length']").change(function(){
+      activarEstablecimientos();
+  })
+
+  $("input[aria-controls='DataTables_Table_0']").focus(function(){
+    $(document).keyup(function(event){
+      event.preventDefault();
+      activarEstablecimientos();
+    })
+  })
+
+  $(".dataTables_paginate").click(function(){
+    activarEstablecimientos();
+  })
+
+
+
+})
+
 
 /* =================================================
-AGREGANDO CATEGORIAS AL COMPROBANTE DESDE LA TABLA
+AGREGANDO CATEGORIAS AL RADICADO DESDE LA TABLA
 ====================================================*/
 
 $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
@@ -178,7 +234,7 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
                 '<div class="input-group">'+
                   '<span class="input-group-addon"><i class="ion ion-grid"></i></span>'+
                   '<input min="1" class="form-control" id="nuevaCantidadMasivo" name="nuevaCantidadMasivo" placeholder="0" valorconcepto=""'+ 'required="" type="number">'+
-                  '<span class="input-group-addon"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></span>'+
+                  '<span class="input-group-addon"><button class="btn btn-danger btn-xs quitarCategoria" idCategoria="'+idCategoria+'"><i class="fa fa-times"></i></button></span>'+
                 '</div>'+
 
               '</div>'+
@@ -201,5 +257,22 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
     }
 
   })
+
+})
+
+
+/* =================================================
+QUITAR CATEGORIAS AL RADICADO DESDE LA TABLA
+====================================================*/
+
+$(".formularioRadicador").on("click", "button.quitarCategoria", function(){
+
+  $(this).parent().parent().parent().parent().parent().remove();
+
+  var idCategoria =$(this).attr("idCategoria");
+
+  $("button.recuperarCategoria[idCategoria='"+idCategoria+"']").removeClass('btn-default');
+  $("button.recuperarCategoria[idCategoria='"+idCategoria+"']").addClass('btn-primary agregarCategoria');
+
 
 })

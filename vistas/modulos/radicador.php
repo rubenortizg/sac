@@ -30,7 +30,7 @@
             <h4>Radicado</h4>
           </div>
 
-          <form role="form" method="post">
+          <form role="form" method="post" class="formularioRadicador">
 
             <div class="box-body">
 
@@ -230,7 +230,7 @@
                               <td>'.$empresas["empresa"].'</td>
                               <td>
                                 <div class="btn-group">
-                                  <button class="btn btn-primary btn-sm agregarEstablecimiento" idEstablecimiento="'.$value["id"].'">Agregar</button>
+                                  <button class="btn btn-primary btn-sm agregarEstablecimiento recuperarEstablecimiento" idEstablecimiento="'.$value["id"].'">Agregar</button>
                                 </div>
                               </td>
                             </tr>';
@@ -292,7 +292,7 @@
                           <td class="text-uppercase">'.$value["categoria"].'</td>
                             <td>
                               <div class="btn-group">
-                                <button class="btn btn-primary btn-sm agregarCategoria" idCategoria="'.$value["id"].'">Agregar</button>
+                                <button class="btn btn-primary btn-sm agregarCategoria recuperarCategoria" idCategoria="'.$value["id"].'">Agregar</button>
                               </div>
                             </td>
                           </tr>';
