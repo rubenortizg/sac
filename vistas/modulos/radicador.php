@@ -174,8 +174,8 @@
                 ======================================-->
 
                 <label>Tipo de Correspondencia:</label>
-                <label class="radio-inline"><input class="minimal" type="radio" name="nuevoTipoCorrespondencia" value="individual" checked> Individual</label>
-                <label class="radio-inline"><input class="minimal" type="radio" name="nuevoTipoCorrespondencia" value="masiva"> Masiva</label>
+                <label class="radio-inline tipoCorrespondencia"><input class="minimal" type="radio" name="nuevoTipoCorrespondencia" id="nuevoTipoCorrespondencia" value="individual" checked> Individual</label>
+                <label class="radio-inline tipoCorrespondencia"><input class="minimal" type="radio" name="nuevoTipoCorrespondencia" id="nuevoTipoCorrespondencia" value="masiva"> Masiva</label>
 
 
                 <div class="nuevaCategoria">

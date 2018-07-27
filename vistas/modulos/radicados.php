@@ -75,9 +75,13 @@
 
               $establecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($item3, $valor3);
 
+              $radicado = $value["radicado"];
+              $radicado = str_pad($radicado, 7, "0", STR_PAD_LEFT);
+
+
               echo '<tr>
                       <td>'.($key+1).'</td>
-                      <td>'.$value["radicado"].'</td>
+                      <td>R'.$radicado.'</td>
                       <td>'.$transportadora["transportadora"].'</td>
                       <td>'.$value["remitente"].'</td>
                       <td>'.$destinatario["empresa"].'</td>

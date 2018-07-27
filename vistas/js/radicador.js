@@ -233,9 +233,9 @@ $(".formularioRadicador").on("click", "button.quitarEstablecimiento", function()
 
 })
 
-/* =================================================
+/* ====================================================================
 AGREGANDO ESTABLECIMIENTOS AL RADICADO DESDE EL BOTON PARA DISPOSITIVOS
-====================================================*/
+=====================================================================*/
 
 $(".btnAgregarEstablecimiento").click(function(){
 
@@ -414,11 +414,88 @@ $(".formularioRadicador").on("change", "select.nuevaDescripcionEstablecimiento",
 
 })
 
+
+/* =============================================================
+FUNCION PARA INABILITAR CATEGORIAS EN CORRESPONDENCIA INDIVIDUAL
+================================================================*/
+
+function desactivarCategorias(){
+
+  var desactivarBotonCategoria = $(".agregarCategoria");
+
+  for (var i = 0; i < desactivarBotonCategoria.length; i++) {
+
+    $(desactivarBotonCategoria[i]).removeClass("btn-primary agregarCategoria");
+    $(desactivarBotonCategoria[i]).addClass("btn-default ");
+
+  }
+
+}
+
+/* =================================================
+FUNCION PARA HABILITAR ESTABLECIMIENTOS
+====================================================*/
+
+function activarCategoria(){
+
+  var activarBotonCategoria = $(".recuperarCategoria");
+
+  for (var i = 0; i < activarBoton.length; i++) {
+
+    $(activarBotonCategoria[i]).removeClass("btn-default");
+    $(activarBotonCategoria[i]).addClass("btn-primary agregarCategoria");
+
+  }
+
+}
+
 /* =================================================
 AGREGANDO CATEGORIAS AL RADICADO DESDE LA TABLA
 ====================================================*/
 
+/* ADICIONAL */
+
 $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
+
+  $(".formularioRadicador").on("checked", "radio.nuevoTipoCorrespondencia", function(){
+
+    var tipo = document.getElementById("nuevoTipoCorrespondencia");
+
+    console.log("tipo",tipo);
+
+  })
+
+
+  var tipo = document.getElementById("nuevoTipoCorrespondencia");
+
+  if (tipo.value == "individual") {
+
+    desactivarCategorias();
+
+    $(".sorting").click(function(){
+      desactivarCategorias();
+    })
+
+    $("select[name='DataTables_Table_0_length']").change(function(){
+      desactivarCategorias();
+    })
+
+    $("input[aria-controls='DataTables_Table_0']").focus(function(){
+      $(document).keyup(function(event){
+        event.preventDefault();
+        desactivarCategorias();
+      })
+    })
+
+    $(".dataTables_paginate").click(function(){
+      desactivarCategorias();
+    })
+
+  }
+
+/* ADICIONAL */
+
+
 
   var idCategoria = $(this).attr("idCategoria");
 
