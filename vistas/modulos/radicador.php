@@ -43,7 +43,35 @@
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-qrcode"></i></span>
-                    <input type="text" class="form-control" id="nuevoRadicado" name="nuevoRadicado" value="R0000001" readonly>
+                    <?php
+
+                      $item = null;
+                      $valor = null;
+
+                      $radicados = ControladorRadicados::ctrMostrarRadicados($item, $valor);
+
+                      if (!$radicados) {
+
+                        $radicado = 1;
+                        $radicado = str_pad($radicado, 7, "0", STR_PAD_LEFT);
+
+                        echo '<input type="text" class="form-control" id="nuevoRadicado" name="nuevoRadicado" value="R'.$radicado.'" readonly>';
+
+                      } else {
+
+                        foreach ($radicados as $key => $value) {
+                          // llegar al ultimo radicado
+                        }
+
+                        $radicado = $value["radicado"] + 1;
+                        $radicado = str_pad($radicado, 7, "0", STR_PAD_LEFT);
+
+                        echo '<input type="text" class="form-control" id="nuevoRadicado" name="nuevoRadicado" value="R'.$radicado.'" readonly>';
+
+                      }
+
+                    ?>
+
                   </div>
                 </div>
 
@@ -54,7 +82,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input type="text" class="form-control" id="nuevaFecha" name="nuevaFecha" value="2018-07-22" readonly>
+                    <input type="text" class="form-control" id="nuevaFecha" name="nuevaFecha" value="<?php date_default_timezone_set('America/Bogota'); echo date("Y-m-d H:i:s"); ?>" readonly>
                   </div>
                 </div>
 
@@ -137,7 +165,7 @@
                 BOTON PARA AGREGAR ESTABLECIMIENTO EN MOVILES
                 ======================================-->
 
-                <button type="button" class="btn btn-default hidden-lg">Agregar Establecimiento</button>
+                <button type="button" class="btn btn-default hidden-lg btnAgregarEstablecimiento">Agregar Establecimiento</button>
 
                 <hr>
 
@@ -459,6 +487,248 @@ MODAL AGREGAR REMITENTE
          ?>
 
       </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!--=====================================
+MODAL AGREGAR CLIENTE
+======================================-->
+
+<div id="modalAgregarCliente" class="modal fade" role="dialog">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Agregar cliente</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <!-- ENTRADA PARA TIPO DE DOCUMENTO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-id-card-o"></i></span>
+
+                <select class="form-control input-lg" name="nuevoTipoDocumento" required>
+
+                  <option value="">Tipo de documento</option>
+
+                  <option value="Cedula de Ciudadania">Cedula de Ciudadania</option>
+
+                  <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+
+                  <option value="NIT">NIT</option>
+
+                  <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+
+                  <option value="Registro Civil">Registro Civil</option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA NUMERO DE IDENTIFICACIÓN -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <input type="number" min="0" class="form-control input-lg" name="nuevoDocumento" placeholder="Ingresar No. Documento" required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA NOMBRE -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresar nombre" required>
+
+              </div>
+
+            </div>
+
+
+            <!-- ENTRADA PARA EMPRESA -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-building"></i></span>
+
+                <select class="form-control input-lg" name="nuevaEmpresa">
+
+                  <option value="">Seleccionar la Empresa</option>
+
+                  <?php
+
+                  $item = null;
+                  $valor = null;
+
+                  $empresas = ControladorEmpresas::ctrMostrarEmpresas($item, $valor);
+
+                  foreach ($empresas as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["empresa"].'</option>';
+                  }
+
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <!-- ENTRADA PARA ESTABLECIMIENTO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+
+                <select class="form-control input-lg" name="nuevoEstablecimiento">
+
+                  <option value="">Seleccionar Establecimiento</option>
+
+                  <?php
+
+                  $item = null;
+                  $valor = null;
+
+                  $establecimientos = ControladorEstablecimientos::ctrMostrarEstablecimientos($item, $valor);
+
+                  foreach ($establecimientos as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["identificador"].'</option>';
+                  }
+
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA CIUDAD -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevaCiudad" placeholder="Ingresar ciudad" required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA TELEFONO FIJO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar Telefono Fijo (Indicativo)" data-inputmask="'mask':'(9) 999-9999'" data-mask>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA TELEFONO CELULAR -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevoCelular" placeholder="Ingresar Celular" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EMAIL -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+
+                <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar Correo" required>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Crear cliente</button>
+
+        </div>
+
+      </form>
+
+      <?php
+
+        $crearCliente = new ControladorClientes();
+        $crearCliente -> ctrCrearClienteExterno();
+
+
+      ?>
 
     </div>
 

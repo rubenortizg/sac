@@ -57,14 +57,38 @@
         </a>
       </li>
 
-      <li>
-        <a href="radicados">
+      <li class="treeview menu-open">
+        <a href="#">
           <i class="fa fa-envelope"></i>
           <span>Radicacion</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+          </span>
         </a>
+
+        <ul class="treeview-menu">
+          <li>
+            <a href="radicados">
+              <i class="fa fa-envelope"></i>
+              <span>Radicados</span>
+            </a>
+          </li>
+          <li>
+            <a href="radicador">
+              <i class="fa fa-sign-in"></i>
+              <span>Registrar Ingresos</span>
+            </a>
+          </li>
+          <li>
+            <a href="salidas">
+              <i class="fa fa-sign-out"></i>
+              <span>Registrar Salidas</span>
+            </a>
+          </li>
+        </ul>
       </li>
 
-      <li class="treeview">
+      <li class="treeview menu-open">
         <a href="#">
           <i class="fa fa-cog"></i>
           <span>Opciones</span>
@@ -94,9 +118,6 @@
               <span>Configuración App</span>
             </a>
           </li>
-
-
-
         </ul>
       </li>
 

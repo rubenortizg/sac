@@ -54,7 +54,15 @@ class ModeloClientes {
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 
-			return $stmt -> fetch();
+      if ($item == "idestablecimiento") {
+
+        return $stmt -> fetchAll();
+
+      } else {
+
+        return $stmt -> fetch();
+      }
+
 
 		}else{
 

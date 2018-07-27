@@ -141,6 +141,53 @@ $(".tablaRadicados tbody").on("click", "button.agregarEstablecimiento", function
 
       })
 
+
+      var datosCliente = new FormData();
+      datosCliente.append("idEstablecimiento", respuesta["id"]);
+
+      $.ajax({
+
+        url: "ajax/clientes.ajax.php",
+        method: "POST",
+        data: datosCliente,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success:function(respuesta){
+
+          //AGREGAR LOS CLIENTES AL SELECT
+
+          var select = document.getElementById("seleccionarCliente");
+
+          if (select.length > 0) {
+
+            while (select.length > 0) {
+              select.remove(select.length-1);
+            }
+
+          }
+
+          $("#seleccionarCliente").append(
+
+            '<option value="">Seleccionar Cliente</option>'
+          )
+
+          respuesta.forEach(funcionForEach);
+
+          function funcionForEach(item, index){
+
+            $("#seleccionarCliente").append(
+
+              '<option idCliente="'+item.id+'"  value="'+item.id+'">'+item.nombre+'</option>'
+            )
+          }
+
+
+        }
+
+      })
+
     }
 
   })
@@ -186,6 +233,186 @@ $(".formularioRadicador").on("click", "button.quitarEstablecimiento", function()
 
 })
 
+/* =================================================
+AGREGANDO ESTABLECIMIENTOS AL RADICADO DESDE EL BOTON PARA DISPOSITIVOS
+====================================================*/
+
+$(".btnAgregarEstablecimiento").click(function(){
+
+  var datos = new FormData();
+  datos.append("traerEstablecimientos", "ok");
+
+  $.ajax({
+
+    url:"ajax/establecimientos.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+    success:function(respuesta){
+
+      $(".nuevoDestinatario").append(
+
+          '<div class="row" style="padding:5px 15px">'+
+
+            '<div class="form group">'+
+
+              '<div class="input-group">'+
+                '<span class="input-group-addon"><i class="fa fa-briefcase"></i></span>'+
+                '<select class="form-control nuevaDescripcionEstablecimiento" idEstablecimiento name="nuevaDescripcionEstablecimiento" required>'+
+                '<option>Seleccione el Establecimiento</option>'+
+                '</select>'+
+                '<span class="input-group-addon"><button class="btn btn-danger btn-xs quitarEstablecimiento" idEstablecimiento><i class="fa fa-times"></i></button></span>'+
+              '</div>'+
+
+              '<div class="row" style="padding:5px 0px">'+
+
+                '<div class="form group">'+
+
+                  '<div class="col-xs-12">'+
+                    '<div class="input-group">'+
+                      '<span class="input-group-addon"><i class="fa fa-building"></i></span>'+
+                      '<input type="text" class="form-control" id="nuevaEmpresa" name="nuevaEmpresa" value="" readonly>'+
+                    '</div>'+
+                  '</div>'+
+
+                  '<div class="col-xs-12" style="padding:5px 15px">'+
+                    '<div class="input-group">'+
+                      '<span class="input-group-addon"><i class="fa fa-users"></i></span>'+
+                      '<select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>'+
+                        '<option value="">Seleccionar Cliente</option>'+
+                      '</select>'+
+
+                      '<span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal"'+ 'data-target="#modalAgregarCliente" data-dismiss="modal">Agregar Cliente</button></span>'+
+                    '</div>'+
+                  '</div>'+
+
+                '</div>'+
+
+              '</div>'+
+
+            '</div>'+
+
+          '</div>');
+
+          //AGREGAR LOS ESTABLECIMIENTOS AL select
+
+          respuesta.forEach(funcionForEach);
+
+          function funcionForEach(item, index){
+
+            $(".nuevaDescripcionEstablecimiento").append(
+
+              '<option idEstablecimiento="'+item.id+'"  value="'+item.id+'">'+item.identificador+'</option>'
+            )
+          }
+
+
+
+
+    }
+
+  })
+
+})
+
+/* =================================================
+AGREGAR EMPRESA AL ESTABLECIMIENTO DESDE EL MOVIL
+====================================================*/
+
+$(".formularioRadicador").on("change", "select.nuevaDescripcionEstablecimiento", function(){
+
+  var idEstablecimiento = $(this).val();
+
+  var datos = new FormData();
+  datos.append("idEstablecimiento", idEstablecimiento);
+
+  $.ajax({
+
+    url:"ajax/establecimientos.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+    success:function(respuesta){
+
+      var datosEmpresa = new FormData();
+      datosEmpresa.append("idEmpresa",respuesta["idempresa"]);
+
+      var identificador = respuesta["identificador"];
+
+      $.ajax({
+
+        url: "ajax/empresas.ajax.php",
+        method: "POST",
+        data: datosEmpresa,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success:function(respuesta){
+
+          $("#nuevaEmpresa").val(respuesta["empresa"]);
+
+        }
+
+      })
+
+      var datosCliente = new FormData();
+      datosCliente.append("idEstablecimiento", respuesta["id"]);
+
+      $.ajax({
+
+        url: "ajax/clientes.ajax.php",
+        method: "POST",
+        data: datosCliente,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success:function(respuesta){
+
+          //AGREGAR LOS CLIENTES AL SELECT
+
+          var select = document.getElementById("seleccionarCliente");
+
+          if (select.length > 0) {
+
+            while (select.length > 0) {
+              select.remove(select.length-1);
+            }
+
+          }
+
+          $("#seleccionarCliente").append(
+
+            '<option value="">Seleccionar Cliente</option>'
+          )
+
+          respuesta.forEach(funcionForEach);
+
+          function funcionForEach(item, index){
+
+            $("#seleccionarCliente").append(
+
+              '<option idCliente="'+item.id+'"  value="'+item.id+'">'+item.nombre+'</option>'
+            )
+          }
+
+
+        }
+
+      })
+
+    }
+
+  })
+
+})
 
 /* =================================================
 AGREGANDO CATEGORIAS AL RADICADO DESDE LA TABLA

@@ -10,15 +10,30 @@ class AjaxEstablecimientos{
 	=============================================*/
 
 	public $idEstablecimiento;
+	public $traerEstablecimientos;
 
 	public function ajaxEditarEstablecimiento(){
 
-		$item = "id";
-		$valor = $this->idEstablecimiento;
+		if($this->traerEstablecimientos == "ok"){
 
-		$respuesta = ControladorEstablecimientos::ctrMostrarEstablecimientos($item, $valor);
+					$item = null;
+					$valor = null;
 
-		echo json_encode($respuesta);
+					$respuesta = ControladorEstablecimientos::ctrMostrarEstablecimientos($item, $valor);
+
+					echo json_encode($respuesta);
+
+		} else {
+
+			$item = "id";
+			$valor = $this->idEstablecimiento;
+
+			$respuesta = ControladorEstablecimientos::ctrMostrarEstablecimientos($item, $valor);
+
+			echo json_encode($respuesta);
+	
+		}
+
 
 	}
 
@@ -61,6 +76,8 @@ class AjaxEstablecimientos{
 
 	}
 
+
+
 }
 
 /*=============================================
@@ -72,6 +89,18 @@ if(isset( $_POST["idEstablecimiento"])){
 	$editarEstablecimiento = new AjaxEstablecimientos();
 	$editarEstablecimiento -> idEstablecimiento = $_POST["idEstablecimiento"];
 	$editarEstablecimiento -> ajaxEditarEstablecimiento();
+
+}
+
+/*=============================================
+LISTAR ESTABLECIMIENTOS
+=============================================*/
+
+if(isset( $_POST["traerEstablecimientos"])){
+
+	$traerEstablecimientos = new AjaxEstablecimientos();
+	$traerEstablecimientos -> traerEstablecimientos = $_POST["traerEstablecimientos"];
+	$traerEstablecimientos -> ajaxEditarEstablecimiento();
 
 }
 

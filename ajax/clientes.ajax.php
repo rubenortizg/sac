@@ -10,15 +10,29 @@ class AjaxClientes{
 	=============================================*/
 
 	public $idCliente;
+	public $idEstablecimiento;
 
 	public function ajaxEditarCliente(){
 
-		$item = "id";
-		$valor = $this->idCliente;
+		if($this->idEstablecimiento){
 
-		$respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
+			$item = "idestablecimiento";
+			$valor = $this->idEstablecimiento;
 
-		echo json_encode($respuesta);
+			$respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
+
+			echo json_encode($respuesta);
+
+		} else {
+
+			$item = "id";
+			$valor = $this->idCliente;
+
+			$respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
+
+			echo json_encode($respuesta);
+
+		}
 
 	}
 
@@ -33,5 +47,17 @@ if(isset( $_POST["idCliente"])){
 	$editarCliente = new AjaxClientes();
 	$editarCliente -> idCliente = $_POST["idCliente"];
 	$editarCliente -> ajaxEditarCliente();
+
+}
+
+/*=============================================
+LISTAR CLIENTES
+=============================================*/
+
+if(isset( $_POST["idEstablecimiento"])){
+
+	$traerClientes = new AjaxClientes();
+	$traerClientes -> idEstablecimiento = $_POST["idEstablecimiento"];
+	$traerClientes -> ajaxEditarCliente();
 
 }
