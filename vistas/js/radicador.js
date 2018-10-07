@@ -319,7 +319,7 @@ $(".btnAgregarEstablecimiento").click(function(){
 })
 
 /* =================================================
-AGREGAR EMPRESA AL ESTABLECIMIENTO DESDE EL MOVIL
+AGREGAR EMPRESA AL ESTABLECIMIENTO DESDE DISPOSITIVOS
 ====================================================*/
 
 $(".formularioRadicador").on("change", "select.nuevaDescripcionEstablecimiento", function(){
@@ -433,14 +433,14 @@ function desactivarCategorias(){
 }
 
 /* =================================================
-FUNCION PARA HABILITAR ESTABLECIMIENTOS
+FUNCION PARA HABILITAR CATEGORIAS
 ====================================================*/
 
 function activarCategoria(){
 
   var activarBotonCategoria = $(".recuperarCategoria");
 
-  for (var i = 0; i < activarBoton.length; i++) {
+  for (var i = 0; i < activarBotonCategoria.length; i++) {
 
     $(activarBotonCategoria[i]).removeClass("btn-default");
     $(activarBotonCategoria[i]).addClass("btn-primary agregarCategoria");
@@ -450,25 +450,24 @@ function activarCategoria(){
 }
 
 /* =================================================
+FUNCION PARA DETERMINAR EL RADIO SELECCIONADO
+====================================================*/
+
+function obtenerValorRadioButtonSeccionado(ctrl){
+  
+    for(i=0;i<ctrl.length;i++)
+        if(ctrl[i].checked) return ctrl[i].value;
+}
+
+/* =================================================
 AGREGANDO CATEGORIAS AL RADICADO DESDE LA TABLA
 ====================================================*/
 
-/* ADICIONAL */
-
 $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
 
-  $(".formularioRadicador").on("checked", "radio.nuevoTipoCorrespondencia", function(){
+  var tipo = obtenerValorRadioButtonSeccionado(formularioRadicador.nuevoTipoCorrespondencia);
 
-    var tipo = document.getElementById("nuevoTipoCorrespondencia");
-
-    console.log("tipo",tipo);
-
-  })
-
-
-  var tipo = document.getElementById("nuevoTipoCorrespondencia");
-
-  if (tipo.value == "individual") {
+  if (tipo == "individual") {
 
     desactivarCategorias();
 
@@ -492,10 +491,6 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
     })
 
   }
-
-/* ADICIONAL */
-
-
 
   var idCategoria = $(this).attr("idCategoria");
 
@@ -577,6 +572,34 @@ $(".formularioRadicador").on("click", "button.quitarCategoria", function(){
 
   $("button.recuperarCategoria[idCategoria='"+idCategoria+"']").removeClass('btn-default');
   $("button.recuperarCategoria[idCategoria='"+idCategoria+"']").addClass('btn-primary agregarCategoria');
+
+  var tipo = obtenerValorRadioButtonSeccionado(formularioRadicador.nuevoTipoCorrespondencia);
+
+  if (tipo == "individual") {
+
+    activarCategoria();
+
+    $(".sorting").click(function(){
+      activarCategoria();
+    })
+
+    $("select[name='DataTables_Table_0_length']").change(function(){
+      activarCategoria();
+    })
+
+    $("input[aria-controls='DataTables_Table_0']").focus(function(){
+      $(document).keyup(function(event){
+        event.preventDefault();
+        activarCategoria();
+      })
+    })
+
+    $(".dataTables_paginate").click(function(){
+      activarCategoria();
+    })
+
+  }
+
 
 
 })
