@@ -453,8 +453,8 @@ function activarCategoria(){
 FUNCION PARA DETERMINAR EL RADIO SELECCIONADO
 ====================================================*/
 
-function obtenerValorRadioButtonSeccionado(ctrl){
-  
+function obtenerValorRadioButtonSeleccionado(ctrl){
+
     for(i=0;i<ctrl.length;i++)
         if(ctrl[i].checked) return ctrl[i].value;
 }
@@ -465,7 +465,7 @@ AGREGANDO CATEGORIAS AL RADICADO DESDE LA TABLA
 
 $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
 
-  var tipo = obtenerValorRadioButtonSeccionado(formularioRadicador.nuevoTipoCorrespondencia);
+  var tipo = obtenerValorRadioButtonSeleccionado(formularioRadicador.nuevoTipoCorrespondencia);
 
   if (tipo == "individual") {
 
@@ -513,45 +513,93 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
 
       var categoria = respuesta["categoria"];
 
-      $(".nuevaCategoria").append(
+      if (tipo == "individual") {
+        $(".nuevaCategoria").append(
 
-        '<div class="row" style="padding:5px 0px">'+
+          '<div class="row" style="padding:5px 0px">'+
 
-            '<div class="form group">'+
+          '<div class="form group">'+
 
-              '<div class="col-xs-6" style="padding-right:0px">'+
+          '<div class="col-xs-6" style="padding-right:0px">'+
 
-                '<div class="input-group">'+
-                  '<span class="input-group-addon"><i class="fa fa-tag"></i></span>'+
-                  '<input type="text" class="form-control" id="nuevaEmpresa" name="nuevaEmpresa" value="'+categoria+'" readonly>'+
-                '</div>'+
+          '<div class="input-group">'+
+          '<span class="input-group-addon"><i class="fa fa-tag"></i></span>'+
+          '<input type="text" class="form-control nuevaCategoriaCorrespondencia" id="nuevaCategoria" name="nuevaCategoria" value="'+categoria+'" readonly>'+
+          '</div>'+
 
-              '</div>'+
+          '</div>'+
 
-              '<div class="col-xs-6">'+
+          '<div class="col-xs-6">'+
 
-                '<div class="input-group">'+
-                  '<span class="input-group-addon"><i class="ion ion-grid"></i></span>'+
-                  '<input min="1" class="form-control" id="nuevaCantidadMasivo" name="nuevaCantidadMasivo" placeholder="0" valorconcepto=""'+ 'required="" type="number">'+
-                  '<span class="input-group-addon"><button class="btn btn-danger btn-xs quitarCategoria" idCategoria="'+idCategoria+'"><i class="fa fa-times"></i></button></span>'+
-                '</div>'+
+          '<div class="input-group">'+
+          '<span class="input-group-addon"><i class="ion ion-grid"></i></span>'+
+          '<input min="1" class="form-control nuevaCantidadCorrespondencia" name="nuevaCantidadCorrespondencia" value="1"'+
+          'required="" type="number" readonly>'+
+          '<span class="input-group-addon"><button class="btn btn-danger btn-xs quitarCategoria" idCategoria="'+idCategoria+'"><i class="fa fa-times"></i></button></span>'+
+          '</div>'+
 
-              '</div>'+
+          '</div>'+
 
-              '<div class="col-xs-12" style="padding:5px 15px">'+
+          '<div class="col-xs-12" style="padding:5px 15px">'+
 
-                '<div class="input-group">'+
-                  '<span class="input-group-addon"><i class="fa fa-info-circle"></i></span>'+
-                  '<input type="text" class="form-control" id="nuevaObservacion" name="nuevaObservacion"  >'+
-                '</div>'+
+          '<div class="input-group">'+
+          '<span class="input-group-addon"><i class="fa fa-info-circle"></i></span>'+
+          '<input type="text" class="form-control nuevaObservacion" id="nuevaObservacion" name="nuevaObservacion"  >'+
+          '</div>'+
 
-              '</div>'+
+          '</div>'+
 
-            '</div>'+
+          '</div>'+
 
-        '</div>'
+          '</div>'
 
-      )
+        )
+
+      } else {
+
+        $(".nuevaCategoria").append(
+
+          '<div class="row" style="padding:5px 0px">'+
+
+          '<div class="form group">'+
+
+          '<div class="col-xs-6" style="padding-right:0px">'+
+
+          '<div class="input-group">'+
+          '<span class="input-group-addon"><i class="fa fa-tag"></i></span>'+
+          '<input type="text" class="form-control nuevaCategoriaCorrespondencia" id="nuevaCategoria" name="nuevaCategoria" value="'+categoria+'" readonly>'+
+          '</div>'+
+
+          '</div>'+
+
+          '<div class="col-xs-6">'+
+
+          '<div class="input-group">'+
+          '<span class="input-group-addon"><i class="ion ion-grid"></i></span>'+
+          '<input min="1" class="form-control nuevaCantidadCorrespondencia" name="nuevaCantidadCorrespondencia" value="1"'+
+          'required="" type="number">'+
+          '<span class="input-group-addon"><button class="btn btn-danger btn-xs quitarCategoria" idCategoria="'+idCategoria+'"><i class="fa fa-times"></i></button></span>'+
+          '</div>'+
+
+          '</div>'+
+
+          '<div class="col-xs-12" style="padding:5px 15px">'+
+
+          '<div class="input-group">'+
+          '<span class="input-group-addon"><i class="fa fa-info-circle"></i></span>'+
+          '<input type="text" class="form-control nuevaObservacion" id="nuevaObservacion" name="nuevaObservacion"  >'+
+          '</div>'+
+
+          '</div>'+
+
+          '</div>'+
+
+          '</div>'
+
+        )
+      }
+
+      listarCorrespondencia()
 
     }
 
@@ -568,12 +616,12 @@ $(".formularioRadicador").on("click", "button.quitarCategoria", function(){
 
   $(this).parent().parent().parent().parent().parent().remove();
 
-  var idCategoria =$(this).attr("idCategoria");
+  var idCategoria = $(this).attr("idCategoria");
 
   $("button.recuperarCategoria[idCategoria='"+idCategoria+"']").removeClass('btn-default');
   $("button.recuperarCategoria[idCategoria='"+idCategoria+"']").addClass('btn-primary agregarCategoria');
 
-  var tipo = obtenerValorRadioButtonSeccionado(formularioRadicador.nuevoTipoCorrespondencia);
+  var tipo = obtenerValorRadioButtonSeleccionado(formularioRadicador.nuevoTipoCorrespondencia);
 
   if (tipo == "individual") {
 
@@ -600,6 +648,52 @@ $(".formularioRadicador").on("click", "button.quitarCategoria", function(){
 
   }
 
-
+  listarCorrespondencia()
 
 })
+
+/* =================================================
+ACTUALIZAR CANTIDAD
+====================================================*/
+
+$(".formularioRadicador").on("change", "input.nuevaCantidadCorrespondencia", function(){
+
+    listarCorrespondencia()
+
+})
+
+/* =================================================
+ACTUALIZAR OBSERVACIONES CORRESPONDENCIA
+====================================================*/
+
+$(".formularioRadicador").on("change", "input.nuevaObservacion", function(){
+
+    listarCorrespondencia()
+
+})
+
+
+/* =================================================
+LISTADO CORRESPONDENCIA
+====================================================*/
+
+function listarCorrespondencia(){
+
+  var listaCorrespondencia = [];
+
+  var tipo = obtenerValorRadioButtonSeleccionado(formularioRadicador.nuevoTipoCorrespondencia);
+
+  var categoria = $(".nuevaCategoriaCorrespondencia");
+  var cantidad = $(".nuevaCantidadCorrespondencia");
+  var observacion = $(".nuevaObservacion");
+
+  for (var i = 0; i < categoria.length; i++) {
+
+    listaCorrespondencia.push({ "categoria" : $(categoria[i]).val(),
+                                "cantidad" : $(cantidad[i]).val(),
+                                "observacion" : $(observacion[i]).val()})
+  }
+
+  console.log("listaCorrespondencia", JSON.stringify(listaCorrespondencia));
+
+}

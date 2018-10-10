@@ -184,6 +184,9 @@
 
                 </div>
 
+
+                <input type="hidden" name="listaCorrespondencia" id="listaCorrespondencia">
+
                 <!--=====================================
                 BOTON PARA AGREGAR TIPO DE CORRESPONDENCIA
                 ======================================-->
