@@ -8,82 +8,43 @@ class ControladorRadicados {
 
   static public function ctrCrearRadicado(){
 
-    if (isset($_POST["nuevoCliente"])) {
+    if (isset($_POST["nuevoRadicado"])) {
 
+      $tabla ="radicados";
 
-      if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoCliente"])  &&
-         preg_match('/^[0-9]+$/', $_POST["nuevoDocumento"]) &&
-         preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["nuevoEmail"]) &&
-         preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoTelefono"]) &&
-         preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoCelular"]) &&
-         preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaCiudad"])){
+      $datos = array( "radicado"=>$_POST["radicadoReal"],
+                      "fecha"=>$_POST["nuevaFecha"],
+                      "idtransportadora"=>$_POST["seleccionarTransportadora"],
+                      "idremitente"=>$_POST["seleccionarRemitente"],
+                      "destinatario"=>$_POST["listaDestinatario"],
+                      "correspondencia"=>$_POST["listaCorrespondencia"],
+                      "idusuario" => $_SESSION["id"]);
 
-           $tabla = "clientes";
+      $respuesta = ModeloRadicados::mdlIngresarRadicado($tabla, $datos);
 
-           $datos = array("identificacion" => $_POST["nuevoDocumento"],
-     					            "tipoid" => $_POST["nuevoTipoDocumento"],
-                          "nombre" => $_POST["nuevoCliente"],
-                          "correo" => $_POST["nuevoEmail"],
-                          "telfijo" => $_POST["nuevoTelefono"],
-                          "celular" => $_POST["nuevoCelular"],
-                          "ciudad" => $_POST["nuevaCiudad"],
-                          "idempresa" => $_POST["nuevaEmpresa"],
-                          "idestablecimiento" => $_POST["nuevoEstablecimiento"],
-                          "idusuario" => $_SESSION["id"]);
-
-            $respuesta = ModeloClientes::mdlIngresarCliente($tabla, $datos);
-
-            if($respuesta == "ok"){
-
-    					echo '<script>
-
-    					swal({
-
-    						type: "success",
-    						title: "¡El cliente ha sido guardado correctamente!",
-    						showConfirmButton: true,
-    						confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-
-    					}).then(function(result){
-
-    						if(result.value){
-
-    							window.location = "clientes";
-
-    						}
-
-    					});
-
-
-    					</script>';
-
-
-    				}
-
-      } else {
+      if($respuesta == "ok"){
 
         echo '<script>
 
-         swal({
+        swal({
 
-           type: "error",
-           title: "¡El radicado no puede ir con los campos vacíos o llevar caracteres especiales!",
-           showConfirmButton: true,
-           confirmButtonText: "Cerrar",
-           closeOnConfirm: false
-         }).then(function(result){
+          type: "success",
+          title: "¡Correspondencia radicada correctamente!",
+          showConfirmButton: true,
+          confirmButtonText: "Cerrar",
+          closeOnConfirm: false
 
-           if(result.value){
+        }).then(function(result){
 
-             window.location = "clientes";
+          if(result.value){
 
-           }
+            window.location = "radicador";
 
-         });
+          }
 
+        });
 
-       </script>';
+        </script>';
 
       }
 

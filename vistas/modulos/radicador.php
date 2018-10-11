@@ -56,6 +56,7 @@
                         $radicado = str_pad($radicado, 7, "0", STR_PAD_LEFT);
 
                         echo '<input type="text" class="form-control" id="nuevoRadicado" name="nuevoRadicado" value="R'.$radicado.'" readonly>';
+                        echo '<input type="hidden" id="radicadoReal" name="radicadoReal" value="'.$radicado.'" readonly>';
 
                       } else {
 
@@ -67,6 +68,7 @@
                         $radicado = str_pad($radicado, 7, "0", STR_PAD_LEFT);
 
                         echo '<input type="text" class="form-control" id="nuevoRadicado" name="nuevoRadicado" value="R'.$radicado.'" readonly>';
+                        echo '<input type="hidden" id="radicadoReal" name="radicadoReal" value="'.$radicado.'" readonly>';
 
                       }
 
@@ -161,6 +163,8 @@
 
                 </div>
 
+                <input type="hidden" name="listaDestinatario" id="listaDestinatario">
+
                 <!--=====================================
                 BOTON PARA AGREGAR ESTABLECIMIENTO EN MOVILES
                 ======================================-->
@@ -204,6 +208,14 @@
           </div>
 
           </form>
+
+          <?php
+
+          $radicarCorrespondencia = new ControladorRadicados();
+          $radicarCorrespondencia -> ctrCrearRadicado();
+
+
+          ?>
 
         </div>
 

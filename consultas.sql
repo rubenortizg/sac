@@ -103,10 +103,10 @@ CREATE TABLE `sac`.`categorias` (
 CREATE TABLE `sac`.`radicados` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `radicado` int(11) NOT NULL,
+ `fecha` datetime NOT NULL,
  `idtransportadora` int(11) NOT NULL,
  `idremitente` int(11) NOT NULL,
- `iddestinatario` int(11) NOT NULL,
- `idestablecimiento` int(11) NOT NULL,
+ `destinatario` text COLLATE utf8_spanish_ci DEFAULT NULL,
  `correspondencia` text COLLATE utf8_spanish_ci DEFAULT NULL,
  `idusuario` int(11) NOT NULL,
  PRIMARY KEY (`id`)

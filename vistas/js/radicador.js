@@ -92,6 +92,7 @@ $(".tablaRadicados tbody").on("click", "button.agregarEstablecimiento", function
         success:function(respuesta){
 
           var empresa = respuesta["empresa"];
+          var idempresa = respuesta["id"];
 
           $(".nuevoDestinatario").append(
 
@@ -101,7 +102,7 @@ $(".tablaRadicados tbody").on("click", "button.agregarEstablecimiento", function
 
                   '<div class="input-group">'+
                     '<span class="input-group-addon"><i class="fa fa-briefcase"></i></span>'+
-                    '<input type="text" class="form-control" id="nuevoEstablecimiento" name="nuevoEstablecimiento" value="'+identificador+'" readonly>'+
+                    '<input type="text" class="form-control nuevoEstablecimiento" id="nuevoEstablecimiento" name="nuevoEstablecimiento" idEstablecimiento="'+idEstablecimiento+'" value="'+identificador+'" readonly>'+
                     '<span class="input-group-addon"><button class="btn btn-danger btn-xs quitarEstablecimiento" idEstablecimiento="'+idEstablecimiento+'"><i class="fa fa-times"></i></button></span>'+
                   '</div>'+
 
@@ -112,14 +113,14 @@ $(".tablaRadicados tbody").on("click", "button.agregarEstablecimiento", function
                       '<div class="col-xs-12">'+
                         '<div class="input-group">'+
                           '<span class="input-group-addon"><i class="fa fa-building"></i></span>'+
-                          '<input type="text" class="form-control" id="nuevaEmpresa" name="nuevaEmpresa" value="'+empresa+'" readonly>'+
+                          '<input type="text" class="form-control nuevaEmpresa" id="nuevaEmpresa" name="nuevaEmpresa" idEmpresa="'+idempresa+'" value="'+empresa+'" readonly>'+
                         '</div>'+
                       '</div>'+
 
                       '<div class="col-xs-12" style="padding:5px 15px">'+
                         '<div class="input-group">'+
                           '<span class="input-group-addon"><i class="fa fa-users"></i></span>'+
-                          '<select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>'+
+                          '<select class="form-control seleccionarCliente" id="seleccionarCliente" name="seleccionarCliente">'+
                             '<option value="">Seleccionar Cliente</option>'+
                           '</select>'+
 
@@ -136,6 +137,11 @@ $(".tablaRadicados tbody").on("click", "button.agregarEstablecimiento", function
               '</div>'
 
           )
+
+
+          // AGRUPAR DESTINATARIO EN FORMATO JSON
+
+          listarDestinatario()
 
         }
 
@@ -229,7 +235,9 @@ $(".formularioRadicador").on("click", "button.quitarEstablecimiento", function()
     activarEstablecimientos();
   })
 
+  // AGRUPAR DESTINATARIO EN FORMATO JSON
 
+  listarDestinatario()
 
 })
 
@@ -261,7 +269,7 @@ $(".btnAgregarEstablecimiento").click(function(){
 
               '<div class="input-group">'+
                 '<span class="input-group-addon"><i class="fa fa-briefcase"></i></span>'+
-                '<select class="form-control nuevaDescripcionEstablecimiento" idEstablecimiento name="nuevaDescripcionEstablecimiento" required>'+
+                '<select class="form-control nuevoEstablecimiento" idEstablecimiento id="nuevoEstablecimiento" name="nuevoEstablecimiento" required>'+
                 '<option>Seleccione el Establecimiento</option>'+
                 '</select>'+
                 '<span class="input-group-addon"><button class="btn btn-danger btn-xs quitarEstablecimiento" idEstablecimiento><i class="fa fa-times"></i></button></span>'+
@@ -274,14 +282,14 @@ $(".btnAgregarEstablecimiento").click(function(){
                   '<div class="col-xs-12">'+
                     '<div class="input-group">'+
                       '<span class="input-group-addon"><i class="fa fa-building"></i></span>'+
-                      '<input type="text" class="form-control" id="nuevaEmpresa" name="nuevaEmpresa" value="" readonly>'+
+                      '<input type="text" class="form-control nuevaEmpresa" id="nuevaEmpresa" idEmpresa name="nuevaEmpresa" value="" readonly>'+
                     '</div>'+
                   '</div>'+
 
                   '<div class="col-xs-12" style="padding:5px 15px">'+
                     '<div class="input-group">'+
                       '<span class="input-group-addon"><i class="fa fa-users"></i></span>'+
-                      '<select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>'+
+                      '<select class="form-control seleccionarCliente" id="seleccionarCliente" name="seleccionarCliente">'+
                         '<option value="">Seleccionar Cliente</option>'+
                       '</select>'+
 
@@ -303,14 +311,12 @@ $(".btnAgregarEstablecimiento").click(function(){
 
           function funcionForEach(item, index){
 
-            $(".nuevaDescripcionEstablecimiento").append(
+            $(".nuevoEstablecimiento").append(
 
               '<option idEstablecimiento="'+item.id+'"  value="'+item.id+'">'+item.identificador+'</option>'
             )
+
           }
-
-
-
 
     }
 
@@ -322,7 +328,7 @@ $(".btnAgregarEstablecimiento").click(function(){
 AGREGAR EMPRESA AL ESTABLECIMIENTO DESDE DISPOSITIVOS
 ====================================================*/
 
-$(".formularioRadicador").on("change", "select.nuevaDescripcionEstablecimiento", function(){
+$(".formularioRadicador").on("change", "select.nuevoEstablecimiento", function(){
 
   var idEstablecimiento = $(this).val();
 
@@ -343,6 +349,8 @@ $(".formularioRadicador").on("change", "select.nuevaDescripcionEstablecimiento",
       var datosEmpresa = new FormData();
       datosEmpresa.append("idEmpresa",respuesta["idempresa"]);
 
+      $("#nuevoEstablecimiento").attr("idEstablecimiento",respuesta["id"]);
+
       var identificador = respuesta["identificador"];
 
       $.ajax({
@@ -357,6 +365,7 @@ $(".formularioRadicador").on("change", "select.nuevaDescripcionEstablecimiento",
         success:function(respuesta){
 
           $("#nuevaEmpresa").val(respuesta["empresa"]);
+          $("#nuevaEmpresa").attr("idEmpresa",respuesta["id"]);
 
         }
 
@@ -403,10 +412,14 @@ $(".formularioRadicador").on("change", "select.nuevaDescripcionEstablecimiento",
             )
           }
 
+          // AGRUPAR DESTINATARIO EN FORMATO JSON
+
+          listarDestinatario()
 
         }
 
       })
+
 
     }
 
@@ -524,7 +537,7 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
 
           '<div class="input-group">'+
           '<span class="input-group-addon"><i class="fa fa-tag"></i></span>'+
-          '<input type="text" class="form-control nuevaCategoriaCorrespondencia" id="nuevaCategoria" name="nuevaCategoria" value="'+categoria+'" readonly>'+
+          '<input type="text" class="form-control nuevaCategoriaCorrespondencia" id="nuevaCategoria" name="nuevaCategoria" idCategoria="'+idCategoria+'" value="'+categoria+'" readonly>'+
           '</div>'+
 
           '</div>'+
@@ -567,7 +580,7 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
 
           '<div class="input-group">'+
           '<span class="input-group-addon"><i class="fa fa-tag"></i></span>'+
-          '<input type="text" class="form-control nuevaCategoriaCorrespondencia" id="nuevaCategoria" name="nuevaCategoria" value="'+categoria+'" readonly>'+
+          '<input type="text" class="form-control nuevaCategoriaCorrespondencia" id="nuevaCategoria" name="nuevaCategoria" idCategoria="'+idCategoria+'" value="'+categoria+'" readonly>'+
           '</div>'+
 
           '</div>'+
@@ -598,6 +611,8 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
 
         )
       }
+
+      // AGRUPAR CORRESPONDENCIA EN FORMATO JSON
 
       listarCorrespondencia()
 
@@ -648,9 +663,61 @@ $(".formularioRadicador").on("click", "button.quitarCategoria", function(){
 
   }
 
+  // AGRUPAR CORRESPONDENCIA EN FORMATO JSON
+
   listarCorrespondencia()
 
 })
+
+/* =================================================
+ACTUALIZAR DESTINATARIO
+====================================================*/
+
+// $(".formularioRadicador").on("change", "select.nuevoDestinatario", function(){
+//
+//   // AGRUPAR DESTINATARIO EN FORMATO JSON
+//
+//   listarDestinatario()
+//
+// })
+
+/* =================================================
+ACTUALIZAR CLIENTE DESTINATARIO
+====================================================*/
+
+$(".formularioRadicador").on("change", "select.seleccionarCliente", function(){
+
+  // AGRUPAR DESTINATARIO EN FORMATO JSON
+
+  listarDestinatario()
+
+})
+
+
+/* =================================================
+LISTADO INFORAMCION DESTINATARIO
+====================================================*/
+
+function listarDestinatario(){
+
+  var listaDestinatario = [];
+
+  var establecimiento = $(".nuevoEstablecimiento");
+  var empresa = $(".nuevaEmpresa");
+  var cliente = $(".seleccionarCliente");
+
+
+  for (var i = 0; i < empresa.length; i++) {
+
+    listaDestinatario.push({  "idEstablecimiento" : $(establecimiento[i]).attr("idEstablecimiento"),
+                              "idEmpresa" : $(empresa[i]).attr("idEmpresa"),
+                              "idCliente" : $(cliente[i]).val()})
+  }
+
+  $("#listaDestinatario").val(JSON.stringify(listaDestinatario));
+
+}
+
 
 /* =================================================
 ACTUALIZAR CANTIDAD
@@ -658,7 +725,9 @@ ACTUALIZAR CANTIDAD
 
 $(".formularioRadicador").on("change", "input.nuevaCantidadCorrespondencia", function(){
 
-    listarCorrespondencia()
+  // AGRUPAR CORRESPONDENCIA EN FORMATO JSON
+
+  listarCorrespondencia()
 
 })
 
@@ -668,7 +737,10 @@ ACTUALIZAR OBSERVACIONES CORRESPONDENCIA
 
 $(".formularioRadicador").on("change", "input.nuevaObservacion", function(){
 
-    listarCorrespondencia()
+
+  // AGRUPAR CORRESPONDENCIA EN FORMATO JSON
+
+  listarCorrespondencia()
 
 })
 
@@ -689,11 +761,11 @@ function listarCorrespondencia(){
 
   for (var i = 0; i < categoria.length; i++) {
 
-    listaCorrespondencia.push({ "categoria" : $(categoria[i]).val(),
+    listaCorrespondencia.push({ "id" : $(categoria[i]).attr("idCategoria"),
                                 "cantidad" : $(cantidad[i]).val(),
                                 "observacion" : $(observacion[i]).val()})
   }
 
-  console.log("listaCorrespondencia", JSON.stringify(listaCorrespondencia));
+    $("#listaCorrespondencia").val(JSON.stringify(listaCorrespondencia));
 
 }

@@ -10,20 +10,18 @@ class ModeloRadicados {
 
   static public function mdlIngresarRadicado($tabla, $datos){
 
-    $sql ="INSERT INTO $tabla(identificacion, tipoid, nombre, correo, telfijo, celular, ciudad, idempresa, idestablecimiento, idusuario) VALUES (:identificacion, :tipoid, :nombre, :correo, :telfijo, :celular, :ciudad, :idempresa, :idestablecimiento, :idusuario)";
+    $sql ="INSERT INTO $tabla(radicado, fecha, idtransportadora, idremitente, destinatario, correspondencia, idusuario) VALUES (:radicado, :fecha, :idtransportadora, :idremitente, :destinatario, :correspondencia, :idusuario)";
 
     $stmt = Conexion::conectar()-> prepare($sql);
 
-		$stmt->bindParam(":identificacion", $datos["identificacion"], PDO::PARAM_INT);
-		$stmt->bindParam(":tipoid", $datos["tipoid"], PDO::PARAM_STR);
-		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-		$stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
-		$stmt->bindParam(":telfijo", $datos["telfijo"], PDO::PARAM_STR);
-    $stmt->bindParam(":celular", $datos["celular"], PDO::PARAM_STR);
-    $stmt->bindParam(":ciudad", $datos["ciudad"], PDO::PARAM_STR);
-    $stmt->bindParam(":idempresa", $datos["idempresa"], PDO::PARAM_STR);
-    $stmt->bindParam(":idestablecimiento", $datos["idestablecimiento"], PDO::PARAM_STR);
+		$stmt->bindParam(":radicado", $datos["radicado"], PDO::PARAM_INT);
+    $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
+		$stmt->bindParam(":idtransportadora", $datos["idtransportadora"], PDO::PARAM_INT);
+		$stmt->bindParam(":idremitente", $datos["idremitente"], PDO::PARAM_INT);
+		$stmt->bindParam(":destinatario", $datos["destinatario"], PDO::PARAM_STR);
+    $stmt->bindParam(":correspondencia", $datos["correspondencia"], PDO::PARAM_STR);
     $stmt->bindParam(":idusuario", $datos["idusuario"], PDO::PARAM_INT);
+
 
 		if($stmt->execute()){
 
