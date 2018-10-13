@@ -58,6 +58,8 @@
 
             $radicados = ControladorRadicados::ctrMostrarRadicados($item, $valor);
 
+
+
             foreach ($radicados as $key => $value) {
 
               $item1 = "id";
@@ -66,46 +68,70 @@
               $transportadora = ControladorTransportadoras::ctrMostrarTransportadoras($item1, $valor1);
 
               $item2 = "id";
-              $valor2 = $value["iddestinatario"];
+              $valor2 = $value["idremitente"];
 
-              $destinatario = ControladorEmpresas::ctrMostrarEmpresas($item2, $valor2);
-
-              $item3 = "id";
-              $valor3 = $value["idestablecimiento"];
-
-              $establecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($item3, $valor3);
+              $remitente = ControladorRemitentes::ctrMostrarRemitentes($item2, $valor2);
 
               $radicado = $value["radicado"];
               $radicado = str_pad($radicado, 7, "0", STR_PAD_LEFT);
 
+              $listaDestinatario = json_decode($value["destinatario"], true);
 
               echo '<tr>
-                      <td>'.($key+1).'</td>
-                      <td>R'.$radicado.'</td>
-                      <td>'.$transportadora["transportadora"].'</td>
-                      <td>'.$value["remitente"].'</td>
-                      <td>'.$destinatario["empresa"].'</td>
-                      <td>'.$establecimiento["identificador"].'</td>
-                      <td>'.$value["tipocorrespondencia"].'</td>
-                      <td>'.$value["fecha"].'</td>
-                      <td>
+                      <td>'.($key+1).'</td>';
 
-                        <div class="btn-group">
+              foreach ($listaDestinatario as $key => $destinatario) {
 
-                          <button class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o"></i></button>
-                          <button class="btn btn-primary btn-sm"><i class="fa fa-print"></i></button>
+                echo '  <td>R'.$radicado.'</td>
+                        <td>'.$transportadora["transportadora"].'</td>
+                        <td>'.$remitente["remitente"].'</td>';
 
-                          <button class="btn btn-warning btn-sm btnEditarRadicado" data-toggle="modal" data-target="#modalEditarRadicado" idRadicado="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+                $item3 = "id";
+                $valor3 = $destinatario["idEmpresa"];
 
-                          <button class="btn btn-danger btn-sm btnEliminarRadicado" idRadicado="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                $empresa = ControladorEmpresas::ctrMostrarEmpresas($item3, $valor3);
 
-                        </div>
+                $item4 = "id";
+                $valor4 = $destinatario["idCliente"];
 
-                      </td>
+                $cliente = ControladorClientes::ctrMostrarClientes($item4, $valor4);
 
-                    </tr>';
+                $item5 = "id";
+                $valor5 = $destinatario["idEstablecimiento"];
+
+                $establecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($item5, $valor5);
+
+
+                if($destinatario["idCliente"] != null){
+                  echo '<td>'.$empresa["empresa"].' - '.$cliente["nombre"].'</td>';
+                } else {
+                  echo '<td>'.$empresa["empresa"].'</td>';
+                }
+
+                echo '  <td>'.$establecimiento["identificador"].'</td>
+                        <td>'.$value["tipo"].'</td>
+                        <td>'.$value["fecha"].'</td>
+                        <td>
+
+                          <div class="btn-group">
+
+                            <button class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o"></i></button>
+                            <button class="btn btn-primary btn-sm"><i class="fa fa-print"></i></button>
+
+                            <button class="btn btn-warning btn-sm btnEditarRadicado" data-toggle="modal" data-target="#modalEditarRadicado" idRadicado="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+
+                            <button class="btn btn-danger btn-sm btnEliminarRadicado" idRadicado="'.$value["id"].'"><i class="fa fa-times"></i></button>
+
+                          </div>
+
+                        </td>
+
+                      </tr>';
+
+              }
 
             }
+
           ?>
 
         </tbody>

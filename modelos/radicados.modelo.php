@@ -10,7 +10,7 @@ class ModeloRadicados {
 
   static public function mdlIngresarRadicado($tabla, $datos){
 
-    $sql ="INSERT INTO $tabla(radicado, fecha, idtransportadora, idremitente, destinatario, correspondencia, idusuario) VALUES (:radicado, :fecha, :idtransportadora, :idremitente, :destinatario, :correspondencia, :idusuario)";
+    $sql ="INSERT INTO $tabla(radicado, fecha, idtransportadora, idremitente, destinatario, tipo, correspondencia, idusuario) VALUES (:radicado, :fecha, :idtransportadora, :idremitente, :destinatario, :tipo, :correspondencia, :idusuario)";
 
     $stmt = Conexion::conectar()-> prepare($sql);
 
@@ -19,6 +19,7 @@ class ModeloRadicados {
 		$stmt->bindParam(":idtransportadora", $datos["idtransportadora"], PDO::PARAM_INT);
 		$stmt->bindParam(":idremitente", $datos["idremitente"], PDO::PARAM_INT);
 		$stmt->bindParam(":destinatario", $datos["destinatario"], PDO::PARAM_STR);
+    $stmt->bindParam(":tipo", $datos["tipo"], PDO::PARAM_STR);
     $stmt->bindParam(":correspondencia", $datos["correspondencia"], PDO::PARAM_STR);
     $stmt->bindParam(":idusuario", $datos["idusuario"], PDO::PARAM_INT);
 

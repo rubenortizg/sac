@@ -108,6 +108,7 @@ CREATE TABLE `sac`.`radicados` (
  `idremitente` int(11) NOT NULL,
  `destinatario` text COLLATE utf8_spanish_ci DEFAULT NULL,
  `correspondencia` text COLLATE utf8_spanish_ci DEFAULT NULL,
+ `tipo` text COLLATE utf8_spanish_ci DEFAULT NULL,
  `idusuario` int(11) NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

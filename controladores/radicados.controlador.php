@@ -17,6 +17,7 @@ class ControladorRadicados {
                       "idtransportadora"=>$_POST["seleccionarTransportadora"],
                       "idremitente"=>$_POST["seleccionarRemitente"],
                       "destinatario"=>$_POST["listaDestinatario"],
+                      "tipo"=>$_POST["nuevoTipoCorrespondencia"],
                       "correspondencia"=>$_POST["listaCorrespondencia"],
                       "idusuario" => $_SESSION["id"]);
 

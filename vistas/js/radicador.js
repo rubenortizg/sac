@@ -695,7 +695,7 @@ $(".formularioRadicador").on("change", "select.seleccionarCliente", function(){
 
 
 /* =================================================
-LISTADO INFORAMCION DESTINATARIO
+LISTADO INFORMACION DESTINATARIO
 ====================================================*/
 
 function listarDestinatario(){
