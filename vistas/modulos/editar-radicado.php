@@ -3,12 +3,12 @@
 
   <section class="content-header">
     <h1>
-      Radicar Correspondencia
+      Editar Radicado
     </h1>
 
     <ol class="breadcrumb">
       <li><a href="inicio"><i class="fa fa-dashboard"></i>Inicio</a></li>
-      <li class="active">Radicar Correspondencia</li>
+      <li class="active">Editar Radicado</li>
     </ol>
 
   </section>
@@ -30,11 +30,35 @@
             <h4>Radicado</h4>
           </div>
 
-          <form role="form" method="post" class="formularioRadicador" id="formularioRadicador">
+          <form role="form" method="post" class="formularioRadicador formularioEdicion" id="formularioRadicador">
 
             <div class="box-body">
 
               <div class="box">
+
+                <!--=====================================
+                RADICADO A EDITAR
+                ======================================-->
+
+                <?php
+
+                  $item = "id";
+                  $valor = $_GET["idRadicado"];
+
+                  $editarRadicado = ControladorRadicados::ctrMostrarRadicados($item, $valor);
+
+                  $itemTransportadora ="id";
+                  $valorTransportadora =$editarRadicado["idtransportadora"];
+
+                  $transportadora = ControladorTransportadoras::ctrMostrarTransportadoras($itemTransportadora, $valorTransportadora);
+
+
+                  $itemRemitente ="id";
+                  $valorRemitente =$editarRadicado["idremitente"];
+
+                  $remitente = ControladorRemitentes::ctrMostrarRemitentes($itemRemitente, $valorRemitente);
+
+                ?>
 
                 <!--=====================================
                 NUMERO DE RADICADO
@@ -45,32 +69,12 @@
                     <span class="input-group-addon"><i class="fa fa-qrcode"></i></span>
                     <?php
 
-                      $item = null;
-                      $valor = null;
-
-                      $radicados = ControladorRadicados::ctrMostrarRadicados($item, $valor);
-
-                      if (!$radicados) {
-
-                        $radicado = 1;
+                        $radicado = $editarRadicado["radicado"];
+                        $radicadoReal = $editarRadicado["radicado"];
                         $radicado = str_pad($radicado, 7, "0", STR_PAD_LEFT);
 
-                        echo '<input type="text" class="form-control" id="nuevoRadicado" name="nuevoRadicado" value="R'.$radicado.'" readonly>';
-                        echo '<input type="hidden" id="radicadoReal" name="radicadoReal" value="'.$radicado.'" readonly>';
-
-                      } else {
-
-                        foreach ($radicados as $key => $value) {
-                          // llegar al ultimo radicado
-                        }
-
-                        $radicado = $value["radicado"] + 1;
-                        $radicado = str_pad($radicado, 7, "0", STR_PAD_LEFT);
-
-                        echo '<input type="text" class="form-control" id="nuevoRadicado" name="nuevoRadicado" value="R'.$radicado.'" readonly>';
-                        echo '<input type="hidden" id="radicadoReal" name="radicadoReal" value="'.$radicado.'" readonly>';
-
-                      }
+                        echo '<input type="text" class="form-control" id="nuevoRadicado" name="editarRadicado" value="R'.$radicado.'" readonly>';
+                        echo '<input type="hidden" id="radicadoReal" name="radicadoReal" value="'.$radicadoReal.'" readonly>';
 
                     ?>
 
@@ -84,7 +88,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input type="text" class="form-control" id="nuevaFecha" name="nuevaFecha" value="<?php date_default_timezone_set('America/Bogota'); echo date("Y-m-d H:i:s"); ?>" readonly>
+                    <input type="text" class="form-control" id="nuevaFecha" name="nuevaFecha" value="<?php echo $editarRadicado["fecha"]; ?>" readonly>
                   </div>
                 </div>
 
@@ -97,7 +101,7 @@
                     <span class="input-group-addon"><i class="fa fa-truck"></i></span>
 
                     <select class="form-control" id="seleccionarTransportadora" name="seleccionarTransportadora" required>
-                      <option value="">Seleccionar transportadora</option>
+                      <option value="<?php echo $transportadora["id"]; ?>"><?php echo $transportadora["transportadora"]; ?></option>
 
                       <?php
 
@@ -127,7 +131,7 @@
                     <span class="input-group-addon"><i class="fa fa-send"></i></span>
 
                     <select class="form-control" id="seleccionarRemitente" name="seleccionarRemitente" required>
-                      <option value="">Seleccionar remitente</option>
+                      <option value="<?php echo $remitente["id"]; ?>"><?php echo $remitente["remitente"]; ?></option>
 
                       <?php
 
@@ -159,7 +163,88 @@
 
                 <div class="nuevoDestinatario">
 
-                  <!-- nuevoDestinatario -->
+                <?php
+
+                  $listaDestinatario = json_decode($editarRadicado["destinatario"], true);
+
+                  foreach ($listaDestinatario as $key => $value) {
+
+                    $itemEstablecimiento = "id";
+                    $valorEstablecimiento = $value["idEstablecimiento"];
+
+                    $establecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($itemEstablecimiento, $valorEstablecimiento);
+
+                    $itemEmpresa = "id";
+                    $valorEmpresa = $value["idEmpresa"];
+
+                    $empresa = ControladorEmpresas::ctrMostrarEmpresas($itemEmpresa, $valorEmpresa);
+
+                    $itemCliente = "id";
+                    $valorCliente = $value["idCliente"];
+
+                    $cliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
+
+                    $itemClientes = "idestablecimiento";
+                    $valorClientes = $value["idEstablecimiento"];
+
+                    $clientes = ControladorClientes::ctrMostrarClientes($itemClientes, $valorClientes);
+
+                    echo '<div class="row" style="padding:5px 15px">
+
+                            <div class="form group">
+
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
+                                <input type="text" class="form-control nuevoEstablecimiento" id="nuevoEstablecimiento" name="nuevoEstablecimiento" idEstablecimiento="'.$establecimiento["id"].'" value="'.$establecimiento["identificador"].'" readonly>
+                                <span class="input-group-addon"><button class="btn btn-danger btn-xs quitarEstablecimiento" idEstablecimiento="'.$establecimiento["id"].'"><i class="fa fa-times"></i></button></span>
+                              </div>
+
+                              <div class="row" style="padding:5px 0px">
+
+                                <div class="form group">
+
+                                  <div class="col-xs-12">
+                                    <div class="input-group">
+                                      <span class="input-group-addon"><i class="fa fa-building"></i></span>
+                                      <input type="text" class="form-control nuevaEmpresa" id="nuevaEmpresa" name="nuevaEmpresa" idEmpresa="'.$empresa["id"].'" value="'.$empresa["empresa"].'" readonly>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-xs-12" style="padding:5px 15px">
+                                    <div class="input-group">
+                                      <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                      <select class="form-control seleccionarCliente" id="seleccionarCliente" name="seleccionarCliente">';
+
+                    if ($value["idCliente"] != "") {
+                      echo '<option value="'.$cliente["id"].'">'.$cliente["nombre"].'</option>';
+                    } else {
+                      echo '<option value="">Seleccionar Cliente</option>';
+                    }
+
+
+                      foreach ($clientes as $key => $value) {
+
+                        echo '<option idCliente="'.$value["id"].'"  value="'.$value["id"].'">'.$value["nombre"].'</option>';
+
+                      }
+
+
+                    echo'              </select>
+
+                                      <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar Cliente</button></span>
+                                    </div>
+                                  </div>
+
+                                </div>
+
+                              </div>
+
+                            </div>
+
+                          </div>';
+                  }
+
+                ?>
 
                 </div>
 
@@ -177,14 +262,84 @@
                 TIPO CORRESPONDENCIA SELECCIONAR / AGREGAR
                 ======================================-->
 
-                <label>Tipo de Correspondencia:</label>
-                <label class="radio-inline nuevoTipoCorrespondencia"><input class="minimal" type="radio" name="nuevoTipoCorrespondencia" id="nuevoTipoCorrespondencia" value="Individual" checked> Individual</label>
-                <label class="radio-inline nuevoTipoCorrespondencia"><input class="minimal" type="radio" name="nuevoTipoCorrespondencia" id="nuevoTipoCorrespondencia" value="Masiva"> Masiva</label>
+                <?php
 
+                  $tipo =$editarRadicado["tipo"];
+
+                  echo '<label>Tipo de Correspondencia:</label>
+                        <label class="radio-inline nuevoTipoCorrespondencia"><input class="minimal" type="radio" name="nuevoTipoCorrespondencia" id="nuevoTipoCorrespondencia" value="Individual" ';
+
+                  if ($tipo =="Individual") {
+                    echo 'checked > Individual</label>';
+                  } else {
+                    echo '> Individual</label>';
+                  }
+
+                  echo '<label class="radio-inline nuevoTipoCorrespondencia"><input class="minimal" type="radio" name="nuevoTipoCorrespondencia" id="nuevoTipoCorrespondencia" value="Masiva" ';
+
+                  if ($tipo =="Masiva") {
+                    echo 'checked > Masiva</label>';
+                  } else {
+                    echo '> Masiva </label>';
+                  }
+
+                ?>
 
                 <div class="nuevaCategoria">
 
-                  <!-- nuevaCategoria -->
+                <?php
+
+                $listaCorrespondencia = json_decode($editarRadicado["correspondencia"], true);
+
+                foreach ($listaCorrespondencia as $key => $value) {
+
+                  $itemCategoria = "id";
+                  $valorCategoria = $value["id"];
+
+                  $categoria = ControladorCategorias::ctrMostrarCategorias($itemCategoria, $valorCategoria);
+
+                  echo '<div class="row" style="padding:5px 0px">
+
+                          <div class="form group">
+
+                            <div class="col-xs-6" style="padding-right:0px">
+
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                                <input type="text" class="form-control nuevaCategoriaCorrespondencia" id="nuevaCategoria" name="nuevaCategoria" idCategoria="'.$categoria["id"].'" value="'.$categoria["categoria"].'" readonly>
+                              </div>
+
+                            </div>
+
+                            <div class="col-xs-6">
+
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="ion ion-grid"></i></span>
+                                <input min="1" class="form-control nuevaCantidadCorrespondencia" name="nuevaCantidadCorrespondencia" value="'.$value["cantidad"].'" required="" type="number">
+                                <span class="input-group-addon"><button class="btn btn-danger btn-xs quitarCategoria" idCategoria="'.$categoria["id"].'"><i class="fa fa-times"></i></button></span>
+                              </div>
+
+                            </div>
+
+                            <div class="col-xs-12" style="padding:5px 15px">
+
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
+                                <input type="text" class="form-control nuevaObservacion" id="nuevaObservacion" name="nuevaObservacion" value="'.$value["observacion"].'"  >
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                        </div>';
+
+
+                }
+
+
+                ?>
+
 
                 </div>
 
@@ -203,7 +358,7 @@
 
           <div class="box-footer">
 
-            <button type="submit" class="btn btn-primary pull-right">Radicar Correspondencia</button>
+            <button type="submit" class="btn btn-primary pull-right">Guardar Cambios</button>
 
           </div>
 
@@ -211,8 +366,8 @@
 
           <?php
 
-          $radicarCorrespondencia = new ControladorRadicados();
-          $radicarCorrespondencia -> ctrCrearRadicado();
+          $editarCorrespondencia = new ControladorRadicados();
+          $editarCorrespondencia -> ctrEditarRadicado();
 
 
           ?>

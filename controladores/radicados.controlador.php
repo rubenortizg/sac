@@ -3,7 +3,7 @@
 class ControladorRadicados {
 
   /* =====================================
-  CREAR RADICADOS
+  CREAR RADICADO
   ====================================== */
 
   static public function ctrCrearRadicado(){
@@ -68,88 +68,71 @@ class ControladorRadicados {
 
 
   /* =====================================
-  EDITAR CLIENTES
+  EDITAR RADICADO
   ====================================== */
 
   static public function ctrEditarRadicado(){
 
     if (isset($_POST["editarRadicado"])) {
 
+      $tabla ="radicados";
 
-      if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCliente"])  &&
-         preg_match('/^[0-9]+$/', $_POST["editarDocumento"]) &&
-         preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["editarEmail"]) &&
-         preg_match('/^[()\-0-9 ]+$/', $_POST["editarTelefono"]) &&
-         preg_match('/^[()\-0-9 ]+$/', $_POST["editarCelular"]) &&
-         preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCiudad"])){
+      $item = "radicado";
+      $valor = $_POST["radicadoReal"];
 
-           $tabla = "clientes";
+      $traerRadicado = ModeloRadicados::mdlMostrarRadicados($tabla, $item, $valor);
 
-           $datos = array("id" => $_POST["idCliente"],
-                          "identificacion" => $_POST["editarDocumento"],
-     					            "tipoid" => $_POST["editarTipoDocumento"],
-                          "nombre" => $_POST["editarCliente"],
-                          "correo" => $_POST["editarEmail"],
-                          "telfijo" => $_POST["editarTelefono"],
-                          "celular" => $_POST["editarCelular"],
-                          "ciudad" => $_POST["editarCiudad"],
-                          "idempresa" => $_POST["editarEmpresa"],
-                          "idestablecimiento" => $_POST["editarEstablecimiento"],
-                          "idusuario" => $_SESSION["id"]);
+      /* =====================================
+      VERIFICAR SI VIENEN DESTINATARIO EDITADO
+      ====================================== */
 
-            $respuesta = ModeloRadicados::mdlEditarRadicado($tabla, $datos);
-
-            if($respuesta == "ok"){
-
-    					echo '<script>
-
-    					swal({
-
-    						type: "success",
-    						title: "¡El cliente ha sido editado correctamente!",
-    						showConfirmButton: true,
-    						confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-
-    					}).then(function(result){
-
-    						if(result.value){
-
-    							window.location = "clientes";
-
-    						}
-
-    					});
-
-
-    					</script>';
-
-
-    				}
-
+      if ($_POST["listaDestinatario"] == "") {
+        $listaDestinatario = $traerRadicado["destinatario"];
       } else {
+        $listaDestinatario = $_POST["listaDestinatario"];
+      }
+
+      if ($_POST["listaCorrespondencia"] == "") {
+        $listaCorrespondencia = $traerRadicado["correspondencia"];
+      } else {
+        $listaCorrespondencia = $_POST["listaCorrespondencia"];
+      }
+
+
+      $datos = array("radicado"=>$_POST["radicadoReal"],
+                    "fecha"=>$_POST["nuevaFecha"],
+                    "idtransportadora"=>$_POST["seleccionarTransportadora"],
+                    "idremitente"=>$_POST["seleccionarRemitente"],
+                    "destinatario"=>$listaDestinatario,
+                    "tipo"=>$_POST["nuevoTipoCorrespondencia"],
+                    "correspondencia"=>$listaCorrespondencia,
+                    "idusuario" => $_SESSION["id"]);
+
+      $respuesta = ModeloRadicados::mdlEditarRadicado($tabla, $datos);
+
+      if($respuesta == "ok"){
 
         echo '<script>
 
-         swal({
+        swal({
 
-           type: "error",
-           title: "¡El cliente no puede ir con los campos vacíos o llevar caracteres especiales!",
-           showConfirmButton: true,
-           confirmButtonText: "Cerrar",
-           closeOnConfirm: false
-         }).then(function(result){
+          type: "success",
+          title: "¡El radicado se actualizo correctamente!",
+          showConfirmButton: true,
+          confirmButtonText: "Cerrar",
+          closeOnConfirm: false
 
-           if(result.value){
+        }).then(function(result){
 
-             window.location = "clientes";
+          if(result.value){
 
-           }
+            window.location = "radicados";
 
-         });
+          }
 
+        });
 
-       </script>';
+        </script>';
 
       }
 
@@ -158,15 +141,15 @@ class ControladorRadicados {
   }
 
   /* =====================================
-  ELIMINAR CLIENTE
+  ELIMINAR RADICADO
   ====================================== */
 
   static public function ctrEliminarRadicado(){
 
     if(isset($_GET["idRadicado"])){
 
-      $tabla ="clientes";
-      $datos = $_GET["idCliente"];
+      $tabla ="radicados";
+      $datos = $_GET["idRadicado"];
 
       $respuesta = ModeloRadicados::mdlEliminarRadicado($tabla, $datos);
 
@@ -176,13 +159,13 @@ class ControladorRadicados {
 
         swal({
             type: "success",
-            title: "El cliente ha sido borrado correctamente",
+            title: "El radicado ha sido borrado correctamente",
             showConfirmButton: true,
             confirmButtonText: "Cerrar"
             }).then(function(result){
                 if (result.value) {
 
-                window.location = "clientes";
+                window.location = "radicados";
 
                 }
               })

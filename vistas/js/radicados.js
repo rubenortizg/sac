@@ -480,7 +480,7 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
 
   var tipo = obtenerValorRadioButtonSeleccionado(formularioRadicador.nuevoTipoCorrespondencia);
 
-  if (tipo == "individual") {
+  if (tipo == "Individual") {
 
     desactivarCategorias();
 
@@ -526,7 +526,7 @@ $(".tablaCategorias tbody").on("click", "button.agregarCategoria", function(){
 
       var categoria = respuesta["categoria"];
 
-      if (tipo == "individual") {
+      if (tipo == "Individual") {
         $(".nuevaCategoria").append(
 
           '<div class="row" style="padding:5px 0px">'+
@@ -638,7 +638,7 @@ $(".formularioRadicador").on("click", "button.quitarCategoria", function(){
 
   var tipo = obtenerValorRadioButtonSeleccionado(formularioRadicador.nuevoTipoCorrespondencia);
 
-  if (tipo == "individual") {
+  if (tipo == "Individual") {
 
     activarCategoria();
 
@@ -673,13 +673,13 @@ $(".formularioRadicador").on("click", "button.quitarCategoria", function(){
 ACTUALIZAR DESTINATARIO
 ====================================================*/
 
-// $(".formularioRadicador").on("change", "select.nuevoDestinatario", function(){
-//
-//   // AGRUPAR DESTINATARIO EN FORMATO JSON
-//
-//   listarDestinatario()
-//
-// })
+$(".formularioRadicador").on("change", "select.nuevoDestinatario", function(){
+
+  // AGRUPAR DESTINATARIO EN FORMATO JSON
+
+  listarDestinatario()
+
+})
 
 /* =================================================
 ACTUALIZAR CLIENTE DESTINATARIO
@@ -769,3 +769,126 @@ function listarCorrespondencia(){
     $("#listaCorrespondencia").val(JSON.stringify(listaCorrespondencia));
 
 }
+
+/* =================================================
+BOTON EDITAR RADICADO
+====================================================*/
+
+$(".tablas").on("click", ".btnEditarRadicado", function(){
+
+  var idRadicado = $(this).attr("idRadicado");
+
+  window.location = "index.php?ruta=editar-radicado&idRadicado="+idRadicado;
+
+})
+
+/* =================================================
+DESACTIVAR DESTINATARIOS EN EDICION DE RADICADO
+====================================================*/
+
+function quitarAgregarEstablecimiento(){
+
+  // Captura id establecimiento
+  var idEstablecimientos = $(".quitarEstablecimiento");
+
+  // Captura botones que aparecen en establecimientos
+  var botonesTabla =$(".tablaRadicados tbody button.agregarEstablecimiento");
+
+  for (var i = 0; i < idEstablecimientos.length; i++) {
+
+    var boton = $(idEstablecimientos[i]).attr("idEstablecimiento");
+
+    for (var j = 0; j < botonesTabla.length; j++) {
+
+        $(botonesTabla[j]).removeClass("btn-primary agregarEstablecimiento");
+        $(botonesTabla[j]).addClass("btn-default");
+
+    }
+  }
+}
+
+
+$('.tablaRadicados').on( 'draw.dt', function(){
+
+  quitarAgregarEstablecimiento();
+
+})
+
+
+
+/* =================================================
+DESACTIVAR CATEGORIAS EN EDICION DE RADICADO
+====================================================*/
+
+function quitarAgregarCategoria(){
+
+  // Captura id categoria
+  var idCategorias = $(".quitarCategoria");
+
+  // Captura botones que aparecen en establecimientos
+  var botonesTablaCat =$(".tablaCategorias tbody button.agregarCategoria");
+
+  for (var i = 0; i < idCategorias.length; i++) {
+
+    var botonCat = $(idCategorias[i]).attr("idCategoria");
+
+    for (var j = 0; j < botonesTablaCat.length; j++) {
+
+      if ($(botonesTablaCat[j]).attr("idCategoria") == botonCat) {
+
+        $(botonesTablaCat[j]).removeClass("btn-primary agregarEstablecimiento");
+        $(botonesTablaCat[j]).addClass("btn-default");
+
+      }
+    }
+  }
+}
+
+
+$('.tablaCategorias').on( 'draw.dt', function(){
+
+  quitarAgregarCategoria();
+
+})
+
+/* =================================================
+DESACTIVAR ESTABLECIMIENTO Y CATEGORIAS EN LA CARGA
+====================================================*/
+
+$(window).on("load", function(){
+
+  quitarAgregarEstablecimiento();
+  quitarAgregarCategoria();
+
+})
+
+/* =================================================
+BORRAR RADICADO
+====================================================*/
+
+$(".btnEliminarRadicado").click(function(){
+
+  var idRadicado =$(this).attr("idRadicado");
+
+  swal({
+
+		title: '¿Esta seguro de borrar el radicado',
+		text: "!Si no lo esta puede cancelar la acción!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Cancelar',
+		confirmButtonText: 'Si, borrar radicado!'
+
+	}).then(function(result){
+
+		if (result.value) {
+
+			window.location = "index.php?ruta=radicados&idRadicado="+idRadicado;
+		}
+
+
+	})
+
+})

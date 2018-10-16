@@ -21,7 +21,7 @@ class ModeloRadicados {
 		$stmt->bindParam(":destinatario", $datos["destinatario"], PDO::PARAM_STR);
     $stmt->bindParam(":tipo", $datos["tipo"], PDO::PARAM_STR);
     $stmt->bindParam(":correspondencia", $datos["correspondencia"], PDO::PARAM_STR);
-    $stmt->bindParam(":idusuario", $datos["idusuario"], PDO::PARAM_INT);
+    $stmt->bindParam(":idu suario", $datos["idusuario"], PDO::PARAM_INT);
 
 
 		if($stmt->execute()){
@@ -77,21 +77,19 @@ class ModeloRadicados {
 
   static public function mdlEditarRadicado($tabla, $datos){
 
-    $sql ="UPDATE $tabla SET identificacion =:identificacion, tipoid =  :tipoid, nombre = :nombre, correo = :correo, telfijo = :telfijo, celular = :celular, ciudad = :ciudad, idempresa = :idempresa, idestablecimiento = :idestablecimiento, idusuario = :idusuario WHERE id = :id";
+    $sql = "UPDATE $tabla SET fecha = :fecha, idtransportadora = :idtransportadora, idremitente = :idremitente, destinatario = :destinatario, tipo = :tipo, correspondencia = :correspondencia, idusuario = :idusuario WHERE radicado = :radicado";
 
     $stmt = Conexion::conectar()-> prepare($sql);
 
-    $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
-		$stmt->bindParam(":identificacion", $datos["identificacion"], PDO::PARAM_INT);
-		$stmt->bindParam(":tipoid", $datos["tipoid"], PDO::PARAM_STR);
-		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-		$stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
-		$stmt->bindParam(":telfijo", $datos["telfijo"], PDO::PARAM_STR);
-    $stmt->bindParam(":celular", $datos["celular"], PDO::PARAM_STR);
-    $stmt->bindParam(":ciudad", $datos["ciudad"], PDO::PARAM_STR);
-    $stmt->bindParam(":idempresa", $datos["idempresa"], PDO::PARAM_STR);
-    $stmt->bindParam(":idestablecimiento", $datos["idestablecimiento"], PDO::PARAM_STR);
+		$stmt->bindParam(":radicado", $datos["radicado"], PDO::PARAM_INT);
+    $stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
+		$stmt->bindParam(":idtransportadora", $datos["idtransportadora"], PDO::PARAM_INT);
+		$stmt->bindParam(":idremitente", $datos["idremitente"], PDO::PARAM_INT);
+		$stmt->bindParam(":destinatario", $datos["destinatario"], PDO::PARAM_STR);
+    $stmt->bindParam(":tipo", $datos["tipo"], PDO::PARAM_STR);
+    $stmt->bindParam(":correspondencia", $datos["correspondencia"], PDO::PARAM_STR);
     $stmt->bindParam(":idusuario", $datos["idusuario"], PDO::PARAM_INT);
+
 
 		if($stmt->execute()){
 
