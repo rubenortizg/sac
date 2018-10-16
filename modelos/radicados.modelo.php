@@ -21,7 +21,7 @@ class ModeloRadicados {
 		$stmt->bindParam(":destinatario", $datos["destinatario"], PDO::PARAM_STR);
     $stmt->bindParam(":tipo", $datos["tipo"], PDO::PARAM_STR);
     $stmt->bindParam(":correspondencia", $datos["correspondencia"], PDO::PARAM_STR);
-    $stmt->bindParam(":idu suario", $datos["idusuario"], PDO::PARAM_INT);
+    $stmt->bindParam(":idusuario", $datos["idusuario"], PDO::PARAM_INT);
 
 
 		if($stmt->execute()){
