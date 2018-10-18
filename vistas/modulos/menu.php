@@ -88,6 +88,45 @@
         </ul>
       </li>
 
+
+      <li class="treeview menu-open">
+        <a href="#">
+          <i class="fa fa-inbox"></i>
+          <span>Facturas</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+
+        <ul class="treeview-menu">
+          <li>
+            <a href="facturas">
+              <i class="fa fa-inbox"></i>
+              <span>Facturas</span>
+            </a>
+          </li>
+          <li>
+            <a href="facturador">
+              <i class="fa fa-sign-in"></i>
+              <span>Registrar Facturas</span>
+            </a>
+          </li>
+          <li>
+            <a href="reparto">
+              <i class="fa fa-sign-out"></i>
+              <span>Entrega Facturas</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="reportes">
+          <i class="fa fa-line-chart"></i>
+          <span>Reportes</span>
+        </a>
+      </li>
+
       <li class="treeview menu-open">
         <a href="#">
           <i class="fa fa-cog"></i>
