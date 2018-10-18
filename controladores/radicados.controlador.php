@@ -23,6 +23,8 @@ class ControladorRadicados {
 
       $respuesta = ModeloRadicados::mdlIngresarRadicado($tabla, $datos);
 
+
+
       if($respuesta == "ok"){
 
         echo '<script>
@@ -39,7 +41,9 @@ class ControladorRadicados {
 
           if(result.value){
 
-            window.location = "radicador";
+            window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
+            window.location = "radicados";
+
 
           }
 

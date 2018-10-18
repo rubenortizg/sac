@@ -115,8 +115,8 @@
 
                           <div class="btn-group">
 
-                            <button class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o"></i></button>
-                            <button class="btn btn-primary btn-sm"><i class="fa fa-print"></i></button>
+                            <button class="btn btn-success btn-sm btnPdfRadicado" codigoRadicado="'.$value["radicado"].'"><i class="fa fa-file-pdf-o"></i></button>
+                            <button class="btn btn-primary btn-sm btnImprimirRadicado" codigoRadicado="'.$value["radicado"].'"><i class="fa fa-print"></i></button>
 
                             <button class="btn btn-warning btn-sm btnEditarRadicado" idRadicado="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
 

@@ -892,3 +892,27 @@ $(".btnEliminarRadicado").click(function(){
 	})
 
 })
+
+/* =================================================
+RADICADO PDF
+====================================================*/
+
+$(".tablas").on("click", ".btnPdfRadicado", function(){
+
+  var codigoRadicado = $(this).attr("codigoRadicado");
+
+  window.open("extensiones/tcpdf/pdf/radicadoPDF.php?radicado="+codigoRadicado, "_blank");
+
+})
+
+/* =================================================
+RADICADO BARCODE
+====================================================*/
+
+$(".tablas").on("click", ".btnImprimirRadicado", function(){
+
+  var codigoRadicado = $(this).attr("codigoRadicado");
+
+  window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado="+codigoRadicado, "_blank");
+
+})
