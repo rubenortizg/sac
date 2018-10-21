@@ -183,4 +183,18 @@ class ControladorRadicados {
   }
 
 
+  /*=============================================
+  RANGO FECHAS
+  =============================================*/
+
+  static public function ctrRangoFechasRadicados($fechaInicial, $fechaFinal){
+
+    $tabla = "radicados";
+
+    $respuesta = ModeloRadicados::mdlRangoFechasRadicados($tabla, $fechaInicial, $fechaFinal);
+
+    return $respuesta;
+  }
+
+
 }

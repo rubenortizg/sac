@@ -357,7 +357,7 @@ $pdf->writeHTML($bloque7, false, false, false, false, '');
 // SALIDA DEL ARCHIVO
 // ------------------------------------
 
-$pdf->Output('radicado.pdf');
+$pdf->Output('radicado'.$valorRadicado.'pdf');
 
 }
 
