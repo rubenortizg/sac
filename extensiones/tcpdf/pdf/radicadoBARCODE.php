@@ -144,7 +144,7 @@ if ($stickerIndividual == true) {
 // ------------------------------------
 
 // ---- Enviar a imprimir el PDF ------
-$pdf->IncludeJS("print();");
+<1p></1p>df->IncludeJS("print();");
 
 // ---- Generar el nombre del PDF -----
 $pdf->Output('radicado.pdf', 'I');
