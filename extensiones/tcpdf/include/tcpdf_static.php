@@ -2453,7 +2453,9 @@ class TCPDF_STATIC {
 		'FR_COURONNE'            => array( 1020.472,  1303.937), // = (  360 x 460  ) mm  = ( 14.17 x 18.11 ) in
 		'FR_TELLIERE'            => array(  963.780,  1247.244), // = (  340 x 440  ) mm  = ( 13.39 x 17.32 ) in
 		'FR_POT'                 => array(  878.740,  1133.858), // = (  310 x 400  ) mm  = ( 12.20 x 15.75 ) in
-		'STICKER25X50'           => array(  141.600,  71,200), // = (  50 x 25  ) mm
+		'STICKER25X50'           => array(  141.700,  71,200), // = (  50 x 25  ) mm
+		'STICKER25X100'           => array( 283.400,  71,200), // = (  50 x 25  ) mm
+
 	);
 
 

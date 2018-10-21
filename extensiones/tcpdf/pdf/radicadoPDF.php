@@ -42,6 +42,7 @@ $valorRadicado = "R".str_pad($valor, 7, "0", STR_PAD_LEFT);
 $respuestaRadicado = ControladorRadicados::ctrMostrarRadicados($item, $valor);
 
 $fecha = substr($respuestaRadicado["fecha"],0,-8);
+$hora = substr($respuestaRadicado["fecha"],11,10);
 $destinatario = json_decode($respuestaRadicado["destinatario"], true);
 $tipo = $respuestaRadicado["tipo"];
 $correspondencia = json_decode($respuestaRadicado["correspondencia"], true);
@@ -113,7 +114,7 @@ $style = array(
 	'vpadding' => 'auto',
 	'fgcolor' => array(0,0,0),
 	'bgcolor' => false, //array(255,255,255),
-	'text' => true,
+	'text' => false,
 	'font' => 'helvetica',
 	'fontsize' => 8,
 	'stretchtext' => 4
@@ -136,20 +137,24 @@ $bloque2 = <<<EOF
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:390px;">
+      <td style="border: 1px solid #666; background-color:white; width:380px;">
         Transportadora: $respuestaTransportadora[transportadora]
       </td>
 
-      <td style="border: 1px solid #666; background-color:white; width:150px; text-align:right;">
-        Fecha: $fecha
+      <td style="border: 1px solid #666; background-color:white; width:160px; text-align:right;">
+        Fecha Radicado: $fecha
       </td>
 
     </tr>
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:540px;">
+      <td style="border: 1px solid #666; background-color:white; width:380px;">
         Remitente: $respuestaRemitente[remitente]
+      </td>
+
+      <td style="border: 1px solid #666; background-color:white; width:160px; text-align:right;">
+        Hora Radicado: $hora
       </td>
     </tr>
 
