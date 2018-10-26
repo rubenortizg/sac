@@ -45,6 +45,9 @@ session_start();
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="vistas/bower_components/morris.js/morris.css">
+
 
   <!-- =====================================
     PLUGINS JAVASCRPIT
@@ -90,6 +93,13 @@ session_start();
   <script src="vistas/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
   <script src="vistas/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js"></script>
 
+  <!-- Morris.js charts -->
+  <script src="vistas/bower_components/raphael/raphael.min.js"></script>
+  <script src="vistas/bower_components/morris.js/morris.min.js"></script>
+
+  <!-- ChartJS -->
+  <script src="vistas/bower_components/chart.js/Chart.js"></script>
+
 </head>
 
 <!-- =====================================
@@ -133,6 +143,7 @@ echo '<div class="wrapper">';
         $_GET["ruta"] == "radicados" ||
         $_GET["ruta"] == "radicador" ||
         $_GET["ruta"] == "editar-radicado" ||
+        $_GET["ruta"] == "reportes" ||
         $_GET["ruta"] == "salir"){
     // ../lista blanca de modulos con URLs amigables
 
@@ -170,6 +181,7 @@ echo '<div class="wrapper">';
 <script src="vistas/js/categorias.js"></script>
 <script src="vistas/js/remitentes.js"></script>
 <script src="vistas/js/radicados.js"></script>
+<script src="vistas/js/reportes.js"></script>
 
 </body>
 </html>
