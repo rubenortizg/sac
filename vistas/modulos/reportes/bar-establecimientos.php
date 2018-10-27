@@ -1,37 +1,45 @@
 <?php
 
-  $itemRadicado = null;
-  $valorRadicado = null;
+if (isset($_GET["fechaInicial"])) {
 
-  $radicados = ControladorRadicados::ctrMostrarRadicados($itemRadicado, $valorRadicado);
+  $fechaInicial = $_GET["fechaInicial"];
+  $fechaFinal = $_GET["fechaFinal"];
 
-  $arrayTansportadoras = array();
-  $arrayCantidadesTr = array();
+}else {
 
-  foreach ($radicados as $key => $value) {
+  $fechaInicial = null;
+  $fechaFinal = null;
+}
 
-    $item = "id";
-    $valor = $value["idtransportadora"];
+$radicados = ControladorRadicados::ctrRangoFechasRadicados($fechaInicial, $fechaFinal);
 
-    $transportadora = ControladorTransportadoras::ctrMostrarTransportadoras($item, $valor);
+$arrayTansportadoras = array();
+$arrayCantidadesTr = array();
 
-    array_push($arrayTansportadoras, $transportadora["transportadora"]);
+foreach ($radicados as $key => $value) {
 
-    $arrayCantidadesTr = array($transportadora["transportadora"] => 1);
+  $item = "id";
+  $valor = $value["idtransportadora"];
 
-    foreach ($arrayCantidadesTr as $key => $value) {
+  $transportadora = ControladorTransportadoras::ctrMostrarTransportadoras($item, $valor);
 
-      $sumaTransportadoras[$key] += $value;
-      $totalTransportadoras += $value;
+  array_push($arrayTansportadoras, $transportadora["transportadora"]);
 
-    }
+  $arrayCantidadesTr = array($transportadora["transportadora"] => 1);
+
+  foreach ($arrayCantidadesTr as $key => $value) {
+
+    $sumaTransportadoras[$key] += $value;
+    $totalTransportadoras += $value;
 
   }
 
-  $consolidadoTransportadoras = array_unique($arrayTansportadoras);
+}
 
-  $colores = array("red","green","yellow","aqua","blue");
-  $coloresClaros = array("#f56954","#00a65a","#f39c12","#00c0ef","#3c8dbc");
+$consolidadoTransportadoras = array_unique($arrayTansportadoras);
+
+$colores = array("red","green","yellow","aqua","blue");
+$coloresClaros = array("#f56954","#00a65a","#f39c12","#00c0ef","#3c8dbc");
 
 ?>
 

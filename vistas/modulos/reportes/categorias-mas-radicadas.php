@@ -1,43 +1,51 @@
 <?php
 
-  $itemRadicado = null;
-  $valorRadicado = null;
+if (isset($_GET["fechaInicial"])) {
 
-  $radicados = ControladorRadicados::ctrMostrarRadicados($itemRadicado, $valorRadicado);
+  $fechaInicial = $_GET["fechaInicial"];
+  $fechaFinal = $_GET["fechaFinal"];
 
-  $arrayCategorias = array();
-  $arrayCantidades = array();
+}else {
 
-  foreach ($radicados as $key => $value) {
+  $fechaInicial = null;
+  $fechaFinal = null;
+}
 
-    $listaCorrespondencia = json_decode($value["correspondencia"], true);
+$radicados = ControladorRadicados::ctrRangoFechasRadicados($fechaInicial, $fechaFinal);
 
-    foreach ($listaCorrespondencia as $key => $correspondencia) {
+$arrayCategorias = array();
+$arrayCantidades = array();
 
-      $item = "id";
-      $valor = $correspondencia["id"];
+foreach ($radicados as $key => $value) {
 
-      $categoria = ControladorCategorias::ctrMostrarCategorias($item, $valor);
+  $listaCorrespondencia = json_decode($value["correspondencia"], true);
 
-      array_push($arrayCategorias, $categoria["categoria"]);
+  foreach ($listaCorrespondencia as $key => $correspondencia) {
 
-      $arrayCantidades = array($categoria["categoria"] => $correspondencia["cantidad"]);
+    $item = "id";
+    $valor = $correspondencia["id"];
 
-      foreach ($arrayCantidades as $key => $value) {
+    $categoria = ControladorCategorias::ctrMostrarCategorias($item, $valor);
 
-        $sumaCantidades[$key] += $value;
-        $totalCategorias += $value;
+    array_push($arrayCategorias, $categoria["categoria"]);
 
-      }
+    $arrayCantidades = array($categoria["categoria"] => $correspondencia["cantidad"]);
+
+    foreach ($arrayCantidades as $key => $value) {
+
+      $sumaCantidades[$key] += $value;
+      $totalCategorias += $value;
 
     }
 
   }
 
-  $consolidadoCategorias = array_unique($arrayCategorias);
+}
 
-  $colores = array("red","green","yellow","aqua","blue","purple","green","red","aqua","blue");
-  $coloresClaros = array("#f56954","#00a65a","#f39c12","#00c0ef","#3c8dbc", "#9975B9","#00a65a","#f56954","#00c0ef","#3c8dbc");
+$consolidadoCategorias = array_unique($arrayCategorias);
+
+$colores = array("red","green","yellow","aqua","blue","purple","green","red","aqua","blue");
+$coloresClaros = array("#f56954","#00a65a","#f39c12","#00c0ef","#3c8dbc", "#9975B9","#00a65a","#f56954","#00c0ef","#3c8dbc");
 
 ?>
 

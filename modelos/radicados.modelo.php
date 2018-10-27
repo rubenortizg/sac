@@ -163,7 +163,6 @@ class ModeloRadicados {
 		} else {
 
       $fechaActual = new DateTime();
-      $fechaActual -> add(new DateInterval("P1D"));
       $fechaActualMasUno = $fechaActual->format("Y-m-d");
 
       $fechaFinal2 = new DateTime($fechaFinal);
@@ -179,7 +178,7 @@ class ModeloRadicados {
         $sql ="SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'";
 
       }
-    
+
 
       $stmt = Conexion::conectar()-> prepare($sql);
 
