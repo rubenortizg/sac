@@ -36,8 +36,8 @@
 
   $consolidadoCategorias = array_unique($arrayCategorias);
 
-  $colores = array("red","green","yellow","aqua","blue");
-  $coloresClaros = array("#f56954","#00a65a","#f39c12","#00c0ef","#3c8dbc");
+  $colores = array("red","green","yellow","aqua","blue","purple","green","red","aqua","blue");
+  $coloresClaros = array("#f56954","#00a65a","#f39c12","#00c0ef","#3c8dbc", "#9975B9","#00a65a","#f56954","#00c0ef","#3c8dbc");
 
 ?>
 
@@ -50,7 +50,7 @@ PIE CATEGORIAS
 
  <div class="box-header with-border">
 
-   <h3 class="box-title">Radicados x Categoria</h3>
+   <h3 class="box-title">Elementos x Categoria</h3>
 
  </div>
 
@@ -73,7 +73,7 @@ PIE CATEGORIAS
 
             foreach ($consolidadoCategorias as $key => $value) {
 
-              echo '<li><i class="fa fa-circle-o text-'.$colores[$color].'"></i> '.$consolidadoCategorias[$key].'</li>';
+              echo '<li><i class="fa fa-circle-o text-'.$colores[$color].'"></i> '.$consolidadoCategorias[$key].'(S)</li>';
 
               $color += 1;
 
@@ -92,31 +92,45 @@ PIE CATEGORIAS
 
  <div class="box-footer no-padding">
 
-   <ul class="nav nav-pills nav-stacked">
+   <table class="table table-bordered table-striped table-condensed dt-responsive"  width="100%">
+    <thead>
+     <tr>
+       <th>Categoria</th>
+       <th style="text-align:right">Cantidad</th>
+       <th style="text-align:right">Porcentaje</th>
+     </tr>
+    </thead>
 
-     <?php
+    <tbody>
 
+      <?php
 
-       $color = 0;
+        $color = 0;
 
-      foreach ($consolidadoCategorias as $key => $value) {
+        foreach ($consolidadoCategorias as $key => $value) {
 
-        $porcentajeCantidades = round(($sumaCantidades[$value]/$totalCategorias)*100,1);
+         $porcentajeCantidades = round(($sumaCantidades[$value]/$totalCategorias)*100,1);
 
-        echo '<li>
-                <a href="#">'.$consolidadoCategorias[$key].'
-                  <span class="pull-right text-'.$colores[$color].'">
-                  <i class="fa fa-angle-down"></i> '.$porcentajeCantidades.'%</span>
-                </a>
-              </li>';
+         echo '<tr>
+                 <td>'.$consolidadoCategorias[$key].'(S)</td>
+                 <td>
+                     <div class="pull-right">'.$sumaCantidades[$value].'</div>
+                 </td>
+                 <td>
+                   <span class="pull-right badge bg-'.$colores[$color].'">
+                   <i></i> '.$porcentajeCantidades.'%</span>
+                 </td>
+               </tr>';
 
-        $color += 1;
+         $color += 1;
 
-      }
+       }
 
-     ?>
+      ?>
 
-   </ul>
+    </tbody>
+
+   </table>
 
  </div>
 
@@ -139,7 +153,7 @@ var PieData        = [
             value    : '.$sumaCantidades[$value].',
             color    : "'.$coloresClaros[$color].'",
             highlight: "'.$coloresClaros[$color].'",
-            label    : "'.$consolidadoCategorias[$key].'"
+            label    : "'.$consolidadoCategorias[$key].'(S)"
           },';
 
     $color += 1;
@@ -172,7 +186,7 @@ var pieOptions     = {
   // String - A legend template
   legendTemplate       : '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<segments.length; i++){%><li><span style=\'background-color:<%=segments[i].fillColor%>\'></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
   // String - A tooltip template
-  tooltipTemplate      : '<%=label%> : <%=value %> radicados'
+  tooltipTemplate      : '<%=label%> : <%=value %>'
 };
 // Create pie or douhnut chart
 // You can switch between pie and douhnut using the method below.
