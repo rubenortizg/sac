@@ -57,7 +57,7 @@ class ModeloRadicados {
 
 		}else{
 
-			$sql ="SELECT * FROM $tabla";
+			$sql ="SELECT * FROM $tabla ORDER BY id DESC";
       $stmt = Conexion::conectar()-> prepare($sql);
 			$stmt -> execute();
 
