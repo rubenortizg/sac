@@ -33,6 +33,14 @@ class ControladorUsuarios{
 						$_SESSION["foto"] = $respuesta["foto"];
 						$_SESSION["perfil"] = $respuesta["perfil"];
 
+						$tablaPerfil = "perfiles";
+						$itemPerfil = "perfil";
+						$valorPerfil = $respuesta["perfil"];
+
+						$acceso = ModeloPerfiles::mdlMostrarPerfiles($tablaPerfil, $itemPerfil, $valorPerfil);
+
+						$_SESSION["acceso"] = $acceso;
+
 
 						/*=============================================
 						REGISTRAR FECHA  PARA SABER EL ULTIMO LOGIN

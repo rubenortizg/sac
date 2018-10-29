@@ -20,7 +20,7 @@ $radicados = ControladorRadicados::ctrMostrarRadicados($item, $valor);
 
       <?php
 
-      for ($i=0; $i < 4; $i++) {
+      for ($i=0; $i < 6; $i++) {
 
         $radicado = str_pad($radicados[$i]["radicado"], 7, "0", STR_PAD_LEFT);
 

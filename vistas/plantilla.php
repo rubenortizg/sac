@@ -144,6 +144,7 @@ echo '<div class="wrapper">';
         $_GET["ruta"] == "radicador" ||
         $_GET["ruta"] == "editar-radicado" ||
         $_GET["ruta"] == "reportes" ||
+        $_GET["ruta"] == "perfiles" ||
         $_GET["ruta"] == "salir"){
     // ../lista blanca de modulos con URLs amigables
 

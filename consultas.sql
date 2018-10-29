@@ -112,3 +112,72 @@ CREATE TABLE `sac`.`radicados` (
  `idusuario` int(11) NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `sac`. `perfiles` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `perfil` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+ `inicio` int(11) NOT NULL,
+ `usuarios` int(11) NOT NULL,
+ `transportadoras` int(11) NOT NULL,
+ `empresas` int(11) NOT NULL,
+ `clientes` int(11) NOT NULL,
+ `establecimientos` int(11) NOT NULL,
+ `remitentes` int(11) NOT NULL,
+ `categorias` int(11) NOT NULL,
+ `radicados` int(11) NOT NULL,
+ `reportes` int(11) NOT NULL,
+ `opciones` int(11) NOT NULL,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `perfil` (`perfil`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
+VALUES (
+  NULL,
+  'Administrador',
+  '6',
+  '6',
+  '6',
+  '6',
+  '6',
+  '6',
+  '6',
+  '6',
+  '6',
+  '6',
+  '6'
+  );
+
+  INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
+  VALUES (
+    NULL,
+    'Especial',
+    '6',
+    '0',
+    '6',
+    '6',
+    '6',
+    '6',
+    '6',
+    '6',
+    '6',
+    '6',
+    '0'
+    );
+
+    INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
+    VALUES (
+      NULL,
+      'Consulta',
+      '6',
+      '0',
+      '4',
+      '4',
+      '4',
+      '4',
+      '4',
+      '0',
+      '4',
+      '4',
+      '0'
+      );

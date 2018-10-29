@@ -1,6 +1,7 @@
 <aside class="main-sidebar">
   <section class="sidebar">
     <ul class="sidebar-menu">
+
       <li class="active">
         <a href="inicio">
           <i class="fa fa-home"></i>
@@ -8,12 +9,19 @@
         </a>
       </li>
 
-      <li>
-        <a href="usuarios">
-          <i class="fa fa-user"></i>
-          <span>Usuarios</span>
-        </a>
-      </li>
+      <?php
+
+        if ($_SESSION["acceso"]["usuarios"] == "6") {
+          echo '<li>
+                  <a href="usuarios">
+                    <i class="fa fa-user"></i>
+                    <span>Usuarios</span>
+                  </a>
+                </li>';
+        }
+
+      ?>
+
 
       <li>
         <a href="transportadoras">
@@ -127,38 +135,46 @@
         </a>
       </li>
 
-      <li class="treeview menu-open">
-        <a href="#">
-          <i class="fa fa-cog"></i>
-          <span>Opciones</span>
-          <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
+      <?php
 
-        <ul class="treeview-menu">
-          <li>
-            <a href="tipos">
-              <i class="fa fa-briefcase"></i>
-              <span>Tipos Establecimiento</span>
-            </a>
-          </li>
+        if ($_SESSION["acceso"]["opciones"] == "6") {
+          echo '<li class="treeview menu-open">
+                  <a href="#">
+                    <i class="fa fa-cog"></i>
+                    <span>Opciones</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
 
-          <li>
-            <a href="perfiles">
-              <i class="fa fa-users"></i>
-              <span>Perfiles de Usuario</span>
-            </a>
-          </li>
+                  <ul class="treeview-menu">
+                    <li>
+                      <a href="tipos">
+                        <i class="fa fa-briefcase"></i>
+                        <span>Tipos Establecimiento</span>
+                      </a>
+                    </li>
 
-          <li>
-            <a href="configuracion">
-              <i class="fa fa-cogs"></i>
-              <span>Configuración App</span>
-            </a>
-          </li>
-        </ul>
-      </li>
+                    <li>
+                      <a href="perfiles">
+                        <i class="fa fa-users"></i>
+                        <span>Perfiles de Usuario</span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="configuracion">
+                        <i class="fa fa-cogs"></i>
+                        <span>Configuración App</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>';
+        }
+
+      ?>
+
+
 
     </ul>
   </section>
