@@ -286,7 +286,7 @@ MODAL EDITAR USUARIO
                   <option value="" id="editarPerfil"></option>
                   <option value="Administrador">Administrador</option>
                   <option value="Especial">Especial</option>
-                  <option value="Vendedor">Consulta</option>
+                  <option value="Consulta">Consulta</option>
                 </select>
               </div>
             </div>
