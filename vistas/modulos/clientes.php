@@ -22,15 +22,20 @@
 
     <div class="box">
 
-      <div class="box-header with-border">
+    <?php
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente">
+    if ($_SESSION["acceso"]["clientes"] == "6" || $_SESSION["acceso"]["clientes"] == "5"  ) {
 
-          Agregar cliente
+      echo '<div class="box-header with-border">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente">
+                Agregar cliente
+              </button>
+            </div> ';
 
-        </button>
+    }
 
-      </div>
+    ?>
+
 
       <div class="box-body">
 
@@ -85,13 +90,19 @@
                       <td>'.$value["correo"].'</td>
                       <td>
 
-                        <div class="btn-group">
+                        <div class="btn-group">';
 
-                          <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
 
-                          <button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                        if ($_SESSION["acceso"]["clientes"] == "6" || $_SESSION["acceso"]["clientes"] == "5"  ) {
+                          echo '
+                          <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
+                        }
 
-                        </div>
+                        if ($_SESSION["acceso"]["clientes"] == "6") {
+                          echo '<button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+                        }
+
+                echo '</div>
 
                       </td>
 

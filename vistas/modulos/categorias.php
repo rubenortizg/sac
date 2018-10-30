@@ -22,15 +22,18 @@
 
     <div class="box">
 
-      <div class="box-header with-border">
+    <?php
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+    if ($_SESSION["acceso"]["categorias"] == "6" || $_SESSION["acceso"]["categorias"] == "5"  ) {
 
-          Agregar categoría
+      echo '<div class="box-header with-border">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+                Agregar categoría
+              </button>
+            </div>';
+    }
 
-        </button>
-
-      </div>
+    ?>
 
       <div class="box-body">
 
@@ -63,13 +66,17 @@
                       <td>'.($key+1).'</td>
                       <td class="text-uppercase">'.$value["categoria"].'</td>
                       <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning btn-sm btnEditarCategoria" idCategoria="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
+                        <div class="btn-group">';
 
-                          <button class="btn btn-danger btn-sm btnEliminarCategoria"  idCategoria="'.$value["id"].'"><i class="fa fa-times"></i></button>
-                        </div>
-                      </td>
-                    </tr>';
+              if ($_SESSION["acceso"]["categorias"] == "6" || $_SESSION["acceso"]["categorias"] == "5"  ) {
+                echo '<button class="btn btn-warning btn-sm btnEditarCategoria" idCategoria="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>';
+              }
+              if ($_SESSION["acceso"]["categorias"] == "6") {
+                echo '<button class="btn btn-danger btn-sm btnEliminarCategoria"  idCategoria="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+              }
+              echo '</div>
+                  </td>
+                </tr>';
 
             }
 

@@ -15,11 +15,17 @@
 
     <div class="box">
 
-      <div class="box-header with-border">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarTransportadora">
-          Agregar transportadora
-        </button>
-      </div>
+      <?php
+
+      if ($_SESSION["acceso"]["transportadoras"] == "6" || $_SESSION["acceso"]["transportadoras"] == "5"  ) {
+        echo '<div class="box-header with-border">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarTransportadora">
+                  Agregar transportadora
+                </button>
+              </div>';
+      }
+
+      ?>
 
       <div class="box-body">
 
@@ -54,22 +60,32 @@
                     echo '<td><img src="vistas/img/transportadoras/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
                   }
 
-                  if($value["estado"] != 0){
+                  if ($_SESSION["acceso"]["transportadoras"] == "6" || $_SESSION["acceso"]["transportadoras"] == "5" ) {
+                    if($value["estado"] != 0){
 
-                    echo '<td><button class="btn btn-success btn-xs btnActivarTransportadora" idTransportadora="'.$value["id"].'" estadoTransportadora="0">Activado</button></td>';
+                      echo '<td><button class="btn btn-success btn-xs btnActivarTransportadora" idTransportadora="'.$value["id"].'" estadoTransportadora="0">Activado</button></td>';
 
-                  }else{
+                    }else{
 
-                    echo '<td><button class="btn btn-danger btn-xs btnActivarTransportadora" idTransportadora="'.$value["id"].'" estadoTransportadora="1">Desactivado</button></td>';
+                      echo '<td><button class="btn btn-danger btn-xs btnActivarTransportadora" idTransportadora="'.$value["id"].'" estadoTransportadora="1">Desactivado</button></td>';
 
+                    }
+                  }else {
+                    echo '<td></td>';
                   }
 
                   echo '<td>
+                    <div class="btn-group">';
 
-                    <div class="btn-group">
-                      <button class="btn btn-warning btn-sm btnEditarTransportadora" idTransportadora="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarTransportadora"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-sm btnEliminarTransportadora" idTransportadora="'.$value["id"].'" logoTransportadora="'.$value["logo"].'" transportadora="'.$value["transportadora"].'"><i class="fa fa-times"></i></button>
-                    </div>
+                  if ($_SESSION["acceso"]["transportadoras"] == "6" || $_SESSION["acceso"]["transportadoras"] == "5" ) {
+                    echo '<button class="btn btn-warning btn-sm btnEditarTransportadora" idTransportadora="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarTransportadora"><i class="fa fa-pencil"></i></button>';
+                  }
+
+                  if ($_SESSION["acceso"]["transportadoras"] == "6") {
+                    echo '<button class="btn btn-danger btn-sm btnEliminarTransportadora" idTransportadora="'.$value["id"].'" logoTransportadora="'.$value["logo"].'" transportadora="'.$value["transportadora"].'"><i class="fa fa-times"></i></button>';
+                  }
+
+                  echo '</div>
                   </td>
                 </tr>';
         }

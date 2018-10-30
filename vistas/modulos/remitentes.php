@@ -22,15 +22,17 @@
 
     <div class="box">
 
-      <div class="box-header with-border">
+      <?php
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarRemitente">
+      if ($_SESSION["acceso"]["remitentes"] == "6" || $_SESSION["acceso"]["remitentes"] == "5"  ) {
+        echo'<div class="box-header with-border">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarRemitente">
+                Agregar remitente
+              </button>
+            </div>';
+      }
 
-          Agregar remitente
-
-        </button>
-
-      </div>
+      ?>
 
       <div class="box-body">
 
@@ -63,13 +65,19 @@
                       <td>'.($key+1).'</td>
                       <td class="text-uppercase">'.$value["remitente"].'</td>
                       <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning btn-sm btnEditarRemitente" idRemitente="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarRemitente"><i class="fa fa-pencil"></i></button>
+                        <div class="btn-group">';
 
-                          <button class="btn btn-danger btn-sm btnEliminarRemitente" idRemitente="'.$value["id"].'"><i class="fa fa-times"></i></button>
-                        </div>
-                      </td>
-                    </tr>';
+              if ($_SESSION["acceso"]["remitentes"] == "6" || $_SESSION["acceso"]["remitentes"] == "5"  ) {
+                echo '<button class="btn btn-warning btn-sm btnEditarRemitente" idRemitente="'.$value["id"].'" data-toggle="modal"           data-target="#modalEditarRemitente"><i class="fa fa-pencil"></i></button>';
+              }
+
+              if ($_SESSION["acceso"]["remitentes"] == "6") {
+                echo '<button class="btn btn-danger btn-sm btnEliminarRemitente" idRemitente="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+              }
+
+              echo '</div>
+                  </td>
+                </tr>';
 
             }
 

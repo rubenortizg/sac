@@ -15,11 +15,21 @@
 
     <div class="box">
 
+    <?php
+
+    if ($_SESSION["acceso"]["empresas"] == "6" || $_SESSION["acceso"]["empresas"] == "5"  ) {
+
+      echo '
       <div class="box-header with-border">
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarEmpresa">
           Agregar empresa
         </button>
-      </div>
+      </div>';
+
+    }
+
+    ?>
+
 
       <div class="box-body">
 
@@ -54,24 +64,37 @@
                     echo '<td><img src="vistas/img/empresas/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
                   }
 
-                  if($value["estado"] != 0){
 
-                    echo '<td><button class="btn btn-success btn-xs btnActivarEmpresa" idEmpresa="'.$value["id"].'" estadoEmpresa="0">Activado</button></td>';
+                  if ($_SESSION["acceso"]["empresas"] == "6" || $_SESSION["acceso"]["empresas"] == "5"  ) {
 
-                  }else{
+                    if($value["estado"] != 0){
 
-                    echo '<td><button class="btn btn-danger btn-xs btnActivarEmpresa" idEmpresa="'.$value["id"].'" estadoEmpresa="1">Desactivado</button></td>';
+                      echo '<td><button class="btn btn-success btn-xs btnActivarEmpresa" idEmpresa="'.$value["id"].'" estadoEmpresa="0">Activado</button></td>';
 
+                    }else{
+
+                      echo '<td><button class="btn btn-danger btn-xs btnActivarEmpresa" idEmpresa="'.$value["id"].'" estadoEmpresa="1">Desactivado</button></td>';
+
+                    }
+
+                  } else {
+                    echo '<td></td>';
                   }
 
                   echo '<td>
 
-                    <div class="btn-group">
-                      <button class="btn btn-warning btn-sm btnEditarEmpresa" idEmpresa="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarEmpresa"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-sm btnEliminarEmpresa" idEmpresa="'.$value["id"].'" logoEmpresa="'.$value["logo"].'" empresa="'.$value["empresa"].'"><i class="fa fa-times"></i></button>
-                    </div>
-                  </td>
-                </tr>';
+                    <div class="btn-group">';
+
+                  if ($_SESSION["acceso"]["empresas"] == "6" || $_SESSION["acceso"]["empresas"] == "5"  ) {
+                    echo '<button class="btn btn-warning btn-sm btnEditarEmpresa" idEmpresa="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarEmpresa"><i class="fa fa-pencil"></i></button>';
+                  }
+
+                  if ($_SESSION["acceso"]["empresas"] == "6") {
+                    echo '<button class="btn btn-danger btn-sm btnEliminarEmpresa" idEmpresa="'.$value["id"].'" logoEmpresa="'.$value["logo"].'" empresa="'.$value["empresa"].'"><i class="fa fa-times"></i></button>';
+                  }
+                  echo '</div>
+                      </td>
+                    </tr>';
         }
 
 
