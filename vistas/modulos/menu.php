@@ -84,45 +84,19 @@
           <li>
             <a href="radicador">
               <i class="fa fa-sign-in"></i>
-              <span>Registrar Ingresos</span>
+              <span>Radicar <i class="fa fa-envelope"></i></span>
+            </a>
+          </li>
+          <li>
+            <a href="facturas">
+              <i class="fa fa-inbox"></i>
+              <span>Radicar Facturas</span>
             </a>
           </li>
           <li>
             <a href="salidas">
               <i class="fa fa-sign-out"></i>
               <span>Registrar Salidas</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-
-
-      <li class="treeview menu-open">
-        <a href="#">
-          <i class="fa fa-inbox"></i>
-          <span>Facturas</span>
-          <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-
-        <ul class="treeview-menu">
-          <li>
-            <a href="facturas">
-              <i class="fa fa-inbox"></i>
-              <span>Facturas</span>
-            </a>
-          </li>
-          <li>
-            <a href="facturador">
-              <i class="fa fa-sign-in"></i>
-              <span>Registrar Facturas</span>
-            </a>
-          </li>
-          <li>
-            <a href="reparto">
-              <i class="fa fa-sign-out"></i>
-              <span>Entrega Facturas</span>
             </a>
           </li>
         </ul>

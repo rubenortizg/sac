@@ -71,6 +71,20 @@ class ControladorRadicados {
   }
 
 
+  /*=============================================
+  MOSTRAR RADICADOS DESCENDENTE
+  =============================================*/
+
+  static public function ctrMostrarRadicadosDescendente($item, $valor){
+
+    $tabla = "radicados";
+
+    $respuesta = ModeloRadicados::mdlMostrarRadicadosDescendente($tabla, $item, $valor);
+
+    return $respuesta;
+  }
+
+
   /* =====================================
   EDITAR RADICADO
   ====================================== */

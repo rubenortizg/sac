@@ -3,7 +3,7 @@
 $item = null;
 $valor = null;
 
-$radicados = ControladorRadicados::ctrMostrarRadicados($item, $valor);
+$radicados = ControladorRadicados::ctrMostrarRadicadosDescendente($item, $valor);
 
 
 ?>
