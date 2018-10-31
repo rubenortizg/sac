@@ -143,6 +143,7 @@ echo '<div class="wrapper">';
         $_GET["ruta"] == "radicados" ||
         $_GET["ruta"] == "radicador" ||
         $_GET["ruta"] == "editar-radicado" ||
+        $_GET["ruta"] == "facturas" ||
         $_GET["ruta"] == "reportes" ||
         $_GET["ruta"] == "perfiles" ||
         $_GET["ruta"] == "salir"){

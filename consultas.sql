@@ -132,52 +132,29 @@ CREATE TABLE `sac`. `perfiles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
-VALUES (
-  NULL,
-  'Administrador',
-  '6',
-  '6',
-  '6',
-  '6',
-  '6',
-  '6',
-  '6',
-  '6',
-  '6',
-  '6',
-  '6'
-  );
+VALUES (NULL,'Administrador','6','6','6','6','6','6','6','6','6','6','6');
 
-  INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
-  VALUES (
-    NULL,
-    'Especial',
-    '6',
-    '0',
-    '5',
-    '5',
-    '5',
-    '5',
-    '5',
-    '5',
-    '5',
-    '5',
-    '0'
-    );
+INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
+VALUES (NULL,'Especial','6','0','5','5','5','5','5','5','5','5','0');
 
-    INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
-    VALUES (
-      NULL,
-      'Consulta',
-      '6',
-      '0',
-      '4',
-      '4',
-      '4',
-      '4',
-      '4',
-      '0',
-      '4',
-      '4',
-      '0'
-      );
+INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
+VALUES (NULL,'Consulta','6','0','4','4','4','4','4','0','4','4','0');
+
+CREATE TABLE `sac`. `facturas` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `idestablecimiento` int(11) NOT NULL,
+ `idempresa` int(11) NOT NULL,
+ `idoperador` int(11) NOT NULL,
+ `ctacontrato` text COLLATE utf8_spanish_ci DEFAULT NULL,
+ `estado` int(11) NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `sac`. `operadores` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `codoperador` text COLLATE utf8_spanish_ci DEFAULT NULL,
+ `nombre` text COLLATE utf8_spanish_ci DEFAULT NULL,
+ `tipo` text COLLATE utf8_spanish_ci DEFAULT NULL,
+ `estado` int(11) NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

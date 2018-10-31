@@ -40,7 +40,7 @@ $radicados = ControladorRadicados::ctrMostrarRadicadosDescendente($item, $valor)
 
         <div class="product-info">
 
-        <a href="http://localhost/sac/extensiones/tcpdf/pdf/radicadoPDF.php?radicado='.$radicados[$i]["radicado"].'" target="_blank" class="product-title">R'.$radicado.'
+        <a href="extensiones/tcpdf/pdf/radicadoPDF.php?radicado='.$radicados[$i]["radicado"].'" target="_blank" class="product-title">R'.$radicado.'
         <span class="label label-warning pull-right">Ver Reporte</span>
         </a>
 
