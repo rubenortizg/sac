@@ -83,7 +83,7 @@ class ControladorFacturas {
               if(result.value){
 
                 window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
-                window.location = "radicados";
+                window.location = "facturas";
 
 
               }
@@ -180,7 +180,7 @@ class ControladorFacturas {
               if(result.value){
 
                 window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
-                window.location = "radicados";
+                window.location = "facturas";
 
 
               }
@@ -277,7 +277,7 @@ class ControladorFacturas {
               if(result.value){
 
                 window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
-                window.location = "radicados";
+                window.location = "facturas";
 
 
               }
