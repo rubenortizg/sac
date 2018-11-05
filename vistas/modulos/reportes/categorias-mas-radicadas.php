@@ -34,7 +34,7 @@ foreach ($radicados as $key => $value) {
     foreach ($arrayCantidades as $key => $value) {
 
       $sumaCantidades[$key] += $value;
-      $totalCategorias += $value;
+      $totalCategoriasRecientes += $value;
 
     }
 
@@ -115,9 +115,11 @@ PIE CATEGORIAS
 
         $color = 0;
 
+        var_dump($totalCategoriasRecientes);
+
         foreach ($consolidadoCategorias as $key => $value) {
 
-         $porcentajeCantidades = round(($sumaCantidades[$value]/$totalCategorias)*100,1);
+         $porcentajeCantidades = round(($sumaCantidades[$value]/$totalCategoriasRecientes)*100,1);
 
          echo '<tr>
                  <td>'.$consolidadoCategorias[$key].'(S)</td>

@@ -63,7 +63,7 @@
            <th>Establecimiento</th>
            <th>Tipo de Correspondencia</th>
            <th>Fecha Radicado</th>
-           <th>Acciones</th>
+           <th style="width:120px">Acciones</th>
          </tr>
         </thead>
 

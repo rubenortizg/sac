@@ -42,6 +42,9 @@ session_start();
   <!-- daterange picker -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 
+  <!-- daterange picker 2 -->
+  <link rel="stylesheet" href="vistas/bower_components/bootstrap-daterangepicker/daterangepicker2.css">
+
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 
@@ -88,6 +91,10 @@ session_start();
   <!-- date-range-picker -->
   <script src="vistas/bower_components/moment/min/moment.min.js"></script>
   <script src="vistas/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+  <!-- date-range-picker 2 -->
+  <script src="vistas/bower_components/moment/min/moment.min.js"></script>
+  <script src="vistas/bower_components/bootstrap-daterangepicker/daterangepicker2.js"></script>
 
   <!-- bootstrap datepicker -->
   <script src="vistas/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
@@ -144,6 +151,7 @@ echo '<div class="wrapper">';
         $_GET["ruta"] == "radicador" ||
         $_GET["ruta"] == "editar-radicado" ||
         $_GET["ruta"] == "facturas" ||
+        $_GET["ruta"] == "salidas" ||
         $_GET["ruta"] == "reportes" ||
         $_GET["ruta"] == "perfiles" ||
         $_GET["ruta"] == "salir"){
@@ -183,6 +191,7 @@ echo '<div class="wrapper">';
 <script src="vistas/js/categorias.js"></script>
 <script src="vistas/js/remitentes.js"></script>
 <script src="vistas/js/radicados.js"></script>
+<script src="vistas/js/salidas.js"></script>
 <script src="vistas/js/reportes.js"></script>
 
 </body>
