@@ -24,71 +24,33 @@
 
     <?php
 
-    if (isset($_GET["fechaInicial"])) {
-
-      $fechaInicial = $_GET["fechaInicial"];
-      $fechaFinal = $_GET["fechaFinal"];
-
-    }else {
-
-      $fechaInicial = null;
-      $fechaFinal = null;
-    }
+    // if (isset($_GET["fechaInicial"])) {
+    //
+    //   $fechaInicial = $_GET["fechaInicial"];
+    //   $fechaFinal = $_GET["fechaFinal"];
+    //
+    // }else {
+    //
+    //   $fechaInicial = null;
+    //   $fechaFinal = null;
+    // }
 
 
     echo '<div class="box-header with-border">';
 
-    echo '<button class="btn btn-success btnPdfSalidas" fechaInicial='.$fechaInicial.' fechaFinal='.$fechaFinal.'><i class="fa fa-file-pdf-o"></i>
+    echo '<button class="btn btn-success btnPdfSalidas"><i class="fa fa-file-pdf-o"></i>
             &nbsp;Generar Reporte
           </button>';
-
-    echo '<button type="button" class="btn btn-default pull-right" id="daterange-btnSalidas">
-            <span>
-              <i class="fa fa-calendar"></i> Rango de Fecha
-            </span>
-              <i class="fa fa-caret-down"></i>
-          </button>
-
-      </div>';
 
     ?>
 
     </div>
 
-    <!-- <div class="row">
-      <div class="col-md-12">
+    <div class="row cambioEstado">
 
-        <div class="box box-success ">
-          <form method="post">
-            <div class="box-header with-border">
-              <h3 class="box-title">Selecciona un estado para la Correspondencia</h3>
-            </div>
 
-            <div class="box-body">
-              <div class="input-group">
-                <select class="form-control" name="nuevoEstado">
-                  <option value="1">Radicado</option>
-                  <option value="2">En reparto</option>
-                  <option value="3">Entregado</option>
-                  <option value="4">Devuelto</option>
-                </select>
-              </div>
-            </div>
 
-            <div class="box-footer">
-              <button type="submit" name="cancel" class="btn btn-default">
-                <i class="fa fa-times"></i>
-                Cancelar
-              </button>
-              <button type="submit" class="btn btn-default" name="actualizarEstado">
-                <i class="fa fa-check"></i>
-                Actualizar estado
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div> -->
+    </div>
 
     <div class="row">
       <div class="col-md-12">
@@ -96,7 +58,6 @@
       <div class="box">
 
       <div class="box-header">
-        <div class="col-xs-12">
            <div class="btn-group bulk-actions dropdown salidas">
              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                Acciones Agrupadas <span class="caret"></span>
@@ -125,7 +86,6 @@
 
              </ul>
            </div>
-         </div>
 
       </div>
 
@@ -144,6 +104,7 @@
            <th>Remitente</th>
            <th>Destinatario</th>
            <th>Establecimiento</th>
+           <th>Estado</th>
            <th>Tipo de Correspondencia</th>
            <th>Fecha Radicado</th>
          </tr>
@@ -153,18 +114,10 @@
 
           <?php
 
-            if (isset($_GET["fechaInicial"])) {
+            $item = "estado";
+            $valor = 0;
 
-              $fechaInicial = $_GET["fechaInicial"];
-              $fechaFinal = $_GET["fechaFinal"];
-
-            }else {
-
-              $fechaInicial = null;
-              $fechaFinal = null;
-            }
-
-            $radicados = ControladorRadicados::ctrRangoFechasRadicados($fechaInicial, $fechaFinal);
+            $radicados = ControladorRadicados::ctrMostrarRadicadosXEstado($item, $valor);
 
             foreach ($radicados as $key => $value) {
 
@@ -221,8 +174,19 @@
                   echo '<td>'.$empresa["empresa"].'</td>';
                 }
 
-                echo '  <td>'.$establecimiento["identificador"].'</td>
-                        <td>'.$value["tipo"].'</td>
+                echo '  <td>'.$establecimiento["identificador"].'</td>';
+
+                if($value["estado"] != 0){
+
+                  echo '<td><button class="btn btn-success btn-xs btnEstadoRadicado" idRadicado="'.$value["id"].'" estadoRadicado="0">Entregado</button></td>';
+
+                }else {
+
+                  echo '<td><button class="btn btn-warning btn-xs btnEstadoRadicado" idRadicado="'.$value["id"].'" estadoRadicado="1">Radicado</button></td>';
+
+                }
+
+                echo '  <td>'.$value["tipo"].'</td>
                         <td>'.$value["fecha"].'</td>';
 
                 echo ' </tr>';

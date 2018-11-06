@@ -18,7 +18,7 @@ SELECIONAR TODOS LOS RADICADOS
 
 $(".salidas .seleccionarTodos").on("click", function(event){
 
-  $(this).parent().parent().parent().parent().parent().parent().children("div.box-body").children().children().children().children().children().children().children().children().children().children().has(":checkbox").addClass('checked');
+  $(this).parent().parent().parent().parent().parent().children("div.box-body").children().children().children().children().children().children().children().children().children().children().has(":checkbox").addClass('checked');
 
 })
 
@@ -28,7 +28,7 @@ DESELECIONAR TODOS LOS RADICADOS
 
 $(".salidas .deseleccionarTodos").on("click", function(event){
 
-  $(this).parent().parent().parent().parent().parent().parent().children("div.box-body").children().children().children().children().children().children().children().children().children().children().has(":checkbox").removeClass('checked');
+  $(this).parent().parent().parent().parent().parent().children("div.box-body").children().children().children().children().children().children().children().children().children().children().has(":checkbox").removeClass('checked');
 
 })
 
@@ -41,15 +41,96 @@ $(".btnPdfSalidas").on("click", function(){
   var fechaInicial = $(this).attr("fechaInicial");
   var fechaFinal = $(this).attr("fechaFinal");
 
-  if (fechaInicial != null && fechaFinal != null) {
+  window.open("extensiones/tcpdf/pdf/salidasPDF.php", "_blank");
 
-    window.open("extensiones/tcpdf/pdf/salidasPDF.php?fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal, "_blank");
 
-  } else {
+})
 
-    window.open("extensiones/tcpdf/pdf/salidasPDF.php", "_blank");
 
-  }
+/*=============================================
+CAMBIAR ESTADO RADICADO
+=============================================*/
+$(".salidas").on("click", ".btnEstadoRadicado", function(){
+
+	var idRadicado = $(this).attr("idRadicado");
+	var estadoRadicado = $(this).attr("estadoRadicado");
+
+	var datos = new FormData();
+ 	datos.append("activarId", idRadicado);
+	datos.append("activarRadicado", estadoRadicado);
+
+	$.ajax({
+
+  url:"ajax/radicados.ajax.php",
+  method: "POST",
+  data: datos,
+  cache: false,
+    contentType: false,
+    processData: false,
+    success: function(respuesta){
+
+    }
+
+	})
+
+	if(estadoRadicado == 0){
+
+		$(this).removeClass('btn-success');
+		$(this).addClass('btn-warning');
+		$(this).html('Radicado');
+		$(this).attr('estadoRadicado',1);
+
+	}else{
+
+		$(this).addClass('btn-success');
+		$(this).removeClass('btn-warning');
+		$(this).html('Entregado');
+		$(this).attr('estadoRadicado',0);
+
+	}
+
+})
+
+
+/* =================================================
+CAMBIAR ESTADO MULTIPLES RADICADOS
+====================================================*/
+
+$(".salidas .cambiarEstado").on("click", function(){
+
+  $(".cambioEstado").append(
+          '<div class="col-md-12">'+
+
+            '<div class="box box-success ">'+
+              '<form method="post">'+
+                '<div class="box-header with-border">'+
+                  '<h3 class="box-title">Selecciona un estado para la Correspondencia</h3>'+
+                '</div>'+
+
+                '<div class="box-body">'+
+                  '<div class="input-group">'+
+                    '<select class="form-control" name="nuevoEstado">'+
+                      '<option value="0">Radicado</option>'+
+                      '<option value="1">Entregado</option>'+
+                    '</select>'+
+                  '</div>'+
+                '</div>'+
+
+                '<div class="box-footer">'+
+                  '<button type="submit" name="cancel" class="btn btn-default">'+
+                    '<i class="fa fa-times"></i>'+
+                    'Cancelar'+
+                  '</button>'+
+                  '&nbsp'+
+                  '<button type="submit" class="btn btn-default actualizarEstado">'+
+                    '<i class="fa fa-check"></i>'+
+                    'Actualizar estado'+
+                  '</button>'+
+                '</div>'+
+              '</form>'+
+            '</div>'+
+          '</div>'
+        )
 
 })
 

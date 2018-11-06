@@ -225,4 +225,50 @@ class ModeloRadicados {
 
 	}
 
+
+  /*=============================================
+  MOSTRAR RADICADOS X ESTADO
+  =============================================*/
+
+  static public function mdlMostrarRadicadosXEstado($tabla, $item, $valor){
+
+    $sql ="SELECT * FROM $tabla WHERE $item = :$item";
+    $stmt = Conexion::conectar()-> prepare($sql);
+    $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+    $stmt -> execute();
+
+    return $stmt -> fetchAll();
+
+    $stmt -> close();
+    $stmt = null;
+
+  }
+
+  /*=============================================
+  ACTUALIZAR RADICADO
+  =============================================*/
+
+  static public function mdlActualizarRadicado($tabla, $item1, $valor1, $item2, $valor2){
+
+    $sql ="UPDATE $tabla SET $item1 = :$item1 WHERE  $item2 = :$item2";
+    $stmt = Conexion::conectar()-> prepare($sql);
+
+    $stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+    $stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+
+    if($stmt -> execute()){
+
+      return "ok";
+
+    }else{
+
+      return "error";
+
+    }
+
+    $stmt -> close();
+    $stmt = null;
+
+  }
+
 }

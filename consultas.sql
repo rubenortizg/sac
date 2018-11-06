@@ -109,6 +109,7 @@ CREATE TABLE `sac`.`radicados` (
  `destinatario` text COLLATE utf8_spanish_ci DEFAULT NULL,
  `correspondencia` text COLLATE utf8_spanish_ci DEFAULT NULL,
  `tipo` text COLLATE utf8_spanish_ci DEFAULT NULL,
+ `estado` int(11) NOT NULL,
  `idusuario` int(11) NOT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -135,7 +136,7 @@ INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, cl
 VALUES (NULL,'Administrador','6','6','6','6','6','6','6','6','6','6','6');
 
 INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
-VALUES (NULL,'Especial','6','0','5','5','5','5','5','5','5','5','0');
+VALUES (NULL,'Especial','6','0','5','5','5','5','5','5','5','5','5');
 
 INSERT INTO perfiles (id, perfil, inicio, usuarios,transportadoras, empresas, clientes, establecimientos, remitentes, categorias, radicados, reportes, opciones)
 VALUES (NULL,'Consulta','6','0','4','4','4','4','4','0','4','4','0');

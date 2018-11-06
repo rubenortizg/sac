@@ -61,6 +61,7 @@
            <th>Remitente</th>
            <th>Destinatario</th>
            <th>Establecimiento</th>
+           <th>Estado</th>
            <th>Tipo de Correspondencia</th>
            <th>Fecha Radicado</th>
            <th style="width:120px">Acciones</th>
@@ -132,8 +133,19 @@
                   echo '<td>'.$empresa["empresa"].'</td>';
                 }
 
-                echo '  <td>'.$establecimiento["identificador"].'</td>
-                        <td>'.$value["tipo"].'</td>
+                echo '  <td>'.$establecimiento["identificador"].'</td>';
+
+                if($value["estado"] == 0){
+
+                  echo '<td><button class="btn btn-warning btn-xs">Radicado</button></td>';
+
+                }elseif ($value["estado"] == 1) {
+
+                  echo '<td><button class="btn btn-success btn-xs">Entregado</button></td>';
+
+                }
+
+                echo'   <td>'.$value["tipo"].'</td>
                         <td>'.$value["fecha"].'</td>
                         <td>
 

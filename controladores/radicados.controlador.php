@@ -348,4 +348,18 @@ class ControladorRadicados {
 
   }
 
+  /*=============================================
+  MOSTRAR RADICADOS X ESTADO
+  =============================================*/
+
+  static public function ctrMostrarRadicadosXEstado($item, $valor){
+
+    $tabla = "radicados";
+
+    $respuesta = ModeloRadicados::mdlMostrarRadicadosXEstado($tabla, $item, $valor);
+
+    return $respuesta;
+  }
+
+
 }

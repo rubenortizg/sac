@@ -42,10 +42,10 @@ if (isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])) {
 
 } else {
 
-  $item = null;
-  $valor = null;
+  $item = "estado";
+  $valor = 0;
 
-  $respuestaRadicados = ModeloRadicados::mdlMostrarRadicados($tabla, $item, $valor);
+  $respuestaRadicados = ModeloRadicados::mdlMostrarRadicadosXEstado($tabla, $item, $valor);
 }
 
 
