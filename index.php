@@ -12,6 +12,8 @@ require_once "controladores/remitentes.controlador.php";
 require_once "controladores/categorias.controlador.php";
 require_once "controladores/radicados.controlador.php";
 require_once "controladores/facturas.controlador.php";
+require_once "controladores/clientefacturas.controlador.php";
+require_once "controladores/operadores.controlador.php";
 require_once "controladores/perfiles.controlador.php";
 
 require_once "modelos/usuarios.modelo.php";
@@ -25,6 +27,8 @@ require_once "modelos/remitentes.modelo.php";
 require_once "modelos/categorias.modelo.php";
 require_once "modelos/radicados.modelo.php";
 require_once "modelos/facturas.modelo.php";
+require_once "modelos/clientefacturas.modelo.php";
+require_once "modelos/operadores.modelo.php";
 require_once "modelos/perfiles.modelo.php";
 
 

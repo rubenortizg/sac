@@ -111,7 +111,7 @@
 
       <?php
 
-        if ($_SESSION["acceso"]["opciones"] == "6") {
+        if ($_SESSION["acceso"]["opciones"] == "6"  || $_SESSION["acceso"]["opciones"] == "5") {
           echo '<li class="treeview menu-open">
                   <a href="#">
                     <i class="fa fa-cog"></i>
@@ -121,8 +121,20 @@
                     </span>
                   </a>
 
-                  <ul class="treeview-menu">
-                    <li>
+                  <ul class="treeview-menu">';
+        }
+
+        if ($_SESSION["acceso"]["opciones"] == "6"  || $_SESSION["acceso"]["opciones"] == "5") {
+            echo '  <li>
+                      <a href="clientes-facturas">
+                        <i class="fa fa-inbox"></i>
+                        <span>Facturas de Clientes</span>
+                      </a>
+                    </li>';
+        }
+
+        if ($_SESSION["acceso"]["opciones"] == "6") {
+            echo '  <li>
                       <a href="tipos">
                         <i class="fa fa-briefcase"></i>
                         <span>Tipos Establecimiento</span>
@@ -141,8 +153,11 @@
                         <i class="fa fa-cogs"></i>
                         <span>Configuración App</span>
                       </a>
-                    </li>
-                  </ul>
+                    </li>';
+        }
+
+        if ($_SESSION["acceso"]["opciones"] == "6"  || $_SESSION["acceso"]["opciones"] == "5") {
+            echo '</ul>
                 </li>';
         }
 

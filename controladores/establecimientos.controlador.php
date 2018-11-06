@@ -106,8 +106,6 @@ class ControladorEstablecimientos {
 
            $tabla = "establecimientos";
 
-           echo $_POST["editarEmpresa"];
-
            $datos = array("id" => $_POST["idEstablecimiento"],
                           "identificador" => $_POST["editarIdentificador"],
      					            "tipo" => $_POST["editarTipo"],

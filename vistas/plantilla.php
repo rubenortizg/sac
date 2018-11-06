@@ -153,7 +153,7 @@ echo '<div class="wrapper">';
         $_GET["ruta"] == "facturas" ||
         $_GET["ruta"] == "salidas" ||
         $_GET["ruta"] == "reportes" ||
-        $_GET["ruta"] == "perfiles" ||
+        $_GET["ruta"] == "clientes-facturas" ||
         $_GET["ruta"] == "salir"){
     // ../lista blanca de modulos con URLs amigables
 
@@ -193,6 +193,7 @@ echo '<div class="wrapper">';
 <script src="vistas/js/radicados.js"></script>
 <script src="vistas/js/salidas.js"></script>
 <script src="vistas/js/reportes.js"></script>
+<script src="vistas/js/clientefacturas.js"></script>
 
 </body>
 </html>
