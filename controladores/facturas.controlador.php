@@ -136,6 +136,8 @@ class ControladorFacturas {
 
         if ($factura != null) {
 
+          $fechaFactura = substr( $_POST["nuevaFactura"],28,8);
+
           $listaDestinatario = array( "idEstablecimiento" => $factura["idestablecimiento"],
                                       "idEmpresa" => $factura["idempresa"],
                                       "idCliente" => "");
@@ -144,7 +146,7 @@ class ControladorFacturas {
 
           $listaCorrespondencia = array( "id" => "1",
                                          "cantidad" => "1",
-                                         "observacion" => "Factura Gas Natural Cta Contrato. $valorFactura");
+                                         "observacion" => "Factura Gas Natural Cta Contrato. $valorFactura, fecha lectura $fechaFactura");
 
           $listaCorrespondencia = "[".json_encode($listaCorrespondencia)."]";
 
