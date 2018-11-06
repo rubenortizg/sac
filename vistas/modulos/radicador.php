@@ -31,7 +31,7 @@ if ($_SESSION["acceso"]["radicados"] != "6" && $_SESSION["acceso"]["radicados"] 
       FORMULARIO RADICACION
       ======================================-->
 
-      <div class="col-lg-5 col-xs-12">
+      <div class="col-lg-4 col-xs-12">
 
         <div class="box box-success">
 
@@ -123,7 +123,7 @@ if ($_SESSION["acceso"]["radicados"] != "6" && $_SESSION["acceso"]["radicados"] 
 
                     </select>
 
-                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarTransportadora" data-dismiss="modal">Agregar Transportadora</button></span>
+                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarTransportadora" data-dismiss="modal">Agregar</button></span>
                   </div>
                 </div>
 
@@ -153,7 +153,7 @@ if ($_SESSION["acceso"]["radicados"] != "6" && $_SESSION["acceso"]["radicados"] 
 
                     </select>
 
-                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarRemitente" data-dismiss="modal">Agregar Remitente</button></span>
+                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarRemitente" data-dismiss="modal">Agregar</button></span>
                   </div>
                 </div>
 
@@ -307,7 +307,7 @@ if ($_SESSION["acceso"]["radicados"] != "6" && $_SESSION["acceso"]["radicados"] 
       TABLA DE CATEGORIAS
       ======================================-->
 
-      <div class="col-lg-2 hidden-md hidden-sm hidden-xs">
+      <div class="col-lg-3 hidden-md hidden-sm hidden-xs">
 
         <div class="box box-warning">
 
