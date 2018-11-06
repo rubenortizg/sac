@@ -25,44 +25,32 @@ require_once "../../../controladores/usuarios.controlador.php";
 require_once "../../../modelos/usuarios.modelo.php";
 
 
-
-
 class imprimirSalidas{
 
 public $radicado;
 
 public function traerImpresionSalidas(){
 
+
 // INFORMACIÓN DE LOS RADICADOS
 
-$item = "radicado";
-$valor = $this->radicado;
-$valorRadicado = "R".str_pad($valor, 7, "0", STR_PAD_LEFT);
+$tabla = "radicados";
 
-$respuestaRadicado = ControladorRadicados::ctrMostrarRadicados($item, $valor);
+if (isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])) {
 
-$fecha = substr($respuestaRadicado["fecha"],0,-8);
-$hora = substr($respuestaRadicado["fecha"],11,10);
-$destinatario = json_decode($respuestaRadicado["destinatario"], true);
-$tipo = $respuestaRadicado["tipo"];
-$correspondencia = json_decode($respuestaRadicado["correspondencia"], true);
+  $respuestaRadicados = ModeloRadicados::mdlRangoFechasRadicados($tabla, $_GET["fechaInicial"], $_GET["fechaFinal"]);
 
-// INFORMACION TRANSPORTADORA
+} else {
 
-$itemTransportadora ="id";
-$valorTransportadora = $respuestaRadicado["idtransportadora"];
+  $item = null;
+  $valor = null;
 
-$respuestaTransportadora = ControladorTransportadoras::ctrMostrarTransportadoras($itemTransportadora, $valorTransportadora);
-
-// INFORMACION REMITENTE
-
-$itemRemitente ="id";
-$valorRemitente = $respuestaRadicado["idremitente"];
-
-$respuestaRemitente = ControladorRemitentes::ctrMostrarRemitentes($itemRemitente, $valorRemitente);
+  $respuestaRadicados = ModeloRadicados::mdlMostrarRadicados($tabla, $item, $valor);
+}
 
 
 // CLASE TCPDF
+
 
 require_once('tcpdf_include.php');
 
@@ -111,7 +99,7 @@ $bloque2 = <<<EOF
 
   <table>
     <tr>
-      <td style="width:540px"><img src="/images/back.jpg"></td>
+      <td style="width:740px"><img src="/images/back.jpg"></td>
     </tr>
   </table>
 
@@ -128,35 +116,35 @@ $bloque2 = <<<EOF
       </td>
 
       <td style="border: 1px solid #666; background-color:white; width:95px; text-align:center">
-        Remitente
+        <b>Remitente</b>
       </td>
 
       <td style="border: 1px solid #666; background-color:white; width:50px; text-align:center">
-        Fecha
+        <b>Fecha</b>
+      </td>
+
+      <td style="border: 1px solid #666; background-color:white; width:86px; text-align:center">
+        <b>Establecimiento</b>
       </td>
 
       <td style="border: 1px solid #666; background-color:white; width:85px; text-align:center">
-        Establecimiento
-      </td>
-
-      <td style="border: 1px solid #666; background-color:white; width:100px; text-align:center">
-        Empresa
-      </td>
-
-      <td style="border: 1px solid #666; background-color:white; width:90px; text-align:center">
-        Cliente
-      </td>
-
-      <td style="border: 1px solid #666; background-color:white; width:45px; text-align:center">
-        Tipo
-      </td>
-
-      <td style="border: 1px solid #666; background-color:white; width:57px; text-align:center;">
-        Cantidad
+        <b>Empresa</b>
       </td>
 
       <td style="border: 1px solid #666; background-color:white; width:80px; text-align:center">
-        Firma
+        <b>Cliente</b>
+      </td>
+
+      <td style="border: 1px solid #666; background-color:white; width:60px; text-align:center">
+        <b>Tipo</b>
+      </td>
+
+      <td style="border: 1px solid #666; background-color:white; width:59px; text-align:center;">
+        <b>Cantidad</b>
+      </td>
+
+      <td style="border: 1px solid #666; background-color:white; width:75px; text-align:center">
+        <b>Firma</b>
       </td>
 
 
@@ -171,53 +159,114 @@ $pdf->writeHTML($bloque2, false, false, false, false, '');
 // ---------------------------- Fin - Bloque 2 - Remitente -----------------------------------
 
 
+foreach ($respuestaRadicados as $key => $respuestaRadicado) {
+
+$valorRadicado = "R".str_pad($respuestaRadicado["radicado"], 7, "0", STR_PAD_LEFT);
+
+$fecha = substr($respuestaRadicado["fecha"],0,-8);
+$hora = substr($respuestaRadicado["fecha"],11,10);
+$destinatario = json_decode($respuestaRadicado["destinatario"], true);
+$correspondencia = json_decode($respuestaRadicado["correspondencia"], true);
+
+// INFORMACION TRANSPORTADORA
+
+$itemTransportadora ="id";
+$valorTransportadora = $respuestaRadicado["idtransportadora"];
+
+$respuestaTransportadora = ControladorTransportadoras::ctrMostrarTransportadoras($itemTransportadora, $valorTransportadora);
+
+// INFORMACION ESTABLECIMIENTO
+
+foreach ($destinatario as $key => $value) {
+
+$itemEstablecimiento ="id";
+$valorEstablecimiento = $value["idEstablecimiento"];
+
+$respuestaEstablecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($itemEstablecimiento, $valorEstablecimiento);
+
+}
+// INFORMACION EMPRESA
+
+
+foreach ($destinatario as $key => $value) {
+
+$itemEmpresa ="id";
+$valorEmpresa = $value["idEmpresa"];
+
+$respuestaEmpresa = ControladorEmpresas::ctrMostrarEmpresas($itemEmpresa, $valorEmpresa);
+
+}
+
+// INFORMACION CLIENTE
+
+foreach ($destinatario as $key => $value) {
+
+$itemCliente ="id";
+$valorCliente = $value["idCliente"];
+
+$respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
+
+}
+
+// INFORMACION REMITENTE
+
+$itemRemitente ="id";
+$valorRemitente = $respuestaRadicado["idremitente"];
+
+$respuestaRemitente = ControladorRemitentes::ctrMostrarRemitentes($itemRemitente, $valorRemitente);
+
+// INFORMACION TIPO DE CATEGORIA
+
+$tipo = "";
+
+foreach ($correspondencia as $key => $value) {
+
+$itemCategoria ="id";
+$valorCategoria = $value["id"];
+
+$respuestaCategoria = ControladorCategorias::ctrMostrarCategorias($itemCategoria, $valorCategoria);
+
+$tipo .= $respuestaCategoria["categoria"]."<br>";
+
+}
+
+// INFORMACION CANTIDAD
+
+$cantidad = "";
+
+foreach ($correspondencia as $key => $value) {
+
+  $cantidad .= $value["cantidad"]."<br>";
+
+}
+
 // ---------------------------- Bloque 3 - Remitente  --------------------------------
 
 $bloque3 = <<<EOF
 
-  <table style="font-size:8px; padding:5px 10px;">
+  <table style="font-size:8px; padding:5px 0px;">
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:62px; text-align:center">
-        $valorRadicado
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:62px; text-align:center">$valorRadicado</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:88px; text-align:center">
-        $respuestaTransportadora[transportadora]
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:88px; text-align:center">$respuestaTransportadora[transportadora]</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:95px; text-align:center">
-        Remitente
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:95px; text-align:center">$respuestaRemitente[remitente]</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:50px; text-align:center">
-        Fecha
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:50px; text-align:center">$respuestaRadicado[fecha]</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:85px; text-align:center">
-        Establecimiento
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:86px; text-align:center">$respuestaEstablecimiento[identificador]</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:100px; text-align:center">
-        Empresa
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:85px; text-align:center">$respuestaEmpresa[empresa]</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:90px; text-align:center">
-        Cliente
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:80px; text-align:center">$respuestaCliente[nombre]</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:45px; text-align:center">
-        Tipo
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:60px; text-align:center">$tipo</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:57px; text-align:center;">
-        Cantidad
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:59px; text-align:center;">$cantidad</td>
 
-      <td style="border: 1px solid #666; background-color:white; width:80px; text-align:center">
-        Firma
-      </td>
+      <td style="border: 1px solid #666; background-color:white; width:75px; text-align:center"></td>
 
 
     </tr>
@@ -230,20 +279,19 @@ $pdf->writeHTML($bloque3, false, false, false, false, '');
 
 // ---------------------------- Fin - Bloque 3 - Remitente -----------------------------------
 
-
+}
 
 // ------------------------------------
 // SALIDA DEL ARCHIVO
 // ------------------------------------
 
-$pdf->Output('radicado'.$valorRadicado.'pdf');
+$pdf->Output('salidas.pdf');
 
 }
 
 }
 
 $salidasPDF = new imprimirSalidas();
-$salidasPDF -> radicado =$_GET["radicado"];
 $salidasPDF -> traerImpresionSalidas();
 
 ?>

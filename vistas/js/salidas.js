@@ -33,14 +33,23 @@ $(".salidas .deseleccionarTodos").on("click", function(event){
 })
 
 /* =================================================
-RADICADO PDF
+SALIDAS PDF
 ====================================================*/
 
 $(".btnPdfSalidas").on("click", function(){
 
-  var codigoRadicado = $(this).attr("codigoRadicado");
+  var fechaInicial = $(this).attr("fechaInicial");
+  var fechaFinal = $(this).attr("fechaFinal");
 
-  window.open("extensiones/tcpdf/pdf/salidasPDF.php?radicado="+codigoRadicado, "_blank");
+  if (fechaInicial != null && fechaFinal != null) {
+
+    window.open("extensiones/tcpdf/pdf/salidasPDF.php?fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal, "_blank");
+
+  } else {
+
+    window.open("extensiones/tcpdf/pdf/salidasPDF.php", "_blank");
+
+  }
 
 })
 

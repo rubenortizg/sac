@@ -103,7 +103,7 @@ if ($_SESSION["acceso"]["radicados"] != "6" && $_SESSION["acceso"]["radicados"] 
                 <div class="form-group">
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
-                  <input type="text" class="form-control" id="nuevaFactura" name="nuevaFactura" placeholder="Codido de Barras Factura">
+                  <input type="text" class="form-control" id="nuevaFactura" name="nuevaFactura" placeholder="Codido de Barras Factura" autofocus>
                   </div>
                 </div>
 
