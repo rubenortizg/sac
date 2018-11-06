@@ -84,7 +84,7 @@
           <li>
             <a href="radicador">
               <i class="fa fa-sign-in"></i>
-              <span>Radicar <i class="fa fa-envelope"></i></span>
+              <span>Radicar &nbsp<i class="fa fa-envelope"></i></span>
             </a>
           </li>
           <li>

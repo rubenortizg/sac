@@ -38,7 +38,7 @@
 
     echo '<div class="box-header with-border">';
 
-    echo '<button class="btn btn-primary btnPdfSalidas" fechaInicial='.$fechaInicial.' fechaFinal='.$fechaFinal.'><i class="fa fa-file-pdf-o"></i>
+    echo '<button class="btn btn-success btnPdfSalidas" fechaInicial='.$fechaInicial.' fechaFinal='.$fechaFinal.'><i class="fa fa-file-pdf-o"></i>
             &nbsp;Generar Reporte
           </button>';
 
