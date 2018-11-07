@@ -114,10 +114,6 @@ $bloque2 = <<<EOF
         <b>Radicado</b>
       </td>
 
-      <td style="border: 1px solid #666; background-color:white; width:88px; text-align:center">
-        <b>Transportadora</b>
-      </td>
-
       <td style="border: 1px solid #666; background-color:white; width:95px; text-align:center">
         <b>Remitente</b>
       </td>
@@ -144,6 +140,10 @@ $bloque2 = <<<EOF
 
       <td style="border: 1px solid #666; background-color:white; width:59px; text-align:center;">
         <b>Cantidad</b>
+      </td>
+
+      <td style="border: 1px solid #666; background-color:white; width:88px; text-align:center">
+        <b>Observacón</b>
       </td>
 
       <td style="border: 1px solid #666; background-color:white; width:75px; text-align:center">
@@ -243,6 +243,17 @@ foreach ($correspondencia as $key => $value) {
 
 }
 
+// INFORMACION OBSERVACIONES
+
+$observacion = "";
+
+foreach ($correspondencia as $key => $value) {
+
+  $observacion .= $value["observacion"]."<br>";
+
+}
+
+
 // ---------------------------- Bloque 3 - Remitente  --------------------------------
 
 $bloque3 = <<<EOF
@@ -254,8 +265,6 @@ $bloque3 = <<<EOF
       <td style="width:2px"></td>
 
       <td style="border: 1px solid #666; background-color:white; width:62px; text-align:center">$valorRadicado</td>
-
-      <td style="border: 1px solid #666; background-color:white; width:88px; text-align:center">$respuestaTransportadora[transportadora]</td>
 
       <td style="border: 1px solid #666; background-color:white; width:95px; text-align:center">$respuestaRemitente[remitente]</td>
 
@@ -270,6 +279,8 @@ $bloque3 = <<<EOF
       <td style="border: 1px solid #666; background-color:white; width:60px; text-align:center">$tipo</td>
 
       <td style="border: 1px solid #666; background-color:white; width:59px; text-align:center;">$cantidad</td>
+
+      <td style="border: 1px solid #666; background-color:white; width:88px; text-align:center">$observacion</td>
 
       <td style="border: 1px solid #666; background-color:white; width:75px; text-align:center"></td>
 
