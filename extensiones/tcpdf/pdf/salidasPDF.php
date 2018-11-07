@@ -66,7 +66,8 @@ $bloque1 = <<<EOF
 
   <table>
     <tr>
-        <td style="width:190px"><div><img src="images/logoMultiplaza.png"></div></td>
+        <td style="width:10px"></td>
+        <td style="width:170px"><div><img src="images/logoMultiplaza.png"></div></td>
 
         <td style="background-color:white; width:330px; text-align:center<; color:red; line-height:13px; "><br><br>ENTREGA DE<br>CORRESPONDENCIA </td>
 
@@ -106,6 +107,8 @@ $bloque2 = <<<EOF
   <table style="font-size:8px; padding:5px 10px;">
 
     <tr>
+
+      <td style="width:2px"></td>
 
       <td style="border: 1px solid #666; background-color:white; width:62px; text-align:center">
         <b>Radicado</b>
@@ -247,6 +250,8 @@ $bloque3 = <<<EOF
   <table style="font-size:8px; padding:5px 0px;">
 
     <tr>
+
+      <td style="width:2px"></td>
 
       <td style="border: 1px solid #666; background-color:white; width:62px; text-align:center">$valorRadicado</td>
 

@@ -115,8 +115,6 @@ PIE CATEGORIAS
 
         $color = 0;
 
-        var_dump($totalCategoriasRecientes);
-
         foreach ($consolidadoCategorias as $key => $value) {
 
          $porcentajeCantidades = round(($sumaCantidades[$value]/$totalCategoriasRecientes)*100,1);

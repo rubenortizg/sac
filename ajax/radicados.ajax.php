@@ -6,7 +6,7 @@ require_once "../modelos/radicados.modelo.php";
 class AjaxRadicados{
 
 	/*=============================================
-	ACTIVAR ESTABLECIMIENTO
+	ACTIVAR RADICADO
 	=============================================*/
 
 	public $activarRadicado;
@@ -30,7 +30,7 @@ class AjaxRadicados{
 }
 
 /*=============================================
-ACTIVAR ESTABLECIMIENTO
+ACTIVAR RADICADO
 =============================================*/
 
 if(isset($_POST["activarRadicado"])){

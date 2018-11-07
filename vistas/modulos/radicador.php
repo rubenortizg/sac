@@ -1,6 +1,6 @@
 <?php
 
-if ($_SESSION["acceso"]["radicados"] != "6" && $_SESSION["acceso"]["radicados"] != "5") {
+if ($_SESSION["acceso"]["radicados"] != "6" && $_SESSION["acceso"]["radicados"] != "5" && $_SESSION["acceso"]["radicados"] != "4") {
   echo '<script>
     window.location = "inicio";
     </script>';

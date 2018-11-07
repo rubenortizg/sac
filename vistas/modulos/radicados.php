@@ -26,7 +26,7 @@
 
     echo '<div class="box-header with-border">';
 
-    if ($_SESSION["acceso"]["radicados"] == "6" || $_SESSION["acceso"]["radicados"] == "5"  ) {
+    if ($_SESSION["acceso"]["radicados"] == "6" || $_SESSION["acceso"]["radicados"] == "5" || $_SESSION["acceso"]["radicados"] == "4"  ) {
 
       echo '<a href="radicador">
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalRadicar">

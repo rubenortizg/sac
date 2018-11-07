@@ -177,6 +177,7 @@ MODAL AGREGAR USUARIO
                   <option value="">Selecionar perfil</option>
                   <option value="Administrador">Administrador</option>
                   <option value="Especial">Especial</option>
+                  <option value="Radicador">Radicador</option>
                   <option value="Consulta">Consulta</option>
                 </select>
               </div>

@@ -24,18 +24,6 @@
 
     <?php
 
-    // if (isset($_GET["fechaInicial"])) {
-    //
-    //   $fechaInicial = $_GET["fechaInicial"];
-    //   $fechaFinal = $_GET["fechaFinal"];
-    //
-    // }else {
-    //
-    //   $fechaInicial = null;
-    //   $fechaFinal = null;
-    // }
-
-
     echo '<div class="box-header with-border">';
 
     echo '<button class="btn btn-success btnPdfSalidas"><i class="fa fa-file-pdf-o"></i>
@@ -140,7 +128,7 @@
                       <td>
                         <div class="form-group">
                           <label>
-                            <input type="checkbox" class="minimal"  >
+                            <input name="'.$value["radicado"].'" type="checkbox" class="minimal"  >
                           </label>
                         </div>
                       </td>
