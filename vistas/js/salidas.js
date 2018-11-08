@@ -18,7 +18,7 @@ SELECIONAR TODOS LOS RADICADOS
 
 $(".salidas .seleccionarTodos").on("click", function(event){
 
-  $(this).parent().parent().parent().parent().parent().children("div.box-body").children().children().children().children().children().children().children().children().children().children().has(":checkbox").addClass('checked');
+  $(this).parent().parent().parent().parent().parent().children("div.box-body").children().children().children().children().children().children().children().children().children().children().has(":checkbox").iCheck('check');
 
 })
 
@@ -28,7 +28,7 @@ DESELECIONAR TODOS LOS RADICADOS
 
 $(".salidas .deseleccionarTodos").on("click", function(event){
 
-  $(this).parent().parent().parent().parent().parent().children("div.box-body").children().children().children().children().children().children().children().children().children().children().has(":checkbox").removeClass('checked');
+  $(this).parent().parent().parent().parent().parent().children("div.box-body").children().children().children().children().children().children().children().children().children().children().has(":checkbox").iCheck('uncheck');
 
 })
 
@@ -96,8 +96,6 @@ $(".salidas").on("click", ".btnEstadoRadicado", function(){
 CAMBIAR ESTADO MULTIPLES RADICADOS
 ====================================================*/
 
-
-
 // Comprobar los checkbox seleccionados
 $('.cambiarEstado').on('click', function() {
 
@@ -105,14 +103,9 @@ $('.cambiarEstado').on('click', function() {
 
     $('input[type=checkbox]:checked').each(function() {
         radicadosSeleccionados.push($(this).attr("name"));
-        alert(radicadosSeleccionados);
-    });
 
-    $(".salidas .cambiarEstado").on("click", function(){
-
-
-      	var idRadicado = $(this).attr("idRadicado");
-      	var estadoRadicado = $(this).attr("estadoRadicado");
+      	var idRadicado = $(this).attr("name");
+      	var estadoRadicado = 1;
 
       	var datos = new FormData();
        	datos.append("activarId", idRadicado);
@@ -132,26 +125,28 @@ $('.cambiarEstado').on('click', function() {
 
       	})
 
-      	if(estadoRadicado == 0){
-
-      		$(this).removeClass('btn-success');
-      		$(this).addClass('btn-warning');
-      		$(this).html('Radicado');
-      		$(this).attr('estadoRadicado',1);
-
-      	}else{
-
-      		$(this).addClass('btn-success');
-      		$(this).removeClass('btn-warning');
-      		$(this).html('Entregado');
-      		$(this).attr('estadoRadicado',0);
-
-      	}
-
-
     })
 
+    swal({
 
+  		title: '¿Esta seguro de actualizar estado',
+  		text: "!Si no lo esta puede cancelar la acción!",
+  		type: 'warning',
+  		showCancelButton: true,
+  		confirmButtonColor: '#3085d6',
+  		cancelButtonColor: '#d33',
+  		cancelButtonText: 'Cancelar',
+  		confirmButtonText: 'Si, actualizar estado!'
+
+  	}).then(function(result){
+
+  		if (result.value) {
+
+  			window.location = "index.php?ruta=salidas";
+
+      }
+
+    })
 
 
 })
