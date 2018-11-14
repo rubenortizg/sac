@@ -130,6 +130,13 @@
                         <i class="fa fa-inbox"></i>
                         <span>Facturas de Clientes</span>
                       </a>
+                    </li>
+
+                    <li>
+                      <a href="codigos-facturas">
+                        <i class="fa fa-barcode"></i>
+                        <span>Codigos de Facturas</span>
+                      </a>
                     </li>';
         }
 
