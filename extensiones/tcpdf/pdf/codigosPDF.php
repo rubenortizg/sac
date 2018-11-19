@@ -77,9 +77,9 @@ $bloque1 = <<<EOF
         <td style="background-color:white; width:170px">
 
           <div style="font-size:8.5px; text-align:right; line-height:9px;">
-            MULTIPLAZA - GRUPO ROBLE
+            SAC - SISTEMA DE CORRESPONDENCIA
             <br>
-            Calle 19 A # 72 - 57 (Avenida Boyacá con Calle 13 / sentido norte - sur)
+            Calle 2 # 24-02
           </div>
 
         </td>
