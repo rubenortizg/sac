@@ -7,7 +7,7 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <div class="login-logo">
-      <img src="vistas/img/plantilla/logo-negro-bloque.png" class="img-responsive" style="padding: 40px 40px 0px 40px">
+      <img src="vistas/img/plantilla/logo-negro-bloque.png" class="img-responsive" style="padding: 20px 30px 0px 30px">
     </div>
 
     <form method="post">
