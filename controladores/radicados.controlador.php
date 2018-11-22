@@ -41,7 +41,7 @@ class ControladorRadicados {
 
           if(result.value){
 
-            window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
+            window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
             window.location = "radicados";
 
 
