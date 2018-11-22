@@ -34,13 +34,13 @@ $valorEstablecimiento = $value["idEstablecimiento"];
 $respuestaEstablecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($itemEstablecimiento, $valorEstablecimiento);
 $barcode =  $valorRadicado.' '.$fecha;
 $establecimiento = strtoupper($respuestaEstablecimiento["tipo"]).'  '.$respuestaEstablecimiento["identificador"];
-$long = intval((40-strlen($establecimiento))/2);
-$espacio = '';
-for ($i=0; $i < $long; $i++) {
-	$espacio .= ' ';
-}
-
-$establecimiento = $espacio.$establecimiento;
+$long = intval((50-strlen($establecimiento)*2)/2);
+// $espacio = '';
+// for ($i=0; $i < $long; $i++) {
+// 	$espacio .= ' ';
+// }
+//
+// $establecimiento = $espacio.$establecimiento;
 
 }
 
@@ -104,14 +104,14 @@ if ($stickerIndividual == true) {
 	$pdf->Ln(5);
 	$pdf->write1DBarcode($valorRadicado, 'C128', '', '', '', 13.5, 0.4, $style, 'N');
 	$pdf->Text(8, 18, $barcode, 0, false);
-	$pdf->Text(5, 21, $establecimiento, 0, false);
+	$pdf->Text(5+$lomg, 21, $establecimiento, 0, false);
 
 }else {
 
 	// ---------- Impresión a dos (2) sticker --------------
 
 	$html = '<table><tr><td>';
-	$image_file = 'images/logoMultiplaza.png';
+	$image_file = 'images/logo.png';
 	$params = $pdf->serializeTCPDFtagParameters(array($image_file, 10, 1, 30, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false));
 	$html .= '<tcpdf method="Image" params="'.$params.'" />';
 	$html .= '</td><td>';
@@ -127,12 +127,12 @@ if ($stickerIndividual == true) {
 	$html .= '<tr><td>';
 	$params = $pdf->serializeTCPDFtagParameters(array(8, 18, $barcode, 0, false));
 	$html .= '<tcpdf method="Text" params="'.$params.'" />';
-	$params = $pdf->serializeTCPDFtagParameters(array(5, 21, $establecimiento, 0, false));
+	$params = $pdf->serializeTCPDFtagParameters(array(5+$long, 21, $establecimiento, 0, false));
 	$html .= '<tcpdf method="Text" params="'.$params.'" />';
 	$html .= '</td><td>';
 	$params = $pdf->serializeTCPDFtagParameters(array(58, 18,$barcode, 0, false));
 	$html .= '<tcpdf method="Text" params="'.$params.'" />';
-	$params = $pdf->serializeTCPDFtagParameters(array(55, 21, $establecimiento, 0, false));
+	$params = $pdf->serializeTCPDFtagParameters(array(55+$long, 21, $establecimiento, 0, false));
 	$html .= '<tcpdf method="Text" params="'.$params.'" />';
 	$html .= '</td></tr></table>';
 	$pdf->writeHTML($html, true, 0, true, 0);

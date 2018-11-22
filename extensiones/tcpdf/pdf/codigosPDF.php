@@ -31,6 +31,66 @@ require_once "../../../controladores/operadores.controlador.php";
 require_once "../../../modelos/operadores.modelo.php";
 
 
+
+// CLASE TCPDF
+
+require_once('tcpdf_include.php');
+
+
+// Extiende la clase TCPDF para crear encabezado y pie de pagina
+class RADPDF extends TCPDF {
+
+ 	public $operadorEncabezado;
+
+	//Encabezado Pagina
+	public function Header() {
+
+		$operadorEnc = $this->operadorEncabezado;
+
+		// Logo
+		$image_file = 'images/logo.png';
+		$this->Image($image_file, 16, 10, 50, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		// Especificando Fuente
+		$this->SetFont('helvetica', '', 13);
+		// Titulo Encabezado
+    $data1 = '<table>
+                <tr>
+                    <td style="width:20px"></td>
+
+                    <td style="background-color:white; width:270px; text-align:center<; color:red; line-height:17px; "><br>Codigos Facturas<br>'.$operadorEnc.'</td>
+
+                    <td style="background-color:white; width:180px">
+
+                      <div style="font-size:8.5px; text-align:right; line-height:9px;">
+                        SAC - SISTEMA DE CORRESPONDENCIA
+                        <br>
+                        Calle 2 # 24-02
+                      </div>
+
+                    </td>
+
+                </tr>
+              </table>';
+    $this->writeHTML($data1, false, false, false, false, '');
+
+
+
+	}
+
+	// Pie de pagina
+	public function Footer() {
+		// Ubicado 15 mm desde el borde inferior
+		$this->SetY(-15);
+		// Definiendo fuente
+		$this->SetFont('helvetica', 'I', 8);
+		// Numero de pagina
+		$this->Cell(0, 10, 'Pagina '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+	}
+}
+
+
+// CLASE IMPRESION CODIGOS DE BARRAS FACTURAS
+
 class imprimirCodigos{
 
 public $operador;
@@ -53,50 +113,55 @@ $item = "id";
 $valor = $this->operador;
 $respuestaOperadores = ModeloOperadores::mdlMostrarOperadores($tabla, $item, $valor);
 
-// CLASE TCPDF
 
-require_once('tcpdf_include.php');
+// Creando nuevo documento PDF
 
-$pdf = new TCPDF("P", PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new RADPDF("P", PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf-> operadorEncabezado = $respuestaOperadores["nombre"];
+// Definiendo informacion documento
+
+$pdf->SetCreator('RUDDOR - SAC');
+$pdf->SetAuthor('RUDDOR - Consultoría Tecnológica');
+$pdf->SetTitle(' Codigos Facturas '.$respuestaOperadores["nombre"]);
+$pdf->SetSubject('Codigo Facturas');
+$pdf->SetKeywords('Codigos, Facturas, '.$respuestaOperadores["nombre"]);
+
+// ---------------------------- Bloque 1 - Encabezado --------------------------
+
+// Definiend valores por defecto encabezado
+$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+
+// Especificando fuente Encabezado y pie de pagina
+$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+// Especificando fuente monoespacio por defecto
+$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+// Definiendo margenes documento
+$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+// Definiendo cambio de pagina automatico
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+// Definiendo factor de escala imagen
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+// Definiendo dependencia de lenguaje (opcional)
+if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+	require_once(dirname(__FILE__).'/lang/eng.php');
+	$pdf->setLanguageArray($l);
+}
+
+
+// ---------------------------- Fin - Bloque 1 - Encabezado --------------------------
+
 
 $pdf->startPageGroup();
 
 $pdf->AddPage();
-
-// ---------------------------- Bloque 1 - Encabezado --------------------------
-
-$bloque1 = <<<EOF
-
-  <table>
-    <tr>
-        <td style="width:10px"></td>
-        <td style="width:170px"><div><img src="images/logoMultiplaza.png"></div></td>
-
-        <td style="background-color:white; width:200px; text-align:center<; color:red; line-height:13px; "><br><br>Codigos Facturas<br>$respuestaOperadores[nombre]</td>
-
-        <td style="background-color:white; width:170px">
-
-          <div style="font-size:8.5px; text-align:right; line-height:9px;">
-            SAC - SISTEMA DE CORRESPONDENCIA
-            <br>
-            Calle 2 # 24-02
-          </div>
-
-        </td>
-
-
-
-    </tr>
-  </table>
-
-
-EOF;
-
-
-$pdf->writeHTML($bloque1, false, false, false, false, '');
-
-
-// ---------------------------- Fin - Bloque 1 - Encabezado --------------------------
 
 
 // ---------------------------- Bloque 2 - Espaciado  --------------------------------
@@ -136,37 +201,56 @@ $style = array(
 	'stretchtext' => 3.75
 );
 
-$html = '<table style="font-size:8px; padding:5px 10px;">';
 
-foreach ($respuestaFacturas as $respuestaFactura) {
+// Codigo Factura
+
+$cantidadElementos = count ($respuestaFacturas);
+
+$pdf->SetFont('helvetica', 'B', 10);
+
 
 // INFORMACION ESTABLECIMIENTO
 
-$itemEstablecimiento ="id";
-$valorEstablecimiento = $respuestaFactura["idestablecimiento"];
+for ($k=1; $k <= $cantidadElementos ; $k++) {
 
-$respuestaEstablecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($itemEstablecimiento, $valorEstablecimiento);
+	$itemEstablecimiento ="id";
+	$valorEstablecimiento = $respuestaFacturas[$k-1]["idestablecimiento"];
 
-// PDF CODIGOS
+	$respuestaEstablecimiento = ControladorEstablecimientos::ctrMostrarEstablecimientos($itemEstablecimiento, $valorEstablecimiento);
 
-$html .= '<tr>
-          <td style="width:12px"></td>
-          <td style="border: 1px solid #666; background-color:white; width:269px; text-align:center"><b>'.$respuestaEstablecimiento["identificador"].'</b></td>
-          <td style="border: 1px solid #666; background-color:white; width:269px; text-align:center"><b>'.$respuestaEstablecimiento["identificador"].'</b></td>
-         </tr>';
-$html .= '<tr><td style="width:12px"></td><td style="border: 1px solid #666; background-color:white; width:269px; text-align:center">';
-$params = $pdf->serializeTCPDFtagParameters(array('415'.$respuestaOperadores["codoperador"].'8020'.$respuestaFactura["ctacontrato"], 'C128', '', '', '', 13.5, 0.35, $style, 'T'));
-$html .= '<tcpdf method="write1DBarcode" params="'.$params.'" />';
-$html .= '</td><td style="border: 1px solid #666; background-color:white; width:269px; height:45px; text-align:center">';
-$params = $pdf->serializeTCPDFtagParameters(array('415'.$respuestaOperadores["codoperador"].'8020'.$respuestaFactura["ctacontrato"], 'C128', '', '', '', 13.5, 0.35, $style, 'T'));
-$html .= '<tcpdf method="write1DBarcode" params="'.$params.'" />';
-$html .= '</td></tr>';
+	$texto = $respuestaEstablecimiento["identificador"];
+	$longitud = strlen($texto);
+
+	$i = $k%10;
+	if ($i == 0) {
+		$i = 10;
+		$pdf->SetXY((214-($longitud*2))/2,23*$i);
+		$pdf->Cell(0, 0, $texto, 0, 1);
+		// Codigos Facturas Codensa
+		if ($valor == '1') {
+			$pdf->write1DBarcode('415'.$respuestaOperadores["codoperador"].'802001'.$respuestaFacturas[$k-1]["ctacontrato"], 'C128', '', '', '', 17, 0.4, $style, 'N');
+		}
+		// Codigos Facturas Acueducto Bogota y Gas Natural
+		if ($valor == '2' || $valor == '3') {
+			$pdf->write1DBarcode('415'.$respuestaOperadores["codoperador"].'8020'.$respuestaFacturas[$k-1]["ctacontrato"], 'C128', '', '', '', 17, 0.4, $style, 'N');
+		}
+		$pdf->AddPage();
+	} else {
+		$pdf->SetXY((214-($longitud*2))/2,23*$i);
+		$pdf->Cell(0, 0, $texto, 0, 1);
+		// Codigos Facturas Codensa
+		if ($valor == '1') {
+			$pdf->write1DBarcode('415'.$respuestaOperadores["codoperador"].'802001'.$respuestaFacturas[$k-1]["ctacontrato"], 'C128', '', '', '', 17, 0.4, $style, 'N');
+		}
+		// Codigos Facturas Acueducto Bogota y Gas Natural
+		if ($valor == '2' || $valor == '3') {
+			$pdf->write1DBarcode('415'.$respuestaOperadores["codoperador"].'8020'.$respuestaFacturas[$k-1]["ctacontrato"], 'C128', '', '', '', 17, 0.4, $style, 'N');
+		}
+	}
 
 
 }
 
-$html .= '</table>';
-$pdf->writeHTML($html, true, 0, true, 0);
 
 // ---------------------------- Fin - Bloque 3 - Codigos -----------------------------------
 

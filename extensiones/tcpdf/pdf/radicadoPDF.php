@@ -26,6 +26,81 @@ require_once "../../../modelos/usuarios.modelo.php";
 
 
 
+// CLASE TCPDF
+
+require_once('tcpdf_include.php');
+
+
+// Extiende la clase TCPDF para crear encabezado y pie de pagina
+class RADPDF extends TCPDF {
+
+	public $radicadoEncabezado;
+
+	//Encabezado Pagina
+	public function Header() {
+
+		$valor = $this->radicadoEncabezado;
+		$valorRadicado = "R".str_pad($valor, 7, "0", STR_PAD_LEFT);
+
+		// Logo
+		$image_file = 'images/logo.png';
+		$this->Image($image_file, 16, 10, 50, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		// Especificando Fuente
+		$this->SetFont('helvetica', 'B', 7);
+		// Titulo Encabezado
+
+    // Estilo barcode
+    $style = array(
+    	'position' => 'R',
+    	'align' => 'C',
+    	'stretch' => false,
+    	'fitwidth' => true,
+    	'cellfitalign' => '',
+    	'border' => false,
+    	'hpadding' => 'auto',
+    	'vpadding' => 'auto',
+    	'fgcolor' => array(0,0,0),
+    	'bgcolor' => false, //array(255,255,255),
+    	'text' => false,
+    	'font' => 'helvetica',
+    	'fontsize' => 8,
+    	'stretchtext' => 4
+    );
+
+    // CODE 128 AUTO
+    $data1 = '<table>
+                <tr>
+                    <td style="background-color:white; width:180px">
+                      <div style="font-size:8.5px; text-align:right; line-height:9px;">
+                        <br>
+                        SAC - SISTEMA DE CORRESPONDENCIA
+                        <br>
+                        Calle 2 # 24-02
+                      </div>
+                    </td>
+                    <td style="background-color:white; width:15px;"></td>
+                    <td style="background-color:white; font-size:13px; width:100px; text-align:center; color:red; line-height:15px; "><br><br>RADICADO No. <br>'.$valorRadicado.'</td>
+                </tr>
+              </table>';
+    $this->writeHTML($data1, false, false, false, false, '');
+    $this->write1DBarcode($valorRadicado, 'C128', '', 10, '', 15, 0.4, $style, 'N');
+
+
+
+	}
+
+	// Pie de pagina
+	public function Footer() {
+		// Ubicado 15 mm desde el borde inferior
+		$this->SetY(-15);
+		// Definiendo fuente
+		$this->SetFont('helvetica', 'I', 8);
+		// Numero de pagina
+		$this->Cell(0, 10, 'Pagina '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+	}
+}
+
+
 
 class imprimirRadicado{
 
@@ -62,66 +137,53 @@ $valorRemitente = $respuestaRadicado["idremitente"];
 $respuestaRemitente = ControladorRemitentes::ctrMostrarRemitentes($itemRemitente, $valorRemitente);
 
 
-// CLASE TCPDF
+// Creando nuevo documento PDF
 
-require_once('tcpdf_include.php');
+$pdf = new RADPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf-> radicadoEncabezado = $_GET["radicado"];
 
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+// Definiendo informacion documento
+
+$pdf->SetCreator('RUDDOR - SAC');
+$pdf->SetAuthor('RUDDOR - Consultoría Tecnológica');
+$pdf->SetTitle('Radicado: '.$valorRadicado);
+$pdf->SetSubject('Comprobante Radicado');
+$pdf->SetKeywords('Radicado, '.$valorRadicado);
+
+// ---------------------------- Bloque 1 - Encabezado --------------------------
+
+// Definiend valores por defecto encabezado
+$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+
+// Especificando fuente Encabezado y pie de pagina
+$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+// Especificando fuente monoespacio por defecto
+$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+// Definiendo margenes documento
+$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+// Definiendo cambio de pagina automatico
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+// Definiendo factor de escala imagen
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+// Definiendo dependencia de lenguaje (opcional)
+if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+	require_once(dirname(__FILE__).'/lang/eng.php');
+	$pdf->setLanguageArray($l);
+}
+
+// ---------------------------- Fin - Bloque 1 - Encabezado --------------------------
 
 $pdf->startPageGroup();
 
 $pdf->AddPage();
-
-// ---------------------------- Bloque 1 - Encabezado --------------------------
-
-$bloque1 = <<<EOF
-
-  <table>
-    <tr>
-        <td style="width:190px"><div><img src="images/logoMultiplaza.png"></div></td>
-
-        <td style="background-color:white; width:180px">
-
-          <div style="font-size:8.5px; text-align:right; line-height:9px;">
-            SAC - SISTEMA DE CORRESPONDENCIA
-            <br>
-            Calle 2 # 24-02
-          </div>
-
-        </td>
-
-        <td style="background-color:white; width:170px; text-align:center<; color:red; line-height:13px; "><br><br>RADICADO No. <br>$valorRadicado</td>
-
-    </tr>
-  </table>
-
-
-EOF;
-
-$pdf->writeHTML($bloque1, false, false, false, false, '');
-
-// ---------------------------- Fin - Bloque 1 - Encabezado --------------------------
-
-// define barcode style
-$style = array(
-	'position' => 'R',
-	'align' => 'C',
-	'stretch' => false,
-	'fitwidth' => true,
-	'cellfitalign' => '',
-	'border' => false,
-	'hpadding' => 'auto',
-	'vpadding' => 'auto',
-	'fgcolor' => array(0,0,0),
-	'bgcolor' => false, //array(255,255,255),
-	'text' => false,
-	'font' => 'helvetica',
-	'fontsize' => 8,
-	'stretchtext' => 4
-);
-
-// CODE 128 AUTO
-$pdf->write1DBarcode($valorRadicado, 'C128', '', '', '', 15, 0.4, $style, 'N');
 
 // ---------------------------- Bloque 2 - Remitente  --------------------------------
 
@@ -129,7 +191,7 @@ $bloque2 = <<<EOF
 
   <table>
     <tr>
-      <td style="width:540px"><img src="/images/back.jpg"></td>
+      <td style="width:645px"><img src="/images/back.jpg"></td>
     </tr>
   </table>
 
@@ -137,7 +199,7 @@ $bloque2 = <<<EOF
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:380px;">
+      <td style="border: 1px solid #666; background-color:white; width:485px;">
         Transportadora: $respuestaTransportadora[transportadora]
       </td>
 
@@ -149,7 +211,7 @@ $bloque2 = <<<EOF
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:380px;">
+      <td style="border: 1px solid #666; background-color:white; width:485px;">
         Remitente: $respuestaRemitente[remitente]
       </td>
 
@@ -160,7 +222,7 @@ $bloque2 = <<<EOF
 
     <tr>
 
-      <td style="border-bottom: 1px solid #666; background-color:white; width:540px;"></td>
+      <td style="border-bottom: 1px solid #666; background-color:white; width:645px;"></td>
 
     </tr>
 
@@ -180,9 +242,9 @@ $bloque3 = <<<EOF
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:100px; text-align:center">Establecimiento</td>
-      <td style="border: 1px solid #666; background-color:white; width:220px; text-align:center">Empresa</td>
-      <td style="border: 1px solid #666; background-color:white; width:220px; text-align:center">Cliente</td>
+      <td style="border: 1px solid #666; background-color:white; width:145px; text-align:center">Establecimiento</td>
+      <td style="border: 1px solid #666; background-color:white; width:250px; text-align:center">Empresa</td>
+      <td style="border: 1px solid #666; background-color:white; width:250px; text-align:center">Cliente</td>
 
     </tr>
 
@@ -227,15 +289,15 @@ $bloque4 = <<<EOF
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:100px; text-align:center">$respuestaEstablecimiento[tipo] - $respuestaEstablecimiento[identificador]</td>
-      <td style="border: 1px solid #666; background-color:white; width:220px; text-align:center">$respuestaEmpresa[empresa]</td>
-      <td style="border: 1px solid #666; background-color:white; width:220px; text-align:center">$respuestaCliente[nombre]</td>
+      <td style="border: 1px solid #666; background-color:white; width:145px; text-align:center">$respuestaEstablecimiento[tipo] - $respuestaEstablecimiento[identificador]</td>
+      <td style="border: 1px solid #666; background-color:white; width:250px; text-align:center">$respuestaEmpresa[empresa]</td>
+      <td style="border: 1px solid #666; background-color:white; width:250px; text-align:center">$respuestaCliente[nombre]</td>
 
     </tr>
 
     <tr>
 
-      <td style="border-bottom: 1px solid #666; background-color:white; width:540px;"></td>
+      <td style="border-bottom: 1px solid #666; background-color:white; width:645px;"></td>
 
     </tr>
 
@@ -258,9 +320,9 @@ $bloque5 = <<<EOF
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:120px; text-align:center">Tipo</td>
-      <td style="border: 1px solid #666; background-color:white; width:80px; text-align:center">Cantidad</td>
-      <td style="border: 1px solid #666; background-color:white; width:340px; text-align:center">Observaciones</td>
+      <td style="border: 1px solid #666; background-color:white; width:185px; text-align:center">Tipo</td>
+      <td style="border: 1px solid #666; background-color:white; width:90px; text-align:center">Cantidad</td>
+      <td style="border: 1px solid #666; background-color:white; width:370px; text-align:center">Observaciones</td>
 
     </tr>
   </table>
@@ -289,9 +351,9 @@ $bloque6 = <<<EOF
 
     <tr>
 
-      <td style="border: 1px solid #666; background-color:white; width:120px; text-align:center">$respuestaCategoria[categoria]</td>
-      <td style="border: 1px solid #666; background-color:white; width:80px; text-align:center">$value[cantidad]</td>
-      <td style="border: 1px solid #666; background-color:white; width:340px; text-align:center">$value[observacion]</td>
+      <td style="border: 1px solid #666; background-color:white; width:185px; text-align:center">$respuestaCategoria[categoria]</td>
+      <td style="border: 1px solid #666; background-color:white; width:90px; text-align:center">$value[cantidad]</td>
+      <td style="border: 1px solid #666; background-color:white; width:370px; text-align:center">$value[observacion]</td>
 
     </tr>
 
@@ -329,17 +391,17 @@ $bloque7 = <<<EOF
 
     <tr>
 
-      <td style="border-bottom: 1px solid #666; background-color:white; width:240px; text-align:center"></td>
-      <td style="background-color:white; width:60px; text-align:center"></td>
-      <td style="border-bottom: 1px solid #666; background-color:white; width:240px; text-align:center"></td>
+      <td style="border-bottom: 1px solid #666; background-color:white; width:290px; text-align:center"></td>
+      <td style="background-color:white; width:65px; text-align:center"></td>
+      <td style="border-bottom: 1px solid #666; background-color:white; width:290px; text-align:center"></td>
 
     </tr>
 
     <tr>
 
-      <td style="background-color:white; width:240px; text-align:center">Multiplaza - $respuestaUsuario[nombre]</td>
-      <td style="background-color:white; width:60px; text-align:center"></td>
-      <td style="background-color:white; width:240px; text-align:center">$respuestaEmpresa[empresa] - $respuestaCliente[nombre]</td>
+      <td style="background-color:white; width:290px; text-align:center">SAC - $respuestaUsuario[nombre]</td>
+      <td style="background-color:white; width:65px; text-align:center"></td>
+      <td style="background-color:white; width:290px; text-align:center">$respuestaEmpresa[empresa] - $respuestaCliente[nombre]</td>
 
     </tr>
 
@@ -364,7 +426,7 @@ $pdf->Output('radicado'.$valorRadicado.'pdf');
 }
 
 $radicadoPDF = new imprimirRadicado();
-$radicadoPDF -> radicado =$_GET["radicado"];
+$radicadoPDF -> radicado = $_GET["radicado"];
 $radicadoPDF -> traerImpresionRadicado();
 
 ?>

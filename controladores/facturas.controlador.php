@@ -82,7 +82,7 @@ class ControladorFacturas {
 
               if(result.value){
 
-                window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
+                window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
                 window.location = "facturas";
 
 
@@ -181,7 +181,7 @@ class ControladorFacturas {
 
               if(result.value){
 
-                window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
+                window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
                 window.location = "facturas";
 
 
@@ -229,7 +229,7 @@ class ControladorFacturas {
 
         $tabla = "facturas";
         $itemFactura = "ctacontrato";
-        $valorFactura = substr( $_POST["nuevaFactura"],21,7);
+        $valorFactura = substr( $_POST["nuevaFactura"],20,8);
 
         $factura = ModeloFacturas::mdlMostrarCtasContrato($tabla, $itemFactura, $valorFactura);
 
@@ -280,7 +280,7 @@ class ControladorFacturas {
 
               if(result.value){
 
-                window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
+                window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
                 window.location = "facturas";
 
 
@@ -378,7 +378,7 @@ class ControladorFacturas {
 
               if(result.value){
 
-                window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
+                window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
                 window.location = "facturas";
 
 
@@ -475,7 +475,7 @@ class ControladorFacturas {
 
               if(result.value){
 
-                window.open("http://localhost/sac/extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
+                window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
                 window.location = "facturas";
 
 
