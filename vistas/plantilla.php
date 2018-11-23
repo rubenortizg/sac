@@ -155,6 +155,9 @@ echo '<div class="wrapper">';
         $_GET["ruta"] == "reportes" ||
         $_GET["ruta"] == "clientes-facturas" ||
         $_GET["ruta"] == "codigos-facturas" ||
+        $_GET["ruta"] == "perfiles" ||
+        $_GET["ruta"] == "perfilador" ||
+        $_GET["ruta"] == "perfilador2" ||
         $_GET["ruta"] == "salir"){
     // ../lista blanca de modulos con URLs amigables
 

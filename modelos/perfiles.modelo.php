@@ -35,4 +35,22 @@ class ModeloPerfiles{
 
 	}
 
+	/*=============================================
+	MOSTRAR COLUMNAS
+	=============================================*/
+
+	static public function mdlMostrarColumnas($tabla){
+
+		$sql ="SHOW columns FROM $tabla";
+    $stmt = Conexion::conectar()-> prepare($sql);
+		$stmt -> execute();
+
+		return $stmt ->fetchAll();
+
+		$stmt -> close();
+		$stmt = null;
+
+
+	}
+
 }

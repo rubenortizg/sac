@@ -38,19 +38,19 @@
       </li>
 
       <li>
-        <a href="establecimientos">
-          <i class="fa fa-briefcase"></i>
-          <span>Establecimientos</span>
-        </a>
-      </li>
-
-      <li>
         <a href="clientes">
           <i class="fa fa-users"></i>
           <span>Clientes</span>
         </a>
       </li>
 
+      <li>
+        <a href="establecimientos">
+          <i class="fa fa-briefcase"></i>
+          <span>Establecimientos</span>
+        </a>
+      </li>
+      
       <li>
         <a href="remitentes">
           <i class="fa fa-send"></i>

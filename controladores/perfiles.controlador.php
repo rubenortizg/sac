@@ -16,4 +16,13 @@ class ControladorPerfiles{
 		return $respuesta;
 	}
 
+	static public function ctrMostrarColumnas(){
+
+		$tabla = "perfiles";
+
+		$respuesta = ModeloPerfiles::mdlMostrarColumnas($tabla);
+
+		return $respuesta;
+	}
+
 }
