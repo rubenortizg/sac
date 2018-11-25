@@ -18,7 +18,7 @@
 
         <?php
 
-        if ($_SESSION["acceso"]["establecimientos"] == "6" || $_SESSION["acceso"]["establecimientos"] == "5"  ) {
+        if ($_SESSION["acceso"]["establecimientos"] >= "6") {
           echo '<div class="box-header with-border">
                   <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarEstablecimiento">
                     Agregar Establecimiento
@@ -67,7 +67,7 @@
 
 
 
-                  if ($_SESSION["acceso"]["establecimientos"] == "6" || $_SESSION["acceso"]["establecimientos"] == "5" ) {
+                  if ($_SESSION["acceso"]["establecimientos"] >= "6") {
                     if($value["estado"] != 0){
 
                       echo '<td><button class="btn btn-success btn-xs btnActivarEstablecimiento" idEstablecimiento="'.$value["id"].'" estadoEstablecimiento="0">Activado</button></td>';
@@ -84,11 +84,11 @@
                   echo '<td>
                         <div class="btn-group">';
 
-                  if ($_SESSION["acceso"]["establecimientos"] == "6" || $_SESSION["acceso"]["establecimientos"] == "5" ) {
+                  if ($_SESSION["acceso"]["establecimientos"] >= "6") {
                     echo '<button class="btn btn-warning btn-sm btnEditarEstablecimiento" idEstablecimiento="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarEstablecimiento"><i class="fa fa-pencil"></i></button>';
                   }
 
-                  if ($_SESSION["acceso"]["establecimientos"] == "6") {
+                  if ($_SESSION["acceso"]["establecimientos"] >= "7") {
                     echo '<button class="btn btn-danger btn-sm btnEliminarEstablecimiento" idEstablecimiento="'.$value["id"].'"><i class="fa fa-times"></i></button>';
                   }
                   echo '</div>

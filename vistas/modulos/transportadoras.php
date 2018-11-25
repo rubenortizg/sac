@@ -17,7 +17,7 @@
 
       <?php
 
-      if ($_SESSION["acceso"]["transportadoras"] == "6" || $_SESSION["acceso"]["transportadoras"] == "5"  ) {
+      if ($_SESSION["acceso"]["transportadoras"] >= "6") {
         echo '<div class="box-header with-border">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarTransportadora">
                   Agregar transportadora
@@ -60,7 +60,7 @@
                     echo '<td><img src="vistas/img/transportadoras/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
                   }
 
-                  if ($_SESSION["acceso"]["transportadoras"] == "6" || $_SESSION["acceso"]["transportadoras"] == "5" ) {
+                  if ($_SESSION["acceso"]["transportadoras"] >= "6") {
                     if($value["estado"] != 0){
 
                       echo '<td><button class="btn btn-success btn-xs btnActivarTransportadora" idTransportadora="'.$value["id"].'" estadoTransportadora="0">Activado</button></td>';
@@ -77,11 +77,11 @@
                   echo '<td>
                     <div class="btn-group">';
 
-                  if ($_SESSION["acceso"]["transportadoras"] == "6" || $_SESSION["acceso"]["transportadoras"] == "5" ) {
+                  if ($_SESSION["acceso"]["transportadoras"] >= "6") {
                     echo '<button class="btn btn-warning btn-sm btnEditarTransportadora" idTransportadora="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarTransportadora"><i class="fa fa-pencil"></i></button>';
                   }
 
-                  if ($_SESSION["acceso"]["transportadoras"] == "6") {
+                  if ($_SESSION["acceso"]["transportadoras"] >= "7") {
                     echo '<button class="btn btn-danger btn-sm btnEliminarTransportadora" idTransportadora="'.$value["id"].'" logoTransportadora="'.$value["logo"].'" transportadora="'.$value["transportadora"].'"><i class="fa fa-times"></i></button>';
                   }
 

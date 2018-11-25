@@ -26,7 +26,7 @@
 
     echo '<div class="box-header with-border">';
 
-    if ($_SESSION["acceso"]["radicados"] == "6" || $_SESSION["acceso"]["radicados"] == "5" || $_SESSION["acceso"]["radicados"] == "4"  ) {
+    if ($_SESSION["acceso"]["radicados"] >= "6") {
 
       echo '<a href="radicador">
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalRadicar">
@@ -154,11 +154,11 @@
                             <button class="btn btn-success btn-sm btnPdfRadicado" codigoRadicado="'.$value["radicado"].'"><i class="fa fa-file-pdf-o"></i></button>
                             <button class="btn btn-primary btn-sm btnImprimirRadicado" codigoRadicado="'.$value["radicado"].'"><i class="fa fa-print"></i></button>';
 
-                if ($_SESSION["acceso"]["radicados"] == "6" || $_SESSION["acceso"]["radicados"] == "5"  ) {
+                if ($_SESSION["acceso"]["radicados"] >= "6" && $_SESSION["acceso"]["opciones"] >= "6"  ) {
                   echo '<button class="btn btn-warning btn-sm btnEditarRadicado" idRadicado="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
                 }
 
-                if ($_SESSION["acceso"]["radicados"] == "6") {
+                if ($_SESSION["acceso"]["radicados"] >= "7") {
                   echo '<button class="btn btn-danger btn-sm btnEliminarRadicado" idRadicado="'.$value["id"].'"><i class="fa fa-times"></i></button>';
                 }
 

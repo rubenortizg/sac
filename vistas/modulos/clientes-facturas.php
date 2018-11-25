@@ -18,7 +18,7 @@
 
         <?php
 
-        if ($_SESSION["acceso"]["opciones"] == "6" || $_SESSION["acceso"]["opciones"] == "5"  ) {
+        if ($_SESSION["acceso"]["opciones"] >= "6") {
           echo '<div class="box-header with-border">
                   <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarClienteFactura">
                     Agregar Factura de Cliente
@@ -81,7 +81,7 @@
 
 
 
-                  if ($_SESSION["acceso"]["opciones"] == "6" || $_SESSION["acceso"]["opciones"] == "5" ) {
+                  if ($_SESSION["acceso"]["opciones"] >= "6") {
                     if($value["estado"] != 0){
 
                       echo '<td><button class="btn btn-success btn-xs btnActivarClienteFactura" idClienteFactura="'.$value["id"].'" estadoClienteFactura="0">Activado</button></td>';
@@ -98,11 +98,11 @@
                   echo '<td>
                         <div class="btn-group">';
 
-                  if ($_SESSION["acceso"]["opciones"] == "6" || $_SESSION["acceso"]["opciones"] == "5" ) {
+                  if ($_SESSION["acceso"]["opciones"] >= "6") {
                     echo '<button class="btn btn-warning btn-sm btnEditarClienteFactura" idClienteFactura="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarClienteFactura"><i class="fa fa-pencil"></i></button>';
                   }
 
-                  if ($_SESSION["acceso"]["opciones"] == "6") {
+                  if ($_SESSION["acceso"]["opciones"] >= "7") {
                     echo '<button class="btn btn-danger btn-sm btnEliminarClienteFactura" idClienteFactura="'.$value["id"].'"><i class="fa fa-times"></i></button>';
                   }
                   echo '</div>

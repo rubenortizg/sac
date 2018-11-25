@@ -11,7 +11,7 @@
 
       <?php
 
-        if ($_SESSION["acceso"]["usuarios"] == "6") {
+        if ($_SESSION["acceso"]["usuarios"] == "7") {
           echo '<li>
                   <a href="usuarios">
                     <i class="fa fa-user"></i>
@@ -50,7 +50,7 @@
           <span>Establecimientos</span>
         </a>
       </li>
-      
+
       <li>
         <a href="remitentes">
           <i class="fa fa-send"></i>
@@ -111,7 +111,7 @@
 
       <?php
 
-        if ($_SESSION["acceso"]["opciones"] == "6"  || $_SESSION["acceso"]["opciones"] == "5") {
+        if ($_SESSION["acceso"]["opciones"] >= "6") {
           echo '<li class="treeview menu-open">
                   <a href="#">
                     <i class="fa fa-cog"></i>
@@ -124,7 +124,7 @@
                   <ul class="treeview-menu">';
         }
 
-        if ($_SESSION["acceso"]["opciones"] == "6"  || $_SESSION["acceso"]["opciones"] == "5") {
+        if ($_SESSION["acceso"]["opciones"] >= "6") {
             echo '  <li>
                       <a href="clientes-facturas">
                         <i class="fa fa-inbox"></i>
@@ -140,7 +140,7 @@
                     </li>';
         }
 
-        if ($_SESSION["acceso"]["opciones"] == "6") {
+        if ($_SESSION["acceso"]["opciones"] >= "7") {
             echo '  <li>
                       <a href="tipos">
                         <i class="fa fa-briefcase"></i>
@@ -163,7 +163,7 @@
                     </li>';
         }
 
-        if ($_SESSION["acceso"]["opciones"] == "6"  || $_SESSION["acceso"]["opciones"] == "5") {
+        if ($_SESSION["acceso"]["opciones"] >= "6") {
             echo '</ul>
                 </li>';
         }

@@ -24,7 +24,7 @@
 
     <?php
 
-    if ($_SESSION["acceso"]["categorias"] == "6" || $_SESSION["acceso"]["categorias"] == "5"  ) {
+    if ($_SESSION["acceso"]["categorias"] >= "6") {
 
       echo '<div class="box-header with-border">
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
@@ -68,10 +68,10 @@
                       <td>
                         <div class="btn-group">';
 
-              if ($_SESSION["acceso"]["categorias"] == "6" || $_SESSION["acceso"]["categorias"] == "5"  ) {
+              if ($_SESSION["acceso"]["categorias"] >= "6") {
                 echo '<button class="btn btn-warning btn-sm btnEditarCategoria" idCategoria="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>';
               }
-              if ($_SESSION["acceso"]["categorias"] == "6") {
+              if ($_SESSION["acceso"]["categorias"] >= "7") {
                 echo '<button class="btn btn-danger btn-sm btnEliminarCategoria"  idCategoria="'.$value["id"].'"><i class="fa fa-times"></i></button>';
               }
               echo '</div>

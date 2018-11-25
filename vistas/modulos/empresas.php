@@ -17,7 +17,7 @@
 
     <?php
 
-    if ($_SESSION["acceso"]["empresas"] == "6" || $_SESSION["acceso"]["empresas"] == "5"  ) {
+    if ($_SESSION["acceso"]["empresas"] >= "6") {
 
       echo '
       <div class="box-header with-border">
@@ -65,7 +65,7 @@
                   }
 
 
-                  if ($_SESSION["acceso"]["empresas"] == "6" || $_SESSION["acceso"]["empresas"] == "5"  ) {
+                  if ($_SESSION["acceso"]["empresas"] >= "6") {
 
                     if($value["estado"] != 0){
 
@@ -85,11 +85,11 @@
 
                     <div class="btn-group">';
 
-                  if ($_SESSION["acceso"]["empresas"] == "6" || $_SESSION["acceso"]["empresas"] == "5"  ) {
+                  if ($_SESSION["acceso"]["empresas"] >= "6") {
                     echo '<button class="btn btn-warning btn-sm btnEditarEmpresa" idEmpresa="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarEmpresa"><i class="fa fa-pencil"></i></button>';
                   }
 
-                  if ($_SESSION["acceso"]["empresas"] == "6") {
+                  if ($_SESSION["acceso"]["empresas"] >= "7") {
                     echo '<button class="btn btn-danger btn-sm btnEliminarEmpresa" idEmpresa="'.$value["id"].'" logoEmpresa="'.$value["logo"].'" empresa="'.$value["empresa"].'"><i class="fa fa-times"></i></button>';
                   }
                   echo '</div>

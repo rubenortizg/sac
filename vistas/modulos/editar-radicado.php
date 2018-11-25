@@ -1,4 +1,12 @@
+<?php
 
+if ($_SESSION["acceso"]["radicados"] < "6" && $_SESSION["acceso"]["opciones"] < "6" ) {
+  echo '<script>
+    window.location = "inicio";
+    </script>';
+}
+
+?>
 <div class="content-wrapper">
 
   <section class="content-header">

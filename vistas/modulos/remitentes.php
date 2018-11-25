@@ -24,7 +24,7 @@
 
       <?php
 
-      if ($_SESSION["acceso"]["remitentes"] == "6" || $_SESSION["acceso"]["remitentes"] == "5"  ) {
+      if ($_SESSION["acceso"]["remitentes"] >= "6") {
         echo'<div class="box-header with-border">
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarRemitente">
                 Agregar remitente
@@ -67,11 +67,11 @@
                       <td>
                         <div class="btn-group">';
 
-              if ($_SESSION["acceso"]["remitentes"] == "6" || $_SESSION["acceso"]["remitentes"] == "5"  ) {
+              if ($_SESSION["acceso"]["remitentes"] >= "6") {
                 echo '<button class="btn btn-warning btn-sm btnEditarRemitente" idRemitente="'.$value["id"].'" data-toggle="modal"           data-target="#modalEditarRemitente"><i class="fa fa-pencil"></i></button>';
               }
 
-              if ($_SESSION["acceso"]["remitentes"] == "6") {
+              if ($_SESSION["acceso"]["remitentes"] >= "7") {
                 echo '<button class="btn btn-danger btn-sm btnEliminarRemitente" idRemitente="'.$value["id"].'"><i class="fa fa-times"></i></button>';
               }
 

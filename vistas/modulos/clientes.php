@@ -24,7 +24,7 @@
 
     <?php
 
-    if ($_SESSION["acceso"]["clientes"] == "6" || $_SESSION["acceso"]["clientes"] == "5"  ) {
+    if ($_SESSION["acceso"]["clientes"] >= "6") {
 
       echo '<div class="box-header with-border">
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente">
@@ -93,12 +93,12 @@
                         <div class="btn-group">';
 
 
-                        if ($_SESSION["acceso"]["clientes"] == "6" || $_SESSION["acceso"]["clientes"] == "5"  ) {
+                        if ($_SESSION["acceso"]["clientes"] >= "6") {
                           echo '
                           <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
                         }
 
-                        if ($_SESSION["acceso"]["clientes"] == "6") {
+                        if ($_SESSION["acceso"]["clientes"] >= "7") {
                           echo '<button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>';
                         }
 
