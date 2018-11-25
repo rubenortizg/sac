@@ -1,6 +1,6 @@
 <?php
 
-if ($_SESSION["acceso"]["radicados"] < "7") {
+if ($_SESSION["acceso"]["opciones"] < "7") {
   echo '<script>
     window.location = "inicio";
     </script>';
