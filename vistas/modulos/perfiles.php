@@ -82,11 +82,11 @@ if ($_SESSION["acceso"]["usuarios"] != "6") {
 
                         <div class="btn-group">';
 
-              if ($_SESSION["acceso"]["radicados"] == "6" || $_SESSION["acceso"]["radicados"] == "5"  ) {
+              if ($_SESSION["acceso"]["opciones"] == "6") {
                 echo '<button class="btn btn-warning btn-sm btnEditarPerfil" idPerfil="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
               }
 
-              if ($_SESSION["acceso"]["radicados"] == "6") {
+              if ($_SESSION["acceso"]["opciones"] == "6") {
                 echo '<button class="btn btn-danger btn-sm btnEliminarPerfil" idPerfil="'.$value["id"].'"><i class="fa fa-times"></i></button>';
               }
 

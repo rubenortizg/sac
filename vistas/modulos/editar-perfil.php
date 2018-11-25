@@ -12,12 +12,12 @@ if ($_SESSION["acceso"]["radicados"] != "6") {
 
   <section class="content-header">
     <h1>
-      Crear Perfil
+      Editar Perfil
     </h1>
 
     <ol class="breadcrumb">
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      <li class="active">Crear Perfil</li>
+      <li class="active">Editar Perfil</li>
     </ol>
 
   </section>
@@ -28,6 +28,19 @@ if ($_SESSION["acceso"]["radicados"] != "6") {
 
       <form role="form" method="post" class="formularioPerfilador" id="formularioPerfilador">
 
+      <!--=====================================
+      PERFIL A EDITAR
+      ======================================-->
+
+      <?php
+
+        $item = "id";
+        $valor = $_GET["idPerfil"];
+
+        $editarPerfil = ControladorPerfiles::ctrMostrarPerfiles($item, $valor);
+
+      ?>
+
       <div class="box-header">
         <!--=====================================
         NOMBRE PERFIL
@@ -35,7 +48,11 @@ if ($_SESSION["acceso"]["radicados"] != "6") {
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            <input type="text" class="form-control" name="nuevoPerfil" placeholder="Nombre del perfil" required>
+            <?php
+              echo '<input type="text" class="form-control" name="editarPerfil" value="'.$editarPerfil["perfil"].'">';
+              echo '<input type="hidden" name="idPerfil" value="'.$valor.'">';
+            ?>
+
           </div>
         </div>
       </div>
@@ -70,22 +87,42 @@ if ($_SESSION["acceso"]["radicados"] != "6") {
                   <td>
                     <div class="form-group">
                       <label>
-                        <input name="'.$perfiles[$i]["Field"].'leer" type="checkbox" class="minimal" value="4">
-                      </label>
+                        <input name="editar'.$perfiles[$i]["Field"].'leer" type="checkbox" class="minimal" value="4"';
+
+              if ($editarPerfil[$perfiles[$i]["Field"]] >= 4) {
+                echo ' checked>';
+              } else {
+                echo '>';
+              }
+
+              echo '  </label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
                       <label>
-                        <input name="'.$perfiles[$i]["Field"].'crear" type="checkbox" class="minimal" value="2">
-                      </label>
+                        <input name="editar'.$perfiles[$i]["Field"].'crear" type="checkbox" class="minimal" value="2"';
+
+              if ($editarPerfil[$perfiles[$i]["Field"]] >= 6) {
+                echo ' checked>';
+              } else {
+                echo '>';
+              }
+
+              echo '  </label>
                     </div>
                   </td>
                   <td>
                     <div class="form-group">
                       <label>
-                        <input name="'.$perfiles[$i]["Field"].'borrar" type="checkbox" class="minimal" value="1">
-                      </label>
+                        <input name="editar'.$perfiles[$i]["Field"].'borrar" type="checkbox" class="minimal" value="1"';
+
+              if ($editarPerfil[$perfiles[$i]["Field"]] >= 7) {
+                echo ' checked>';
+              } else {
+                echo '>';
+              }
+              echo '  </label>
                     </div>
                   </td>
                 </tr>';
@@ -102,15 +139,15 @@ if ($_SESSION["acceso"]["radicados"] != "6") {
       </div>
 
       <div class="box-footer">
-        <button  type="submit" class="btn btn-primary pull-right">Crear perfil</button>
+        <button  type="submit" class="btn btn-primary pull-right">Guardar Cambios</button>
       </div>
 
       </form>
 
       <?php
 
-      $crearPerfil = new ControladorPerfiles();
-      $crearPerfil -> ctrCrearPerfil();
+      $editarPerfil = new ControladorPerfiles();
+      $editarPerfil -> ctrEditarPerfil();
 
       ?>
 
