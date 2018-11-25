@@ -36,7 +36,7 @@ if ($_SESSION["acceso"]["opciones"] < "7") {
 
     echo '<div class="box-header with-border">';
 
-    if ($_SESSION["acceso"]["radicados"] == "6") {
+    if ($_SESSION["acceso"]["opciones"] >= "7") {
 
       echo '<a href="perfilador">
               <button class="btn btn-primary">
@@ -82,11 +82,11 @@ if ($_SESSION["acceso"]["opciones"] < "7") {
 
                         <div class="btn-group">';
 
-              if ($_SESSION["acceso"]["opciones"] == "6") {
+              if ($_SESSION["acceso"]["opciones"] >= "7") {
                 echo '<button class="btn btn-warning btn-sm btnEditarPerfil" idPerfil="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
               }
 
-              if ($_SESSION["acceso"]["opciones"] == "6") {
+              if ($_SESSION["acceso"]["opciones"] >= "7") {
                 echo '<button class="btn btn-danger btn-sm btnEliminarPerfil" idPerfil="'.$value["id"].'"><i class="fa fa-times"></i></button>';
               }
 
