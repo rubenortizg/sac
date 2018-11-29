@@ -62,7 +62,7 @@ if ($_SESSION["acceso"]["radicados"] < "4") {
 
       <div class="box-body">
 
-       <table class="table table-bordered table-striped dt-responsive tablas"  width="100%">
+       <table class="table table-bordered table-striped dt-responsive tablasRadicados"  width="100%">
         <thead>
          <tr>
            <th style="width:10px">#</th>
