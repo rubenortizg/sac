@@ -278,9 +278,19 @@ MODAL EDITAR ESTABLECIMIENTO
                 <select class="form-control input-lg" name="editarTipo" required>
 
                   <option value="" id="editarTipo"></option>
-                  <option value="Oficina">Oficina</option>
-                  <option value="Local">Local</option>
-                  <option value="Bodega">Bodega</option>
+
+                  <?php
+
+                  $item = null;
+                  $valor = null;
+
+                  $tipo = ControladorTipos::ctrMostrarTipos($item, $valor);
+
+                  foreach ($tipo as $key => $value) {
+                    echo '<option value="'.$value["tipo"].'">'.$value["tipo"].'</option>';
+                  }
+
+                  ?>
 
                 </select>
 
