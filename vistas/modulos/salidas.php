@@ -2,7 +2,7 @@
 
 if ($_SESSION["acceso"]["radicados"] < "6") {
   echo '<script>
-    window.location = "inicio";
+    window.location = "radicados";
     </script>';
 }
 

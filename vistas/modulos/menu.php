@@ -98,8 +98,9 @@
                         <i class="fa fa-envelope"></i>
                         <span>Radicados</span>
                       </a>
-                    </li>
-                    <li>
+                    </li>';
+          if ($_SESSION["acceso"]["radicados"] >= "6") {
+          echo '    <li>
                       <a href="radicador">
                         <i class="fa fa-sign-in"></i>
                         <span>Radicar &nbsp<i class="fa fa-envelope"></i></span>
@@ -116,8 +117,10 @@
                         <i class="fa fa-sign-out"></i>
                         <span>Registrar Salidas</span>
                       </a>
-                    </li>
-                  </ul>
+                    </li>';
+          }
+
+          echo '   </ul>
                 </li>';
         }
 
