@@ -83,7 +83,7 @@
 
 
         if ($_SESSION["acceso"]["radicados"] >= "4") {
-          echo '<li class="treeview menu-open">
+          echo '<li class="treeview">
                   <a href="#">
                     <i class="fa fa-envelope"></i>
                     <span>Radicacion</span>
@@ -136,7 +136,7 @@
 
 
         if ($_SESSION["acceso"]["opciones"] >= "6") {
-          echo '<li class="treeview menu-open">
+          echo '<li class="treeview">
                   <a href="#">
                     <i class="fa fa-cog"></i>
                     <span>Opciones</span>
