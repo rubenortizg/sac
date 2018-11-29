@@ -122,3 +122,9 @@ $('#daterange-btn').daterangepicker(
     $('#daterange-btn span').html(start.format('YYYY-MM-DD') + ' / ' + end.format('YYYY-MM-DD'))
   }
 )
+
+if ($(window).width() > 768) {
+    $('body').addClass('sidebar-collapse');
+} else {
+    $('body').removeClass('sidebar-collapse');
+}

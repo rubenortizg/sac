@@ -113,11 +113,7 @@ session_start();
   BODY DOCUMENT
 ==========================================-->
 
-<<<<<<< HEAD
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse login-page">
-=======
-<body class="hold-transition skin-blue sidebar-mini login-page">
->>>>>>> 7fad20829d909028507709e31e5810c62eda47d1
 
 <?php
 
