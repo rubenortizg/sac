@@ -20,8 +20,8 @@ if ($_SESSION["acceso"]["radicados"] < "6") {
 
     <ol class="breadcrumb">
 
-      <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-
+      <li><a href="inicio"><i class="fa fa-dashboard"></i>Inicio</a></li>
+      <li><a href="radicados"><i class="fa fa-envelope"></i>Radicados</a></li>
       <li class="active">Salidas Correspondencia</li>
 
     </ol>

@@ -14,7 +14,7 @@ if ($_SESSION["acceso"]["radicados"] < "4") {
 
     <h1>
 
-      Radicacion de Correspondencia
+      Radicados
 
     </h1>
 
@@ -22,7 +22,7 @@ if ($_SESSION["acceso"]["radicados"] < "4") {
 
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
-      <li class="active">Radicacion Correspondencia</li>
+      <li class="active">Radicados</li>
 
     </ol>
 
