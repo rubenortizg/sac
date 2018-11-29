@@ -17,6 +17,7 @@ if ($_SESSION["acceso"]["opciones"] < "7") {
 
     <ol class="breadcrumb">
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li class="active"><a href="perfiles"><i class="fa fa-users"></i> Perfiles de Usuarios</a></li>
       <li class="active">Editar Perfil</li>
     </ol>
 
