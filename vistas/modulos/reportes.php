@@ -1,6 +1,6 @@
 <?php
 
-if ($_SESSION["acceso"]["radicados"] < "6") {
+if ($_SESSION["acceso"]["radicados"] < "4") {
   echo '<script>
     window.location = "inicio";
     </script>';
@@ -47,21 +47,23 @@ if ($_SESSION["acceso"]["radicados"] < "6") {
 
           <?php
 
-          if (isset($_GET["fechaInicial"])) {
+          if ($_SESSION["acceso"]["radicados"] >= "6") {
 
-            echo '<a href="vistas/modulos/descargar-reporte.php?reporte=reporte&fechaInicial='.$_GET["fechaInicial"].'&fechaFinal='.$_GET["fechaFinal"].'">';
+            if (isset($_GET["fechaInicial"])) {
 
-          } else {
+              echo '<a href="vistas/modulos/descargar-reporte.php?reporte=reporte&fechaInicial='.$_GET["fechaInicial"].'&fechaFinal='.$_GET["fechaFinal"].'">';
 
-            echo '<a href="vistas/modulos/descargar-reporte.php?reporte=reporte">';
+            } else {
+
+              echo '<a href="vistas/modulos/descargar-reporte.php?reporte=reporte">';
+            }
+
+            echo '  <button class="btn btn-success" style="margin-top:5px">Descargar reporte en Excel</button>
+                  </a>';
+
           }
 
-
-
           ?>
-
-            <button class="btn btn-success" style="margin-top:5px">Descargar reporte en Excel</button>
-          </a>
 
         </div>
 

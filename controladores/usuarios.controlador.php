@@ -32,6 +32,7 @@ class ControladorUsuarios{
 						$_SESSION["usuario"] = $respuesta["usuario"];
 						$_SESSION["foto"] = $respuesta["foto"];
 						$_SESSION["perfil"] = $respuesta["perfil"];
+						$_SESSION["login"] = $respuesta["ultimo_login"];
 
 						$tablaPerfil = "perfiles";
 						$itemPerfil = "perfil";

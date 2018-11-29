@@ -1,15 +1,17 @@
-<aside class="main-sidebar">
-  <section class="sidebar">
-    <ul class="sidebar-menu">
+<?php
 
-      <li class="active">
-        <a href="inicio">
-          <i class="fa fa-home"></i>
-          <span>Inicio</span>
-        </a>
-      </li>
+  echo '<aside class="main-sidebar">
+          <section class="sidebar">
+            <ul class="sidebar-menu">';
 
-      <?php
+        if ($_SESSION["acceso"]["inicio"] >= "0") {
+          echo '<li class="active">
+                  <a href="inicio">
+                    <i class="fa fa-home"></i>
+                    <span>Inicio</span>
+                  </a>
+                </li>';
+        }
 
         if ($_SESSION["acceso"]["usuarios"] == "7") {
           echo '<li>
@@ -20,96 +22,115 @@
                 </li>';
         }
 
-      ?>
+        if ($_SESSION["acceso"]["transportadoras"] >= "4") {
+          echo '<li>
+                  <a href="transportadoras">
+                    <i class="fa fa-truck"></i>
+                    <span>Transportadoras</span>
+                  </a>
+                </li>';
+        }
 
 
-      <li>
-        <a href="transportadoras">
-          <i class="fa fa-truck"></i>
-          <span>Transportadoras</span>
-        </a>
-      </li>
+        if ($_SESSION["acceso"]["empresas"] >= "4") {
+          echo '<li>
+                  <a href="empresas">
+                    <i class="fa fa-building"></i>
+                    <span>Empresas</span>
+                  </a>
+                </li>';
+        }
 
-      <li>
-        <a href="empresas">
-          <i class="fa fa-building"></i>
-          <span>Empresas</span>
-        </a>
-      </li>
 
-      <li>
-        <a href="clientes">
-          <i class="fa fa-users"></i>
-          <span>Clientes</span>
-        </a>
-      </li>
+        if ($_SESSION["acceso"]["clientes"] >= "4") {
+          echo '<li>
+                  <a href="clientes">
+                    <i class="fa fa-users"></i>
+                    <span>Clientes</span>
+                  </a>
+                </li>';
+        }
 
-      <li>
-        <a href="establecimientos">
-          <i class="fa fa-briefcase"></i>
-          <span>Establecimientos</span>
-        </a>
-      </li>
 
-      <li>
-        <a href="remitentes">
-          <i class="fa fa-send"></i>
-          <span>Remitentes</span>
-        </a>
-      </li>
+        if ($_SESSION["acceso"]["establecimientos"] >= "4") {
+          echo '<li>
+                  <a href="establecimientos">
+                    <i class="fa fa-briefcase"></i>
+                    <span>Establecimientos</span>
+                  </a>
+                </li>';
+        }
 
-      <li>
-        <a href="categorias">
-          <i class="fa fa-tags"></i>
-          <span>Categorias</span>
-        </a>
-      </li>
 
-      <li class="treeview menu-open">
-        <a href="#">
-          <i class="fa fa-envelope"></i>
-          <span>Radicacion</span>
-          <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
+        if ($_SESSION["acceso"]["remitentes"] >= "4") {
+          echo '<li>
+                  <a href="remitentes">
+                    <i class="fa fa-send"></i>
+                    <span>Remitentes</span>
+                  </a>
+                </li>';
+        }
 
-        <ul class="treeview-menu">
-          <li>
-            <a href="radicados">
-              <i class="fa fa-envelope"></i>
-              <span>Radicados</span>
-            </a>
-          </li>
-          <li>
-            <a href="radicador">
-              <i class="fa fa-sign-in"></i>
-              <span>Radicar &nbsp<i class="fa fa-envelope"></i></span>
-            </a>
-          </li>
-          <li>
-            <a href="facturas">
-              <i class="fa fa-inbox"></i>
-              <span>Radicar Facturas</span>
-            </a>
-          </li>
-          <li>
-            <a href="salidas">
-              <i class="fa fa-sign-out"></i>
-              <span>Registrar Salidas</span>
-            </a>
-          </li>
-        </ul>
-      </li>
 
-      <li>
-        <a href="reportes">
-          <i class="fa fa-line-chart"></i>
-          <span>Reportes</span>
-        </a>
-      </li>
+        if ($_SESSION["acceso"]["categorias"] >= "4") {
+          echo '<li>
+                  <a href="categorias">
+                    <i class="fa fa-tags"></i>
+                    <span>Categorias</span>
+                  </a>
+                </li>';
+        }
 
-      <?php
+
+        if ($_SESSION["acceso"]["radicados"] >= "4") {
+          echo '<li class="treeview menu-open">
+                  <a href="#">
+                    <i class="fa fa-envelope"></i>
+                    <span>Radicacion</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+
+                  <ul class="treeview-menu">
+                    <li>
+                      <a href="radicados">
+                        <i class="fa fa-envelope"></i>
+                        <span>Radicados</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="radicador">
+                        <i class="fa fa-sign-in"></i>
+                        <span>Radicar &nbsp<i class="fa fa-envelope"></i></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="facturas">
+                        <i class="fa fa-inbox"></i>
+                        <span>Radicar Facturas</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="salidas">
+                        <i class="fa fa-sign-out"></i>
+                        <span>Registrar Salidas</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>';
+        }
+
+
+        if ($_SESSION["acceso"]["reportes"] >= "4") {
+          echo '<li>
+                  <a href="reportes">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Reportes</span>
+                  </a>
+                </li>';
+        }
+
 
         if ($_SESSION["acceso"]["opciones"] >= "6") {
           echo '<li class="treeview menu-open">
@@ -168,10 +189,9 @@
                 </li>';
         }
 
-      ?>
+  echo '</ul>
+      </section>
+    </aside>';
 
 
-
-    </ul>
-  </section>
-</aside>
+?>

@@ -175,10 +175,20 @@ MODAL AGREGAR USUARIO
                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
                 <select class="form-control input-lg" name="nuevoPerfil">
                   <option value="">Selecionar perfil</option>
-                  <option value="Administrador">Administrador</option>
-                  <option value="Especial">Especial</option>
-                  <option value="Radicador">Radicador</option>
-                  <option value="Consulta">Consulta</option>
+
+                  <?php
+
+                  $item = null;
+                  $valor = null;
+
+                  $perfiles = ControladorPerfiles::ctrMostrarPerfiles($item, $valor);
+
+                  foreach ($perfiles as $key => $value) {
+                    echo '<option value="'.$value["perfil"].'">'.$value["perfil"].'</option>';
+                  }
+
+                  ?>
+                  
                 </select>
               </div>
             </div>

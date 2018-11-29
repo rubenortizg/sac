@@ -1,4 +1,3 @@
-
 <div class="content-wrapper">
 
   <section class="content-header">
@@ -20,7 +19,19 @@
 
       <?php
 
-        include "inicio/cajas-superiores.php";
+        if ($_SESSION["acceso"]["opciones"] >= "4") {
+          include "inicio/cajas-superiores.php";
+        } else {
+
+          echo '<div class="box box-primary">
+                  <div class="box-header">
+                    <h2>Bienvenid@ '.$_SESSION["nombre"].'</h2>
+                    <h4>Sistema de Administración de Correspondencia</h4>
+                    <br>
+                    <p>Ultimo login: '.	$_SESSION["login"].'</p>
+                  </div>
+                </div>';
+        }
 
       ?>
 
@@ -32,7 +43,9 @@
 
         <?php
 
-          include "reportes/grafico-radicados.php"
+        if ($_SESSION["acceso"]["opciones"] >= "4") {
+          include "reportes/grafico-radicados.php";
+        }
 
         ?>
 
@@ -42,7 +55,9 @@
 
         <?php
 
-          include "reportes/categorias-mas-radicadas.php"
+          if ($_SESSION["acceso"]["opciones"] >= "4") {
+            include "reportes/categorias-mas-radicadas.php";
+          }
 
         ?>
 
@@ -52,7 +67,9 @@
 
         <?php
 
-          include "inicio/radicados-recientes.php"
+          if ($_SESSION["acceso"]["opciones"] >= "4") {
+            include "inicio/radicados-recientes.php";
+          }
 
         ?>
 

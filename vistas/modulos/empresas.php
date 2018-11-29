@@ -1,3 +1,13 @@
+<?php
+
+if ($_SESSION["acceso"]["empresas"] < "4") {
+  echo '<script>
+    window.location = "inicio";
+    </script>';
+}
+
+?>
+
 <div class="content-wrapper">
 
   <section class="content-header">
