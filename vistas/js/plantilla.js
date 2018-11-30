@@ -30,7 +30,7 @@ $('.tablas').DataTable({
 			"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 		}
   }
-  
+
 });
 
 /* =====================================
@@ -123,6 +123,10 @@ $('#daterange-btn').daterangepicker(
     $('#daterange-btn span').html(start.format('YYYY-MM-DD') + ' / ' + end.format('YYYY-MM-DD'))
   }
 )
+
+/* =====================================
+  //Menu colapsado en dispositivos md
+==========================================*/
 
 if ($(window).width() > 768) {
     $('body').addClass('sidebar-collapse');
