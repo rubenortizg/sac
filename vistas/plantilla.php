@@ -139,7 +139,7 @@ echo '<div class="wrapper">';
     // lista blanca de modulos con URLs amigables
     if ($_GET["ruta"] == "inicio" ||
         $_GET["ruta"] == "usuarios" ||
-        $_GET["ruta"] == "admin" ||
+        $_GET["ruta"] == "configuracion" ||
         $_GET["ruta"] == "transportadoras" ||
         $_GET["ruta"] == "tipos" ||
         $_GET["ruta"] == "establecimientos" ||
