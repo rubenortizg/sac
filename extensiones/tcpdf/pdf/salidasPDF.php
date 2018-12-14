@@ -55,9 +55,9 @@ class RADPDF extends TCPDF {
                     <td style="background-color:white; width:240px">
 
                       <div style="font-size:8.5px; text-align:right; line-height:10px;">
-                        SAC - SISTEMA DE CORRESPONDENCIA
-                        <br>
-                        Calle 2 # 24-02
+                        MULTIPLAZA - GRUPO ROBLE
+                        <br>Calle 19 A # 72 - 57 (Avenida Boyacá con
+                        <br>Calle 13 / sentido norte - sur)
                       </div>
 
                     </td>
