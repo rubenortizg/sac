@@ -107,6 +107,18 @@ session_start();
   <!-- ChartJS -->
   <script src="vistas/bower_components/chart.js/Chart.js"></script>
 
+  <!-- CK Editor -->
+  <script src="vistas/bower_components/ckeditor/ckeditor.js"></script>
+
+  <script>
+    $(function () {
+      // Replace the <textarea id="editor1"> with a CKEditor
+      // instance, using default configuration.
+      CKEDITOR.replace('editor1')
+
+    })
+  </script>
+
 </head>
 
 <!-- =====================================
@@ -200,6 +212,7 @@ echo '<div class="wrapper">';
 <script src="vistas/js/clientefacturas.js"></script>
 <script src="vistas/js/codigosfacturas.js"></script>
 <script src="vistas/js/perfiles.js"></script>
+<script src="vistas/js/configuracion.js"></script>
 
 </body>
 </html>
