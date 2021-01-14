@@ -13,6 +13,12 @@ public $radicado;
 
 public function traerImpresionRadicadoBC(){
 
+// DESACTIVAMOS ERRORES POR PANTALLA Y ENVIAMOS A LOG DE ENVENTOS
+
+ob_start();
+error_reporting(E_ALL & ~E_NOTICE);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 
 // INFORMACIÓN DEL RADICADO
 
@@ -145,6 +151,9 @@ if ($stickerIndividual == true) {
 
 // ---- Enviar a imprimir el PDF ------
 $pdf->IncludeJS("print();");
+
+/* Limpiamos la salida del búfer y lo desactivamos */
+ob_end_clean();
 
 // ---- Generar el nombre del PDF -----
 $pdf->Output('sticker'.$valorRadicado.'pdf', 'I');

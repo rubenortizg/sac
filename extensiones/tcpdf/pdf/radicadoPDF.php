@@ -73,9 +73,9 @@ class RADPDF extends TCPDF {
                     <td style="background-color:white; width:180px">
                       <div style="font-size:8.5px; text-align:right; line-height:9px;">
                         <br>
-                        SAC - SISTEMA DE CORRESPONDENCIA
-                        <br>
-                        Calle 2 # 24-02
+												MULTIPLAZA - GRUPO ROBLE
+                        <br>Calle 19 A # 72 - 57 (Avenida Boyacá con
+                        <br>Calle 13 / sentido norte - sur)
                       </div>
                     </td>
                     <td style="background-color:white; width:15px;"></td>
@@ -107,6 +107,14 @@ class imprimirRadicado{
 public $radicado;
 
 public function traerImpresionRadicado(){
+
+// DESACTIVAMOS ERRORES POR PANTALLA Y ENVIAMOS A LOG DE ENVENTOS
+
+ob_start();
+error_reporting(E_ALL & ~E_NOTICE);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
 
 // INFORMACIÓN DEL RADICADO
 
@@ -291,9 +299,8 @@ $bloque4 = <<<EOF
 
       <td style="border: 1px solid #666; background-color:white; width:145px; text-align:center">$respuestaEstablecimiento[tipo] - $respuestaEstablecimiento[identificador]</td>
       <td style="border: 1px solid #666; background-color:white; width:250px; text-align:center">$respuestaEmpresa[empresa]</td>
-      <td style="border: 1px solid #666; background-color:white; width:250px; text-align:center">$respuestaCliente[nombre]</td>
 
-    </tr>
+      </tr>
 
     <tr>
 
@@ -401,7 +408,6 @@ $bloque7 = <<<EOF
 
       <td style="background-color:white; width:290px; text-align:center">SAC - $respuestaUsuario[nombre]</td>
       <td style="background-color:white; width:65px; text-align:center"></td>
-      <td style="background-color:white; width:290px; text-align:center">$respuestaEmpresa[empresa] - $respuestaCliente[nombre]</td>
 
     </tr>
 
@@ -413,6 +419,9 @@ $pdf->writeHTML($bloque7, false, false, false, false, '');
 
 
 // ---------------------------- Fin - Bloque 7 - Usuarios ------------------------
+
+/* Limpiamos la salida del búfer y lo desactivamos */
+ob_end_clean();
 
 
 // ------------------------------------

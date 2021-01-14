@@ -55,9 +55,9 @@ class RADPDF extends TCPDF {
                     <td style="background-color:white; width:240px">
 
                       <div style="font-size:8.5px; text-align:right; line-height:10px;">
-                        SAC - SISTEMA DE CORRESPONDENCIA
-                        <br>
-                        Calle 2 # 24-02
+                        MULTIPLAZA - GRUPO ROBLE
+                        <br>Calle 19 A # 72 - 57 (Avenida Boyacá con
+                        <br>Calle 13 / sentido norte - sur)
                       </div>
 
                     </td>
@@ -90,6 +90,12 @@ public $radicado;
 
 public function traerImpresionSalidas(){
 
+// DESACTIVAMOS ERRORES POR PANTALLA Y ENVIAMOS A LOG DE ENVENTOS
+
+ob_start();
+error_reporting(E_ALL & ~E_NOTICE);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 
 // INFORMACIÓN DE LOS RADICADOS
 
@@ -358,6 +364,10 @@ $pdf->writeHTML($bloque3, false, false, false, false, '');
 // ---------------------------- Fin - Bloque 3 - Remitente -----------------------------------
 
 }
+
+/* Limpiamos la salida del búfer y lo desactivamos */
+ob_end_clean();
+
 
 // ------------------------------------
 // SALIDA DEL ARCHIVO
