@@ -1048,7 +1048,12 @@ $(".daterangepicker.opensleft .ranges li").on("click", function(event){
 /* =====================================
   Data Table
 ==========================================*/
+
 $('.tablasRadicados').DataTable({
+  "ajax":"ajax/listadoRadicados.ajax.php",
+  "deferRender": true,
+  "retrieve": true,
+  "processing": true,
   "language":{
     "sProcessing":     "Procesando...",
     "sLengthMenu":     "Mostrar _MENU_ registros",
