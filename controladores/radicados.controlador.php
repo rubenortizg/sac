@@ -21,18 +21,13 @@ class ControladorRadicados {
                       "correspondencia"=>$_POST["listaCorrespondencia"],
                       "idusuario" => $_SESSION["id"]);
 
-      $respuesta = ModeloRadicados::mdlIngresarRadicado($tabla, $datos);
-
-
-
-      if($respuesta == "ok"){
-
+      if($datos["destinatario"]==""){
         echo '<script>
 
         swal({
 
-          type: "success",
-          title: "¡Correspondencia radicada correctamente!",
+          type: "error",
+          title: "¡No se selecciono destinatario!",
           showConfirmButton: true,
           confirmButtonText: "Cerrar",
           closeOnConfirm: false
@@ -40,19 +35,66 @@ class ControladorRadicados {
         }).then(function(result){
 
           if(result.value){
-
-            window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
-            window.location = "radicados";
-
-
+            window.location = "radicador";
           }
 
         });
 
         </script>';
+      }elseif ($datos["correspondencia"]==""){
+        echo '<script>
+
+        swal({
+
+          type: "error",
+          title: "¡No se agrego correspondencia!",
+          showConfirmButton: true,
+          confirmButtonText: "Cerrar",
+          closeOnConfirm: false
+
+        }).then(function(result){
+
+          if(result.value){
+            window.location = "radicador";
+          }
+
+        });
+
+        </script>';
+      }else {
+        $respuesta = ModeloRadicados::mdlIngresarRadicado($tabla, $datos);
+
+        if($respuesta == "ok"){
+
+          echo '<script>
+
+          swal({
+
+            type: "success",
+            title: "¡Correspondencia radicada correctamente!",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar",
+            closeOnConfirm: false
+
+          }).then(function(result){
+
+            if(result.value){
+
+              window.open("extensiones/tcpdf/pdf/radicadoBARCODE.php?radicado='.$datos["radicado"].'", "_blank");
+              window.location = "radicados";
+
+
+            }
+
+          });
+
+          </script>';
+
+        }
 
       }
 
+      
     }
 
   }
@@ -270,7 +312,6 @@ class ControladorRadicados {
         $remitente = ControladorRemitentes::ctrMostrarRemitentes("id", $value["idremitente"]);
 
         echo utf8_decode("<tr>
-
           <td style='border:1px solid #eee;'>R".str_pad($value["radicado"], 7, "0", STR_PAD_LEFT)."</td>
           <td style='border:1px solid #eee;'>".$transportadora["transportadora"]."</td>
           <td style='border:1px solid #eee;'>".$remitente["remitente"]."</td>
